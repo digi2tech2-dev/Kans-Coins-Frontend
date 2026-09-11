@@ -6,6 +6,7 @@ export const routeLoaders = {
   AccountVerificationRequired: () => import('../pages/AccountVerificationRequired'),
   EmailVerified: () => import('../pages/EmailVerified'),
   PublicCatalog: () => import('../pages/PublicCatalog'),
+  ApiDocs: () => import('../pages/ApiDocs'),
   AboutUsPage: () => import('../pages/AboutUsPage'),
   Dashboard: () => import('../pages/Dashboard'),
   AdminDashboard: () => import('../pages/AdminDashboard'),
@@ -45,6 +46,7 @@ const publicPaths = new Set([
   '/about-us',
   '/created-by',
   '/public-contact-us',
+  '/api-docs',
   '/auth',
   '/login',
   '/email-verified',
@@ -58,6 +60,7 @@ const publicPaths = new Set([
 const routeMatchers = [
   [/^\/(?:|catalog)\/?$/, routeLoaders.PublicCatalog],
   [/^\/about-us\/?$/, routeLoaders.AboutUsPage],
+  [/^\/api-docs\/?$/, routeLoaders.ApiDocs],
   [/^\/public-contact-us\/?$/, routeLoaders.ContactUs],
   [/^\/(?:auth|login)\/?$/, routeLoaders.Auth],
   [/^\/email-verified\/?$/, routeLoaders.EmailVerified],

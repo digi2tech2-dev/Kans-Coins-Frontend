@@ -13,8 +13,9 @@ const FloatingWhatsApp = () => {
   const { user } = useAuthStore();
   const shouldHideForRole = isAdminRole(user?.role);
   const isAuthPage = location.pathname === '/auth';
+  const isApiDocsPage = location.pathname === '/api-docs';
 
-  if (shouldHideForRole || isAuthPage) {
+  if (shouldHideForRole || isAuthPage || isApiDocsPage) {
     return null;
   }
 

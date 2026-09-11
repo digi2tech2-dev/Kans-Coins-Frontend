@@ -173,6 +173,7 @@ Vite only exposes variables prefixed with `VITE_` to browser code through `impor
 | --- | --- | --- | --- | --- | --- |
 | `VITE_DATA_PROVIDER` | Optional | `mock` | Selects API provider | `mock` or `real` | Only `real` enables the Axios adapter. Any other value behaves like mock mode. |
 | `VITE_API_BASE_URL` | Required for real mode | `http://localhost:5000/api` | Backend API base URL and upload origin resolution | `https://api.example.com/api` | Include `/api` for this backend. `src/utils/imageUrl.js` strips a trailing `/api` to resolve `/uploads`. |
+| `VITE_B2B_API_BASE_URL` | Optional | derived from `VITE_API_BASE_URL` | Full canonical B2B API URL displayed on `/api-docs` | `https://domain.com/client/api` | Set the complete `/client/api` URL. If absent, docs derive the backend origin from `VITE_API_BASE_URL` and append `/client/api` once. |
 | `VITE_PUBLIC_APP_URL` | Optional | hardcoded public-site fallback in source | Referral share links | `https://app.example.com` | Public URL only. Prefer setting this explicitly. |
 | `VITE_SITE_URL` | Optional | none | SEO canonical URL | `https://app.example.com` | Used before `VITE_PUBLIC_SITE_URL`. |
 | `VITE_PUBLIC_SITE_URL` | Optional | none | SEO canonical URL fallback | `https://app.example.com` | Public URL only. |
@@ -240,7 +241,8 @@ These routes require a valid authenticated user with an approved account status.
 | `/products/:productId` | `ProductPurchasePage` | Shared roles | Product purchase page. |
 | `/purchase/:productId` | `ProductPurchasePage` | Shared roles | Purchase alias. |
 | `/settings` | `Settings` | Shared roles | Settings page. |
-| `/developers/api` | `DeveloperApi` | Shared roles | Route is protected by role only. Sidebar shows it only when `user.isApiEnabled === true`. |
+| `/developers/api` | `DeveloperApi` | Shared roles | Authenticated API-token and IP/webhook management. Sidebar shows it only when `user.isApiEnabled === true`. |
+| `/api-docs` | `ApiDocs` | Public | Canonical B2B API v1 documentation; does not require login or use the application layout. |
 | `/account` | `Account` | Shared roles | Profile/account details. |
 | `/account/security` | `AccountSecurity` | Shared roles | Security and 2FA management. |
 | `/account-security` | `AccountSecurity` | Shared roles | Security alias. |
@@ -555,7 +557,7 @@ The payment-details form calculates payment fees and payable amount. It supports
 
 ### Developer API
 
-`/developers/api` lets authenticated users manage API-token/settings through `/me/api-token/generate` and `/me/api-settings`. The route itself accepts shared authenticated roles; sidebar navigation only shows it when `user.isApiEnabled === true`.
+`/developers/api` lets authenticated users manage API-token/settings through `/me/api-token/generate` and `/me/api-settings`. The route itself accepts shared authenticated roles; sidebar navigation only shows it when `user.isApiEnabled === true`. Public integration documentation is at `/api-docs`; `VITE_B2B_API_BASE_URL` is the complete canonical B2B URL (for example, `https://domain.com/client/api`). If absent, the page derives the origin from `VITE_API_BASE_URL` and appends `/client/api` once.
 
 ### Referral
 

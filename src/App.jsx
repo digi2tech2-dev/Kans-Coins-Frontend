@@ -20,6 +20,7 @@ import DeveloperApi from './pages/DeveloperApi';
 import { routeLoaders } from './transitions/routeModules';
 
 const Layout = lazy(routeLoaders.Layout);
+const ApiDocs = lazy(routeLoaders.ApiDocs);
 const Auth = lazy(routeLoaders.Auth);
 const AccountPending = lazy(routeLoaders.AccountPending);
 const AccountRejected = lazy(routeLoaders.AccountRejected);
@@ -99,6 +100,7 @@ const AnimatedAppRoutes = ({ location }) => {
       <Route path="/catalog" element={renderSuspended(<PublicCatalog />)} />
       <Route path="/about-us" element={renderSuspended(<AboutUsPage />)} />
       <Route path="/created-by" element={renderSuspended(<CreatedBy />)} />
+      <Route path="/api-docs" element={renderSuspended(<ApiDocs />)} />
       <Route path="/public-contact-us" element={renderSuspended(<ContactUs accountOnly />)} />
       <Route path="/auth" element={renderSuspended(<Auth />)} />
       <Route path="/login" element={renderSuspended(<Auth />)} />
