@@ -39,7 +39,7 @@ import {
   readReferralBridge,
   readReferralCodeFromSearch,
 } from '../utils/referralCode';
-import brandIconImage from '../assets/logo.PNG';
+import brandIconImage from '../assets/logo.webp';
 import styles from './Auth.module.css';
 
 const GoogleMark = () => (

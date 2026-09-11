@@ -11,10 +11,10 @@ import HeaderBrand from '../components/layout/HeaderBrand';
 import PublicSidebar from '../components/layout/PublicSidebar';
 import SiteCopyrightFooter from '../components/layout/SiteCopyrightFooter';
 import { useBodyScrollLock } from '../utils/bodyScrollLock';
-import digitechImage from '../assets/digitech-solutions.jpg';
-import ahmedImage from '../assets/WhatsApp Image 2026-03-26 at 7.18.08 AM.jpeg';
-import kareemImage from '../assets/WhatsApp Image 2026-03-26 at 7.18.08 AM (1).jpeg';
-import bahaaImage from '../assets/WhatsApp Image 2026-03-26 at 7.18.08 AM (2).jpeg';
+import digitechImage from '../assets/digitech-solutions.webp';
+import ahmedImage from '../assets/about-img-1.webp';
+import kareemImage from '../assets/about-img-2.webp';
+import bahaaImage from '../assets/about-img-3.webp';
 
 const CreatedBy = () => {
   const navigate = useNavigate();

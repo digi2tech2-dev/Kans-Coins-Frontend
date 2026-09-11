@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { AlertCircle, ArrowUpLeft, LoaderCircle, Wallet } from 'lucide-react';
+import { AlertCircle, ArrowUpLeft, LoaderCircle, ReceiptText, Wallet } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../store/useAuthStore';
 import { useLanguage } from '../../context/LanguageContext';
@@ -105,14 +105,23 @@ const WalletSidebarCard = ({ className, isVisible = true, onNavigate }) => {
           </span>
         </div>
 
-        <div>
+        <div className="grid grid-cols-2 gap-1.5">
+          <button
+            type="button"
+            onClick={() => handleNavigate('/wallet/topup-history')}
+            className="inline-flex h-7 items-center justify-center gap-1 rounded-[10px] border border-[color:rgb(var(--color-primary-rgb)/0.34)] bg-[color:rgb(var(--color-card-rgb)/0.66)] px-1.5 text-[9px] font-bold text-[var(--color-text)] transition-colors hover:border-[color:rgb(var(--color-primary-rgb)/0.58)] hover:bg-[color:rgb(var(--color-card-rgb)/0.85)]"
+          >
+            <ReceiptText className="h-3 w-3 text-[var(--color-primary)]" />
+            <span>{dir === 'rtl' ? 'التفاصيل' : 'Details'}</span>
+          </button>
+
           <button
             type="button"
             onClick={() => handleNavigate('/wallet/add-balance')}
-            className="inline-flex h-7 w-full items-center justify-center gap-1 rounded-[10px] border border-[color:rgb(var(--color-primary-rgb)/0.34)] bg-[linear-gradient(135deg,#2563eb_0%,#312e81_52%,#c026d3_100%)] px-1.5 text-[9px] font-bold text-white shadow-[0_0_26px_-16px_rgba(124,58,237,0.8),0_0_28px_-18px_rgba(192,38,211,0.82)] transition-colors hover:brightness-[1.05]"
+            className="inline-flex h-7 items-center justify-center gap-1 rounded-[10px] border border-[color:rgb(var(--color-primary-rgb)/0.34)] bg-[linear-gradient(135deg,#2563eb_0%,#312e81_52%,#c026d3_100%)] px-1.5 text-[9px] font-bold text-white shadow-[0_0_26px_-16px_rgba(124,58,237,0.8),0_0_28px_-18px_rgba(192,38,211,0.82)] transition-colors hover:brightness-[1.05]"
           >
             <ArrowUpLeft className="h-3 w-3" />
-            <span>اشحن الآن</span>
+            <span>{dir === 'rtl' ? 'اشحن الآن' : 'Top Up'}</span>
           </button>
         </div>
       </div>

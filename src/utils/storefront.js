@@ -1,7 +1,7 @@
-import buyCardsImage from '../assets/slide-1.webp';
-import chatAppsImage from '../assets/slide-2.webp';
-import gamesChargingImage from '../assets/slide-3.webp';
-import brandIconImage from '../assets/logo.PNG';
+import buyCardsImage from '../assets/slide-1-opt.webp';
+import chatAppsImage from '../assets/slide-2-opt.webp';
+import gamesChargingImage from '../assets/slide-3-opt.webp';
+import brandIconImage from '../assets/logo.webp';
 import { calculateProductPrice } from './pricing';
 import { formatNumber } from './intl';
 import { getMoneyFormatOptions, toFiniteMoneyNumber } from './money';

@@ -15,8 +15,23 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" />
+    <!-- Preload primary Arabic font (Cairo) -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" />
+    </noscript>
+    <!-- Secondary fonts loaded non-blocking -->
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap"
+    />
     <link rel="icon" href="/favicon.ico?v=kanz-coins" />
     <link rel="shortcut icon" href="/favicon.ico?v=kanz-coins" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=kanz-coins" />
@@ -83,7 +98,7 @@
   </head>
   <body>
     <div id="app-boot-loader" aria-hidden="true">
-      <img class="boot-loader__logo" src="/src/assets/logo.PNG" alt="KANZ COINS" />
+      <img class="boot-loader__logo" src="/src/assets/logo.webp" alt="KANZ COINS" fetchpriority="high" decoding="async" />
     </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

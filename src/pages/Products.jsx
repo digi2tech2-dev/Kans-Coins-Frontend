@@ -20,8 +20,8 @@ import {
   getStorefrontLanguage,
 } from '../utils/storefront';
 import { buildStoreSeo, toAbsoluteUrl } from '../utils/seo';
-import slideFourImage from '../assets/slide-4.webp';
-import slideThreeImage from '../assets/slide-3.webp';
+import slideFourImage from '../assets/slide-4-opt.webp';
+import slideThreeImage from '../assets/slide-3-opt.webp';
 
 const getProductsPageCopy = (language = 'ar') => (
   language === 'ar'

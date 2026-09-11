@@ -40,12 +40,12 @@ import {
 import { buildStoreSeo, toAbsoluteUrl } from '../utils/seo';
 import { useBodyScrollLock } from '../utils/bodyScrollLock';
 import { resolveImageUrl } from '../utils/imageUrl';
-import slideOneImage from '../assets/slide-1.webp';
-import slideTwoImage from '../assets/slide-2.webp';
-import slideThreeImage from '../assets/slide-3.webp';
-import slideFourImage from '../assets/slide-4.webp';
-import targetSalesImage from '../assets/تارجت.jpg';
-import coinsImage from '../assets/logo.PNG';
+import slideOneImage from '../assets/slide-1-opt.webp';
+import slideTwoImage from '../assets/slide-2-opt.webp';
+import slideThreeImage from '../assets/slide-3-opt.webp';
+import slideFourImage from '../assets/slide-4-opt.webp';
+import targetSalesImage from '../assets/target.webp';
+import coinsImage from '../assets/logo.webp';
 
 const dataProvider = (import.meta.env.VITE_DATA_PROVIDER || 'mock').toLowerCase();
 const isRealProvider = dataProvider === 'real';

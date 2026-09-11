@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import useAuthStore from '../../store/useAuthStore';
 import { isAdminRole } from '../../utils/authRoles';
 import { buildWhatsAppLink, getAdminWhatsAppNumber } from '../../utils/whatsapp';
-import floatingPromoOne from '../../assets/عائم1.PNG';
-import floatingPromoTwo from '../../assets/عائم2.PNG';
+import floatingPromoOne from '../../assets/floating-1.webp';
+import floatingPromoTwo from '../../assets/floating-2.webp';
 
 const FloatingWhatsApp = () => {
   const { i18n } = useTranslation();

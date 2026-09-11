@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '../ui/Button';
-import lockChainImage from '../../assets/قفل.PNG';
+import lockChainImage from '../../assets/lock.webp';
 
 const sizeClasses = {
   xs: {

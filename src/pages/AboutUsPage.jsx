@@ -11,7 +11,7 @@ import PublicSidebar from '../components/layout/PublicSidebar';
 import SiteCopyrightFooter from '../components/layout/SiteCopyrightFooter';
 import { useBodyScrollLock } from '../utils/bodyScrollLock';
 import { buildWhatsAppLink, getAdminWhatsAppNumber } from '../utils/whatsapp';
-import brandIconImage from '../assets/logo.PNG';
+import brandIconImage from '../assets/logo.webp';
 
 const AboutUsPage = () => {
   const navigate = useNavigate();

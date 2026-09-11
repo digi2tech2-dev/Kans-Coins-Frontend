@@ -9,12 +9,12 @@ import HeroSlider from '../components/home/HeroSlider';
 import CategoryCard from '../components/home/CategoryCard';
 import ProductSearchBar from '../components/products/ProductSearchBar';
 import ProductPurchaseDialog from '../components/products/ProductPurchaseDialog';
-import slideOneHeroImage from '../assets/slide-1.webp';
-import slideTwoHeroImage from '../assets/slide-2.webp';
-import slideThreeHeroImage from '../assets/slide-3.webp';
-import slideFourHeroImage from '../assets/slide-4.webp';
-import targetBannerImage from '../assets/تارجت.jpg';
-import coinsImage from '../assets/logo.PNG';
+import slideOneHeroImage from '../assets/slide-1-opt.webp';
+import slideTwoHeroImage from '../assets/slide-2-opt.webp';
+import slideThreeHeroImage from '../assets/slide-3-opt.webp';
+import slideFourHeroImage from '../assets/slide-4-opt.webp';
+import targetBannerImage from '../assets/target.webp';
+import coinsImage from '../assets/logo.webp';
 import { resolveImageUrl } from '../utils/imageUrl';
 import {
   createStorefrontCategories,

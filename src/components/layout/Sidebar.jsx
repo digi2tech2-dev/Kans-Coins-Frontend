@@ -4,7 +4,6 @@ import {
   Activity,
   Banknote,
   Boxes,
-  ChevronDown,
   ChevronLeft,
   Check,
   ClipboardCheck,
@@ -78,7 +77,6 @@ const Sidebar = ({ isOpen, setIsOpen, isMobile }) => {
   const [isPreviewExpanded, setIsPreviewExpanded] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [copiedUserId, setCopiedUserId] = useState(false);
-  const [collapsedSections, setCollapsedSections] = useState({});
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   const { dir } = useLanguage();
@@ -133,14 +131,6 @@ const Sidebar = ({ isOpen, setIsOpen, isMobile }) => {
   const handleContactClick = () => {
     navigate('/contact-us');
     closeSidebarOnMobile();
-  };
-
-  const isSectionOpen = (sectionKey) => collapsedSections[sectionKey] !== true;
-  const toggleSidebarSection = (sectionKey) => {
-    setCollapsedSections((current) => ({
-      ...current,
-      [sectionKey]: current[sectionKey] !== true,
-    }));
   };
 
   const navItems = [
@@ -428,34 +418,24 @@ const Sidebar = ({ isOpen, setIsOpen, isMobile }) => {
               />
             )}
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {sidebarSections.map((section, sectionIndex) => (
                 <div key={section.key} className="space-y-1.5">
                   {isExpanded ? (
-                    <button
-                      type="button"
-                      onClick={() => toggleSidebarSection(section.key)}
-                      className="flex w-full items-center gap-2 rounded-xl px-2 pb-1 pt-1 text-[0.68rem] font-black text-[var(--color-muted)] transition-colors hover:bg-[color:rgb(var(--color-primary-rgb)/0.08)] hover:text-[var(--color-text)]"
-                      aria-expanded={isSectionOpen(section.key)}
-                      aria-controls={`sidebar-section-${section.key}`}
+                    <div
+                      className="flex select-none items-center gap-2.5 px-2 pb-1 pt-1.5 text-[0.72rem] font-black"
                     >
-                      <span className="shrink-0">{section.label}</span>
-                      <span className="h-px flex-1 bg-[color:rgb(var(--color-border-rgb)/0.42)]" />
-                      <ChevronDown
-                        className={cn(
-                          'h-3.5 w-3.5 shrink-0 transition-transform',
-                          !isSectionOpen(section.key) && (dir === 'rtl' ? 'rotate-90' : '-rotate-90')
-                        )}
-                      />
-                    </button>
+                      <span className="shrink-0 tracking-wide text-[var(--color-text-secondary)]">
+                        {section.label}
+                      </span>
+                      <span className="h-px flex-1 bg-[color:rgb(var(--color-border-rgb)/0.5)]" />
+                    </div>
                   ) : (
                     sectionIndex > 0 && <div className="mx-auto my-2 h-px w-7 bg-[color:rgb(var(--color-border-rgb)/0.5)]" />
                   )}
-                  {isSectionOpen(section.key) && (
-                    <div id={`sidebar-section-${section.key}`} className="space-y-1.5">
-                      {section.items.map(renderNavItem)}
-                    </div>
-                  )}
+                  <div id={`sidebar-section-${section.key}`} className="space-y-1.5">
+                    {section.items.map(renderNavItem)}
+                  </div>
                 </div>
               ))}
             </div>

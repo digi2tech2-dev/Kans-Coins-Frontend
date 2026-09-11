@@ -32,7 +32,7 @@ import Input from '../components/ui/Input';
 import { useToast } from '../components/ui/Toast';
 import { resolveUserAvatar } from '../utils/avatar';
 import apiClient from '../services/client';
-import referralHeroImage from '../assets/slide-3.webp';
+import referralHeroImage from '../assets/slide-3-opt.webp';
 
 const copyText = async (value) => {
   try {

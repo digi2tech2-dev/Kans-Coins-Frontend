@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import useAdminStore from '../../store/useAdminStore';
 import useGroupStore from '../../store/useGroupStore';
-import agentProofImage from '../../assets/slide-3.webp';
+import agentProofImage from '../../assets/slide-3-opt.webp';
 import { resolveUserAvatar } from '../../utils/avatar';
 import apiClient from '../../services/client';
 import { useLanguage } from '../../context/LanguageContext';

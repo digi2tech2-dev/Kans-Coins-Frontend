@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, Check, Copy, ExternalLink, Menu } from 'lucide-react';
-import brandLogo from '../assets/logo.PNG';
+import brandLogo from '../assets/logo.webp';
 
 const configuredB2bApiBase = String(import.meta.env.VITE_B2B_API_BASE_URL || '')
   .trim()

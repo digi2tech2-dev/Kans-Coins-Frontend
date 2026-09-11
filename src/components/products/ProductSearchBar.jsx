@@ -2,7 +2,7 @@ import React, { useDeferredValue, useEffect, useMemo, useRef, useState } from 'r
 import { createPortal } from 'react-dom';
 import { SearchX } from 'lucide-react';
 import { resolveImageUrl } from '../../utils/imageUrl';
-import coinsImage from '../../assets/logo.PNG';
+import coinsImage from '../../assets/logo.webp';
 import SearchBar from '../ui/SearchBar';
 import { cn } from '../ui/Button';
 import { filterStorefrontProducts, sanitizeStorefrontQuery } from '../../utils/storefront';

@@ -8,7 +8,7 @@ import useTargetStore from '../store/useTargetStore';
 import useSystemStore from '../store/useSystemStore';
 import { useToast } from '../components/ui/Toast';
 import { getTargetPaymentMethods, isPaymentMethodAllowed } from '../utils/paymentSettings';
-import targetHeroImage from '../assets/تارجت.jpg';
+import targetHeroImage from '../assets/target.webp';
 
 const TARGET_DATA_REFRESH_INTERVAL = 15 * 1000;
 
