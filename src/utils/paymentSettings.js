@@ -47,7 +47,7 @@ export const createDefaultPaymentGroups = () => [
     methods: [
       {
         id: 'vodafone cash',
-        name: 'فودافون كاش',
+        name: 'فودافون كاش دفع آلي',
         type: 'mobile_wallet',
         isActive: true,
       },
@@ -71,15 +71,38 @@ export const createDefaultPaymentGroups = () => [
       },
     ],
   },
+  {
+    id: 'default-crypto',
+    name: 'العملات الرقمية',
+    description: 'دفع آلي بالعملات الرقمية',
+    currency: 'USD',
+    isActive: true,
+    methods: [
+      {
+        id: 'usdt',
+        name: 'USDT دفع آلي',
+        type: 'usdt',
+        isActive: true,
+      },
+    ],
+  },
 ];
 
 export const normalizePaymentMethodToken = (value) =>
   String(value || '').trim().toLowerCase();
 
 const PAYMENT_METHOD_ALIASES = {
-  'vodafone cash': ['vodafone', 'فودافون كاش'],
-  vodafone: ['vodafone cash', 'فودافون كاش'],
-  'فودافون كاش': ['vodafone', 'vodafone cash'],
+  'vodafone cash': ['vodafone', 'فودافون كاش', 'فودافون كاش دفع آلي', 'فودافون كاش دفع الي'],
+  vodafone: ['vodafone cash', 'فودافون كاش', 'فودافون كاش دفع آلي', 'فودافون كاش دفع الي'],
+  'فودافون كاش': ['vodafone', 'vodafone cash', 'فودافون كاش دفع آلي', 'فودافون كاش دفع الي'],
+  'فودافون كاش دفع آلي': ['vodafone', 'vodafone cash', 'فودافون كاش', 'فودافون كاش دفع الي'],
+  'فودافون كاش دفع الي': ['vodafone', 'vodafone cash', 'فودافون كاش', 'فودافون كاش دفع آلي'],
+  usdt: ['crypto', 'tether', 'يو اس دي تي', 'usdt دفع آلي', 'usdt دفع الي'],
+  crypto: ['usdt', 'tether', 'يو اس دي تي', 'usdt دفع آلي', 'usdt دفع الي'],
+  tether: ['usdt', 'crypto', 'يو اس دي تي', 'usdt دفع آلي', 'usdt دفع الي'],
+  'usdt دفع آلي': ['usdt', 'tether', 'crypto', 'يو اس دي تي', 'usdt دفع الي'],
+  'usdt دفع الي': ['usdt', 'tether', 'crypto', 'يو اس دي تي', 'usdt دفع آلي'],
+  'يو اس دي تي': ['usdt', 'tether', 'crypto', 'usdt دفع آلي', 'usdt دفع الي'],
   instapay: ['insta pay', 'إنستا باي'],
   'insta pay': ['instapay', 'إنستا باي'],
   'إنستا باي': ['instapay', 'insta pay'],
@@ -210,7 +233,8 @@ export const isSiteWalletPaymentMethod = (methodOrValue) => {
 };
 
 const TARGET_REQUIRED_PAYMENT_METHODS = [
-  { id: 'vodafone cash', name: 'فودافون كاش', type: 'mobile_wallet', isActive: true },
+  { id: 'vodafone cash', name: 'فودافون كاش دفع آلي', type: 'mobile_wallet', isActive: true },
+  { id: 'usdt', name: 'USDT دفع آلي', type: 'usdt', isActive: true },
   { id: 'etisalat cash', name: 'اتصالات كاش', type: 'mobile_wallet', isActive: true },
   { id: 'orange cash', name: 'أورانج كاش', type: 'mobile_wallet', isActive: true },
   { id: 'instapay', name: 'إنستا باي', type: 'mobile_wallet', isActive: true },

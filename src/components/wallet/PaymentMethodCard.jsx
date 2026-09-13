@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Bot } from 'lucide-react';
 import { resolveImageUrl } from '../../utils/imageUrl';
 
 // Helper to determine contextual note for each payment method
@@ -74,20 +75,70 @@ export const getMethodCountry = (method) => {
 };
 
 // SVG Logos for high-fidelity fallback rendering when image isn't uploaded
-const BrandSvgLogo = ({ token }) => {
+const BrandSvgLogo = ({ token, isRTL = true }) => {
   if (token.includes('vodafone') || token.includes('فودافون')) {
     return (
-      <div className="flex flex-col items-center justify-center">
-        <svg viewBox="0 0 100 100" className="h-9 w-9 sm:h-11 sm:w-11" fill="none">
-          <circle cx="50" cy="50" r="45" stroke="#E60000" strokeWidth="8" />
-          <path
-            d="M50 24C38.95 24 30 32.95 30 44c0 9.2 6.2 16.94 14.7 19.26l-1.9 8.74 13.6-7.85C62.8 61.4 68 53.3 68 44c0-11.05-8.95-20-18-20z"
-            fill="#E60000"
-          />
-        </svg>
-        <span className="mt-0.5 font-['Arial',sans-serif] text-xs font-black tracking-tight text-[#E60000] sm:text-sm">
-          vodafone
-        </span>
+      <div className="flex items-center justify-center gap-2 sm:gap-3 py-0.5">
+        <div className="flex flex-col items-center justify-center">
+          <svg viewBox="0 0 100 100" className="h-9 w-9 sm:h-10 sm:w-10" fill="none">
+            <circle cx="50" cy="50" r="45" stroke="#E60000" strokeWidth="8" />
+            <path
+              d="M50 24C38.95 24 30 32.95 30 44c0 9.2 6.2 16.94 14.7 19.26l-1.9 8.74 13.6-7.85C62.8 61.4 68 53.3 68 44c0-11.05-8.95-20-18-20z"
+              fill="#E60000"
+            />
+          </svg>
+          <span className="mt-0.5 font-['Arial',sans-serif] text-[10px] sm:text-xs font-black tracking-tight text-[#E60000]">
+            vodafone
+          </span>
+        </div>
+
+        {/* High-tech Bot Mascot Shape */}
+        <div className="flex flex-col items-center justify-center rounded-xl border border-amber-400/80 bg-gradient-to-b from-stone-900 via-stone-950 to-amber-950 px-2 py-1 shadow-[0_4px_12px_rgba(0,0,0,0.35),inset_0_1px_1px_rgba(245,158,11,0.3)]">
+          <div className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 text-stone-950 shadow-md">
+            <Bot className="h-4 w-4 sm:h-5 sm:w-5 animate-pulse" />
+            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 border border-white" />
+            </span>
+          </div>
+          <span className="mt-1 text-[8px] sm:text-[9px] font-black text-amber-300 leading-none">
+            {isRTL ? 'بوت آلي' : 'AUTO BOT'}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (token.includes('usdt') || token.includes('tether') || token.includes('يو اس دي تي')) {
+    return (
+      <div className="flex items-center justify-center gap-2">
+        {/* Tether USDT Official Emblem */}
+        <div className="flex flex-col items-center justify-center">
+          <svg viewBox="0 0 100 100" className="h-8 w-8 sm:h-9 sm:w-9" fill="none">
+            <circle cx="50" cy="50" r="48" fill="#26A17B" />
+            <path
+              d="M57.6 37.8h17.2V27.4H25.2v10.4h17.2c-5.8.4-11.8 1.4-16.8 3 7.8 2.5 18.6 3.6 24.4 3.9v10.2c-15.6-.8-27.4-4-27.4-8 0-1.6 1.8-3.1 5.2-4.4V34C20.8 36.6 18 40.1 18 44c0 7.4 14.3 13.4 32 13.4s32-6 32-13.4c0-3.9-2.8-7.4-9.8-10v8.5c3.4 1.3 5.2 2.8 5.2 4.4 0 4-11.8 7.2-27.4 8V44.3c5.8-.3 16.6-1.4 24.4-3.9-5-1.6-11-2.6-16.8-3v-7.6z"
+              fill="white"
+            />
+          </svg>
+          <span className="mt-0.5 font-['Arial',sans-serif] text-[10px] sm:text-xs font-black tracking-tight text-[#26A17B]">
+            USDT (TRC20)
+          </span>
+        </div>
+
+        {/* High-tech Bot Mascot Shape */}
+        <div className="flex flex-col items-center justify-center rounded-xl border border-emerald-400/80 bg-gradient-to-b from-stone-900 via-stone-950 to-emerald-950 px-2 py-1 shadow-[0_4px_12px_rgba(0,0,0,0.35),inset_0_1px_1px_rgba(16,185,129,0.3)]">
+          <div className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-400 to-teal-600 text-stone-950 shadow-md">
+            <Bot className="h-4 w-4 sm:h-5 sm:w-5 animate-pulse text-stone-950" />
+            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 border border-white" />
+            </span>
+          </div>
+          <span className="mt-1 text-[8px] sm:text-[9px] font-black text-emerald-300 leading-none">
+            {isRTL ? 'بوت آلي' : 'AUTO BOT'}
+          </span>
+        </div>
       </div>
     );
   }
@@ -238,10 +289,19 @@ const PaymentMethodCard = ({ method, onSelect, isRTL = true }) => {
   const noteText = getMethodNote(method, isRTL);
   const country = getMethodCountry(method);
 
+  const isVodafone = token.includes('vodafone') || token.includes('فودافون');
+  const isUsdt = token.includes('usdt') || token.includes('tether') || token.includes('يو اس دي تي') || method?.type === 'usdt' || method?.type === 'crypto';
+  const isAutomated = isVodafone || isUsdt;
+  const displayName = isVodafone
+    ? (isRTL ? 'فودافون كاش دفع آلي' : 'Vodafone Cash Automated')
+    : isUsdt
+    ? (isRTL ? 'USDT دفع آلي' : 'USDT Automated')
+    : (method?.name || '');
+
   return (
     <button
       type="button"
-      onClick={() => onSelect(method)}
+      onClick={() => onSelect({ ...method, name: displayName })}
       className="group relative flex w-full flex-col overflow-hidden rounded-[1.6rem] sm:rounded-[1.85rem] border-2 border-amber-400/90 bg-[radial-gradient(ellipse_at_top,#f59e0b_0%,#b45309_45%,#78350f_80%,#451a03_100%)] p-2.5 sm:p-3 text-center shadow-[0_12px_32px_-12px_rgba(217,119,6,0.65),inset_0_1px_1px_rgba(255,255,255,0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-[0_20px_40px_-10px_rgba(245,158,11,0.75)] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-amber-300/80"
     >
       {/* Background Sparkles / Festive Golden Stars */}
@@ -276,26 +336,38 @@ const PaymentMethodCard = ({ method, onSelect, isRTL = true }) => {
           </div>
         ) : null}
 
+        {/* Bot Badge for Automated Methods (Vodafone Cash & USDT) */}
+        {isAutomated ? (
+          <div
+            className="absolute top-1.5 start-1.5 z-10 flex items-center gap-1 rounded-full border border-amber-400 bg-gradient-to-r from-stone-950 to-stone-900 px-2 py-0.5 shadow-sm text-[8px] sm:text-[9px] font-black text-amber-300 select-none"
+            title={isRTL ? 'دفع آلي فوري عبر البوت' : 'Auto Bot'}
+          >
+            <Bot className="h-3 w-3 text-emerald-400 animate-pulse" />
+            <span>{isRTL ? 'دفع آلي' : 'Auto Bot'}</span>
+          </div>
+        ) : null}
+
         {/* Logo / Image Display Area */}
         <div className="flex min-h-[58px] sm:min-h-[72px] w-full items-center justify-center px-1 py-1.5">
           {showImage ? (
             <img
               src={resolveImageUrl(method.image)}
-              alt={method.name}
+              alt={displayName}
               className="max-h-14 sm:max-h-18 w-full object-contain"
               loading="lazy"
               decoding="async"
               onError={() => setImageFailed(true)}
             />
           ) : (
-            <BrandSvgLogo token={token} />
+            <BrandSvgLogo token={token} isRTL={isRTL} />
           )}
         </div>
 
         {/* Method Name Ribbon at Bottom of White Ticket */}
         <div className="mt-1 flex items-center justify-center">
-          <span className="inline-block max-w-[92%] truncate rounded-full border border-amber-300/60 bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 px-3 py-0.5 text-center text-[10px] sm:text-xs font-black text-white shadow-[0_2px_6px_rgba(180,83,9,0.4)]">
-            {method.name}
+          <span className="inline-flex max-w-[95%] items-center justify-center gap-1.5 truncate rounded-full border border-amber-300/60 bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 px-3 py-0.5 text-center text-[10px] sm:text-xs font-black text-white shadow-[0_2px_6px_rgba(180,83,9,0.4)]">
+            {isAutomated ? <Bot className="h-3.5 w-3.5 text-amber-200 shrink-0" /> : null}
+            <span className="truncate">{displayName}</span>
           </span>
         </div>
 
@@ -319,18 +391,33 @@ const PaymentMethodCard = ({ method, onSelect, isRTL = true }) => {
           </div>
         </div>
 
-        {/* 100% Security Seal Stamp in Corner */}
+        {/* 100% Security Seal Stamp / Auto Bot Stamp */}
         <div
-          className="absolute -bottom-1 end-0 flex h-8 w-8 sm:h-9 sm:w-9 flex-col items-center justify-center rounded-full border-2 border-dashed border-amber-300/90 bg-gradient-to-br from-amber-700 via-amber-800 to-stone-950 text-center shadow-md select-none"
-          title={isRTL ? 'أمان 100%' : '100% Secure'}
+          className={`absolute -bottom-1 end-0 flex h-8 w-8 sm:h-9 sm:w-9 flex-col items-center justify-center rounded-full border-2 border-dashed text-center shadow-md select-none ${
+            isAutomated
+              ? 'border-emerald-400/90 bg-gradient-to-br from-emerald-800 via-teal-950 to-stone-950'
+              : 'border-amber-300/90 bg-gradient-to-br from-amber-700 via-amber-800 to-stone-950'
+          }`}
+          title={isAutomated ? (isRTL ? 'دفع آلي فوري 24/7' : 'Instant Auto 24/7') : (isRTL ? 'أمان 100%' : '100% Secure')}
         >
-          <span className="text-[5px] text-amber-300 leading-none">★★★</span>
-          <span className="text-[6px] sm:text-[7px] font-black leading-tight text-amber-100">
-            {isRTL ? 'أمان' : 'SAFE'}
-          </span>
-          <span className="text-[6px] sm:text-[7px] font-black leading-none text-amber-300">
-            100%
-          </span>
+          {isAutomated ? (
+            <>
+              <Bot className="h-3.5 w-3.5 text-emerald-300" />
+              <span className="text-[6px] sm:text-[7px] font-black leading-none text-emerald-200">
+                {isRTL ? 'آلي' : 'AUTO'}
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="text-[5px] text-amber-300 leading-none">★★★</span>
+              <span className="text-[6px] sm:text-[7px] font-black leading-tight text-amber-100">
+                {isRTL ? 'أمان' : 'SAFE'}
+              </span>
+              <span className="text-[6px] sm:text-[7px] font-black leading-none text-amber-300">
+                100%
+              </span>
+            </>
+          )}
         </div>
       </div>
     </button>

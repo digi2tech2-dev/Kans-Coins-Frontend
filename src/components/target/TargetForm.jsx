@@ -11,7 +11,8 @@ import { isPaymentMethodAllowed, isSiteWalletPaymentMethod } from '../../utils/p
 
 const getPaymentMethodLabel = (method) => {
   const normalized = String(method || '').trim().toLowerCase();
-  if (normalized === 'vodafone cash') return 'فودافون كاش';
+  if (normalized === 'vodafone cash' || normalized === 'vodafone' || normalized.includes('فودافون')) return 'فودافون كاش دفع آلي';
+  if (normalized === 'usdt' || normalized === 'crypto' || normalized.includes('tether') || normalized.includes('يو اس دي')) return 'USDT دفع آلي';
   if (normalized === 'instapay') return 'إنستا باي';
   if (normalized === 'orange cash') return 'أورانج كاش';
   if (normalized === 'etisalat cash') return 'اتصالات كاش';

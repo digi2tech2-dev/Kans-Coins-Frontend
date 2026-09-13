@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { CreditCard, ShieldCheck, Wallet, Zap } from 'lucide-react';
+import { ShieldCheck, Wallet, Zap } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '../context/LanguageContext';
@@ -133,58 +133,42 @@ const AddBalance = ({
         ) : null}
 
         <section className="rounded-[1.3rem] border border-[color:rgb(var(--color-border-rgb)/0.72)] bg-[color:rgb(var(--color-card-rgb)/0.64)] p-3 sm:p-5">
-          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-amber-500/12 text-amber-500">
-                <CreditCard className="h-5 w-5" />
-              </span>
-              <div>
-                <h2 className="text-sm sm:text-base font-black text-[var(--color-text)]">
-                  {isRTL ? 'اختر وسيلة الدفع' : 'Choose a payment method'}
-                </h2>
-                <p className="mt-0.5 text-[0.68rem] sm:text-xs font-semibold text-[var(--color-text-secondary)]">
-                  {isRTL ? 'جميع وسائل الشحن المتاحة والمؤمنة' : 'All available and secure payment methods'}
-                </p>
-              </div>
-            </div>
-
-            {/* Optional quick filter tabs if more than one group */}
-            {paymentGroups.length > 1 ? (
-              <div className="flex flex-wrap items-center gap-1.5" role="tablist">
+          {/* Optional quick filter tabs if more than one group */}
+          {paymentGroups.length > 1 ? (
+            <div className="mb-4 flex flex-wrap items-center gap-1.5" role="tablist">
+              <button
+                type="button"
+                onClick={() => setSelectedGroupId('all')}
+                className={cn(
+                  'rounded-full px-3 py-1 text-xs font-black transition-all',
+                  selectedGroupId === 'all'
+                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-md'
+                    : 'border border-[color:rgb(var(--color-border-rgb)/0.8)] bg-[color:rgb(var(--color-card-rgb)/0.7)] text-[var(--color-text-secondary)] hover:text-[var(--color-text)]'
+                )}
+              >
+                {isRTL ? 'الكل' : 'All'}
+                <span className="ms-1.5 opacity-80 text-[10px]">({allMethods.length})</span>
+              </button>
+              {paymentGroups.map((group) => (
                 <button
+                  key={group.id}
                   type="button"
-                  onClick={() => setSelectedGroupId('all')}
+                  onClick={() => setSelectedGroupId(group.id)}
                   className={cn(
                     'rounded-full px-3 py-1 text-xs font-black transition-all',
-                    selectedGroupId === 'all'
+                    selectedGroupId === group.id
                       ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-md'
                       : 'border border-[color:rgb(var(--color-border-rgb)/0.8)] bg-[color:rgb(var(--color-card-rgb)/0.7)] text-[var(--color-text-secondary)] hover:text-[var(--color-text)]'
                   )}
                 >
-                  {isRTL ? 'الكل' : 'All'}
-                  <span className="ms-1.5 opacity-80 text-[10px]">({allMethods.length})</span>
+                  {group.name}
+                  {group.currency ? (
+                    <span className="ms-1 text-[9px] font-bold opacity-75">({group.currency})</span>
+                  ) : null}
                 </button>
-                {paymentGroups.map((group) => (
-                  <button
-                    key={group.id}
-                    type="button"
-                    onClick={() => setSelectedGroupId(group.id)}
-                    className={cn(
-                      'rounded-full px-3 py-1 text-xs font-black transition-all',
-                      selectedGroupId === group.id
-                        ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-md'
-                        : 'border border-[color:rgb(var(--color-border-rgb)/0.8)] bg-[color:rgb(var(--color-card-rgb)/0.7)] text-[var(--color-text-secondary)] hover:text-[var(--color-text)]'
-                    )}
-                  >
-                    {group.name}
-                    {group.currency ? (
-                      <span className="ms-1 text-[9px] font-bold opacity-75">({group.currency})</span>
-                    ) : null}
-                  </button>
-                ))}
-              </div>
-            ) : null}
-          </div>
+              ))}
+            </div>
+          ) : null}
 
           {displayedMethods.length ? (
             <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">

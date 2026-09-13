@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
-import { AlertCircle, CheckCircle, Copy, Landmark, Loader, ReceiptText, ShieldCheck } from 'lucide-react';
+import { AlertCircle, Bot, CheckCircle, Copy, Landmark, Loader, ReceiptText, ShieldCheck, Zap } from 'lucide-react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import UploadReceiptBox from '../components/wallet/UploadReceiptBox';
@@ -63,22 +63,20 @@ const FieldCompletionBadge = ({ complete }) => (
 );
 
 const getSenderDetailRequirement = (method) => {
+  const token = `${method?.id || ''} ${method?.name || ''} ${method?.type || ''}`.toLowerCase();
   const type = normalizeMethodType(method?.type);
+
+  // USDT / Tether / Crypto - removed per request ("شيل دي رقم المحفظة المحول منها من USDT دفع آلي عالمي فقط وشيل الفاليديشن")
+  if (token.includes('usdt') || token.includes('tether') || token.includes('يو اس دي تي') || type === 'usdt' || type === 'crypto') {
+    return null;
+  }
+
   if (type === 'mobile_wallet' || type === 'e_wallet' || type === 'ewallet') {
     return {
       field: 'senderWalletNumber',
       label: 'رقم المحفظة المحول منها',
       placeholder: 'أدخل رقم المحفظة التي تم التحويل منها',
       validationMessage: 'يرجى إدخال رقم المحفظة المحول منها',
-    };
-  }
-
-  if (type === 'usdt' || type === 'crypto') {
-    return {
-      field: 'senderWalletAddress',
-      label: 'عنوان المحفظة المحول منها',
-      placeholder: 'أدخل عنوان محفظة USDT التي تم التحويل منها',
-      validationMessage: 'يرجى إدخال عنوان المحفظة المحول منها',
     };
   }
 
@@ -89,11 +87,13 @@ const getMethodPresentation = (method) => {
   const token = `${method?.id || ''} ${method?.name || ''}`.toLowerCase();
   const type = normalizeMethodType(method?.type);
 
-  if (token.includes('vodafone')) return { icon: 'VC', color: 'from-red-500 to-yellow-500' };
+  if (token.includes('vodafone') || token.includes('فودافون')) return { icon: '🤖', color: 'from-red-600 via-rose-600 to-amber-500' };
+  if (token.includes('usdt') || token.includes('tether') || token.includes('يو اس دي تي') || type === 'usdt' || type === 'crypto') {
+    return { icon: '🤖', color: 'from-emerald-600 via-teal-600 to-amber-500' };
+  }
   if (token.includes('etisalat')) return { icon: 'EC', color: 'from-green-500 to-indigo-500' };
   if (token.includes('orange')) return { icon: 'OC', color: 'from-orange-500 to-red-500' };
   if (type === 'bank_transfer') return { icon: 'BT', color: 'from-indigo-500 to-amber-500' };
-  if (type === 'usdt' || type === 'crypto') return { icon: 'USDT', color: 'from-emerald-500 to-indigo-600' };
   if (type === 'credit_card') return { icon: 'CC', color: 'from-amber-500 to-orange-600' };
 
   return { icon: 'PM', color: 'from-emerald-500 to-indigo-600' };
@@ -190,6 +190,28 @@ const PaymentDetails = ({
     [method]
   );
 
+  const isVodafone = useMemo(() => {
+    const token = `${method?.id || ''} ${method?.name || ''}`.toLowerCase();
+    return token.includes('vodafone') || token.includes('فودافون');
+  }, [method]);
+
+  const isUsdt = useMemo(() => {
+    const token = `${method?.id || ''} ${method?.name || ''} ${method?.type || ''}`.toLowerCase();
+    return token.includes('usdt') || token.includes('tether') || token.includes('يو اس دي تي') || method?.type === 'usdt' || method?.type === 'crypto';
+  }, [method]);
+
+  const isAutomated = isVodafone || isUsdt;
+
+  const displayedMethodName = useMemo(() => {
+    if (isVodafone) {
+      return dir === 'rtl' ? 'فودافون كاش دفع آلي' : 'Vodafone Cash Automated';
+    }
+    if (isUsdt) {
+      return dir === 'rtl' ? 'USDT دفع آلي' : 'USDT Automated';
+    }
+    return method?.name || '';
+  }, [isVodafone, isUsdt, dir, method?.name]);
+
   const methodFields = method?.fields || ['amount'];
   const senderDetailRequirement = useMemo(
     () => getSenderDetailRequirement(method),
@@ -204,7 +226,7 @@ const PaymentDetails = ({
     .replace(/\s*ورقم العملية\.?/g, '')
     .replace(/\s*ورقم المعاملة\.?/g, '')
     .trim();
-  const requiresReceipt = Boolean(method?.accountNumber);
+  const requiresReceipt = isAutomated ? false : Boolean(method?.accountNumber);
   const feePercent = useMemo(() => {
     const value = Number(method?.feePercent);
     if (!Number.isFinite(value)) return 0;
@@ -394,7 +416,7 @@ const PaymentDetails = ({
         transactionNumber: transactionId,
         paymentReference: transactionId,
         proofImage: uploadedFile || null,
-        paymentChannel: freshMethod?.name || methodId || '',
+        paymentChannel: (isAutomated ? displayedMethodName : freshMethod?.name) || methodId || '',
         paymentMethodType: normalizeMethodType(freshMethod?.type),
         currencyCode: freshGroup?.currency || freshMethod?.currency || user?.currency || 'USD',
         userId: user?.id || '',
@@ -491,39 +513,59 @@ const PaymentDetails = ({
           </button>
         ) : null}
         <motion.div
-          initial={{ y: 10, opacity: 0 }}
+          initial={{ y: -8, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
           className="relative overflow-hidden rounded-[1.35rem] border border-[color:rgb(var(--color-primary-rgb)/0.24)] bg-[linear-gradient(135deg,rgb(var(--color-card-rgb)/0.96),rgb(var(--color-primary-rgb)/0.08),rgb(245_158_11/0.06))] p-3.5 shadow-[0_22px_55px_-44px_rgb(var(--color-primary-rgb)/0.72)] sm:p-4"
         >
           <div className="flex items-center gap-3">
-            {method.image ? (
-              <img
-                src={resolveImageUrl(method.image)}
-                alt={method.name}
-                loading="lazy"
-                decoding="async"
-                referrerPolicy="no-referrer"
-                className="h-12 w-12 shrink-0 rounded-xl border border-[color:rgb(var(--color-primary-rgb)/0.22)] bg-white object-cover sm:h-14 sm:w-14"
-              />
-            ) : (
-              <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${methodPresentation.color} sm:h-14 sm:w-14`}>
-                <span className="text-xs font-bold text-white">{methodPresentation.icon}</span>
-              </div>
-            )}
+            <div className="relative shrink-0">
+              {method.image ? (
+                <img
+                  src={resolveImageUrl(method.image)}
+                  alt={displayedMethodName}
+                  loading="lazy"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  className="h-12 w-12 rounded-xl border border-[color:rgb(var(--color-primary-rgb)/0.22)] bg-white object-cover sm:h-14 sm:w-14"
+                />
+              ) : (
+                <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${methodPresentation.color} shadow-lg sm:h-14 sm:w-14`}>
+                  {isAutomated ? (
+                    <Bot className="h-7 w-7 text-white" />
+                  ) : (
+                    <span className="text-xs font-bold text-white">{methodPresentation.icon}</span>
+                  )}
+                </div>
+              )}
+              {isAutomated && (
+                <span className="absolute -bottom-1 -end-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[var(--color-card)] bg-amber-500 text-white shadow-sm" title={dir === 'rtl' ? 'دفع آلي' : 'Automated'}>
+                  <Bot className="h-3 w-3" />
+                </span>
+              )}
+            </div>
             <div className="min-w-0 flex-1">
               <div className="mb-1.5 flex flex-wrap items-center gap-1.5">
                 <span className="inline-flex items-center gap-1 rounded-full border border-emerald-400/25 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-black text-emerald-600 dark:text-emerald-300">
                   <ShieldCheck className="h-3.5 w-3.5" />
                   {dir === 'rtl' ? 'دفع آمن' : 'Secure payment'}
                 </span>
+                {isAutomated && (
+                  <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/35 bg-gradient-to-r from-amber-500/15 via-emerald-500/15 to-amber-500/15 px-2.5 py-0.5 text-[9px] font-black text-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.2)] dark:text-amber-300">
+                    <Bot className="h-3 w-3 animate-pulse text-amber-400" />
+                    <span>{dir === 'rtl' ? 'دفع آلي عبر البوت 24/7' : 'Automated Bot 24/7'}</span>
+                  </span>
+                )}
                 {group?.currency && (
                   <span className="rounded-full border border-violet-400/25 bg-violet-500/10 px-2 py-0.5 text-[9px] font-black text-violet-600 dark:text-violet-300">
                     {String(group.currency).toUpperCase()}
                   </span>
                 )}
               </div>
-              <h1 className="truncate text-base font-black tracking-tight text-[var(--color-text)] sm:text-xl">{method.name}</h1>
+              <h1 className="flex items-center gap-2 truncate text-base font-black tracking-tight text-[var(--color-text)] sm:text-xl">
+                <span>{displayedMethodName}</span>
+                {isAutomated && <Bot className="h-5 w-5 shrink-0 text-amber-400" />}
+              </h1>
               <p className="mt-0.5 truncate text-[10px] font-bold text-[var(--color-text-secondary)] sm:text-xs">
                 {group?.name || (dir === 'rtl' ? 'إضافة رصيد' : 'Add balance')}
               </p>
