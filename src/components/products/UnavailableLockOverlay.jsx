@@ -31,7 +31,7 @@ const UnavailableLockOverlay = ({ label = 'غير متوفر', size = 'md', clas
   return (
     <span
       className={cn(
-        'pointer-events-none absolute inset-0 z-30 block overflow-hidden border border-amber-200/45 bg-[radial-gradient(circle_at_50%_24%,rgb(255_255_255/0.88),transparent_34%),linear-gradient(180deg,rgb(244_253_255/0.72),rgb(255_248_226/0.78))] shadow-[inset_0_1px_0_rgb(255_255_255/0.88),inset_0_-18px_30px_rgb(124_58_237/0.08)] dark:border-violet-200/24 dark:bg-[radial-gradient(circle_at_50%_24%,rgb(255_255_255/0.16),transparent_34%),linear-gradient(180deg,rgb(124_58_237/0.28),rgb(244_114_208/0.22))] dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.18),inset_0_-18px_30px_rgb(0_0_0/0.12)]',
+        'pointer-events-none absolute inset-0 z-30 block overflow-hidden border border-amber-200/45 bg-[radial-gradient(circle_at_50%_24%,rgb(255_255_255/0.88),transparent_34%),linear-gradient(180deg,rgb(244_253_255/0.72),rgb(255_248_226/0.78))] shadow-[inset_0_1px_0_rgb(255_255_255/0.88),inset_0_-18px_30px_rgb(245_158_11/0.08)] dark:border-amber-400/20 dark:bg-[radial-gradient(circle_at_50%_24%,rgb(255_255_255/0.12),transparent_34%),linear-gradient(180deg,rgb(217_119_6/0.25),rgb(180_83_9/0.2))] dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.18),inset_0_-18px_30px_rgb(0_0_0/0.12)]',
         styles.panel,
         className
       )}

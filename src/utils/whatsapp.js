@@ -1,4 +1,4 @@
-const FALLBACK_WHATSAPP_NUMBER = '01050028058';
+const FALLBACK_WHATSAPP_NUMBER = '01144903085';
 const ENV_ADMIN_WHATSAPP_NUMBER =
   import.meta.env.VITE_ADMIN_WHATSAPP_NUMBER
   || import.meta.env.ADMIN_WHATSAPP_NUMBER
@@ -6,9 +6,9 @@ const ENV_ADMIN_WHATSAPP_NUMBER =
 
 export const normalizeWhatsAppNumber = (value) => {
   const digits = String(value || '').replace(/\D/g, '');
-  if (!digits) return FALLBACK_WHATSAPP_NUMBER;
+  if (!digits) return '201144903085';
 
-  // Support local numbers like 010xxxxxxxx by defaulting to Egypt country code.
+  // Support local numbers like 011xxxxxxxx by defaulting to Egypt country code.
   if (digits.startsWith('0') && digits.length >= 10) {
     return `20${digits.replace(/^0+/, '')}`;
   }

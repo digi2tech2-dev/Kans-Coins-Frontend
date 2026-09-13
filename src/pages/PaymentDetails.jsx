@@ -494,7 +494,7 @@ const PaymentDetails = ({
           initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
-          className="relative overflow-hidden rounded-[1.35rem] border border-[color:rgb(var(--color-primary-rgb)/0.24)] bg-[linear-gradient(135deg,rgb(var(--color-card-rgb)/0.96),rgb(var(--color-primary-rgb)/0.08),rgb(192_38_211/0.06))] p-3.5 shadow-[0_22px_55px_-44px_rgb(var(--color-primary-rgb)/0.72)] sm:p-4"
+          className="relative overflow-hidden rounded-[1.35rem] border border-[color:rgb(var(--color-primary-rgb)/0.24)] bg-[linear-gradient(135deg,rgb(var(--color-card-rgb)/0.96),rgb(var(--color-primary-rgb)/0.08),rgb(245_158_11/0.06))] p-3.5 shadow-[0_22px_55px_-44px_rgb(var(--color-primary-rgb)/0.72)] sm:p-4"
         >
           <div className="flex items-center gap-3">
             {method.image ? (
@@ -540,9 +540,9 @@ const PaymentDetails = ({
             className="min-w-0 overflow-hidden rounded-[1.3rem] border border-[color:rgb(var(--color-primary-rgb)/0.2)] bg-[color:rgb(var(--color-card-rgb)/0.9)] p-3.5 shadow-[0_20px_48px_-42px_rgb(var(--color-primary-rgb)/0.6)] sm:p-4 lg:sticky lg:top-5"
           >
             <div className="mb-3 flex items-center gap-2.5">
-              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#7c3aed,#c026d3)] text-white shadow-[0_14px_28px_-18px_rgb(124_58_237/0.9)]">
+              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#b45309,#d97706)] text-white shadow-[0_14px_28px_-18px_rgb(217_119_6/0.9)]">
                 <Landmark className="h-4 w-4" />
-                <span className="absolute -end-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full border-2 border-[var(--color-card)] bg-white font-['Poppins'] text-[9px] font-extrabold text-violet-700">1</span>
+                <span className="absolute -end-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full border-2 border-[var(--color-card)] bg-white font-['Poppins'] text-[9px] font-extrabold text-amber-700">1</span>
               </span>
               <div>
                 <h3 className="text-sm font-black text-[var(--color-text)]">{t('payments.accountDetails')}</h3>
@@ -590,9 +590,9 @@ const PaymentDetails = ({
           className="min-w-0 overflow-hidden rounded-[1.3rem] border border-[color:rgb(var(--color-border-rgb)/0.76)] bg-[color:rgb(var(--color-card-rgb)/0.92)] p-3.5 shadow-[0_20px_48px_-42px_rgb(var(--color-primary-rgb)/0.55)] sm:p-4"
         >
           <div className="mb-4 flex items-center gap-2.5">
-            <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#c026d3,#ec4899)] text-white shadow-[0_14px_28px_-18px_rgb(192_38_211/0.9)]">
+            <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#d97706,#f59e0b)] text-white shadow-[0_14px_28px_-18px_rgb(217_119_6/0.9)]">
               <ReceiptText className="h-4 w-4" />
-              <span className="absolute -end-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full border-2 border-[var(--color-card)] bg-white font-['Poppins'] text-[9px] font-extrabold text-fuchsia-700">2</span>
+              <span className="absolute -end-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full border-2 border-[var(--color-card)] bg-white font-['Poppins'] text-[9px] font-extrabold text-amber-700">2</span>
             </span>
             <div>
               <h3 className="text-sm font-black text-[var(--color-text)]">{t('payments.paymentDetails')}</h3>
@@ -685,7 +685,7 @@ const PaymentDetails = ({
             </div>
           )}
 
-          <div className="mb-4 overflow-hidden rounded-2xl border border-[color:rgb(var(--color-primary-rgb)/0.2)] bg-[linear-gradient(135deg,rgb(var(--color-primary-rgb)/0.07),rgb(192_38_211/0.05))] p-3">
+          <div className="mb-4 overflow-hidden rounded-2xl border border-[color:rgb(var(--color-primary-rgb)/0.2)] bg-[linear-gradient(135deg,rgb(var(--color-primary-rgb)/0.07),rgb(245_158_11/0.05))] p-3">
             <div className="flex items-center justify-between gap-3 text-xs">
               <span className="font-bold text-[var(--color-text-secondary)]">
                 {t('payments.subtotalLabel', {
@@ -713,7 +713,7 @@ const PaymentDetails = ({
                   defaultValue: dir === 'rtl' ? 'الإجمالي المطلوب تحويله' : 'Total to transfer',
                 })}
               </span>
-              <span className="rounded-xl bg-[linear-gradient(135deg,#7c3aed,#c026d3)] px-3 py-1.5 font-['Poppins'] text-sm font-extrabold tracking-tight text-white shadow-[0_12px_24px_-18px_rgb(124_58_237/0.9)] [direction:ltr] [font-variant-numeric:tabular-nums]">{formatMoney(payableAmount)}</span>
+              <span className="rounded-xl bg-[linear-gradient(135deg,#b45309,#d97706)] px-3 py-1.5 font-['Poppins'] text-sm font-extrabold tracking-tight text-white shadow-[0_12px_24px_-18px_rgb(217_119_6/0.9)] [direction:ltr] [font-variant-numeric:tabular-nums]">{formatMoney(payableAmount)}</span>
             </div>
           </div>
 
@@ -743,7 +743,7 @@ const PaymentDetails = ({
             aria-busy={isSubmitting}
             whileTap={{ scale: 0.985 }}
             whileHover={!isSubmitting ? { y: -1 } : undefined}
-            className="group flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#7c3aed_0%,#c026d3_100%)] px-5 text-sm font-black text-white shadow-[0_18px_34px_-24px_rgb(124_58_237/0.9)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+            className="group flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#b45309_0%,#d97706_50%,#f59e0b_100%)] px-5 text-sm font-black text-white shadow-[0_18px_34px_-24px_rgb(217_119_6/0.9)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
             disabled={isSubmitting}
           >
             {isSubmitting ? (
@@ -762,7 +762,7 @@ const PaymentDetails = ({
         </div>
 
         {submitStatus === 'success' && createPortal(
-          <div className="fixed inset-0 z-[240] flex items-center justify-center bg-[radial-gradient(34rem_circle_at_50%_15%,rgb(192_38_211/0.2),transparent_52%),radial-gradient(28rem_circle_at_15%_85%,rgb(37_99_235/0.17),transparent_50%),rgb(2_1_10/0.82)] px-4 backdrop-blur-[16px]">
+          <div className="fixed inset-0 z-[240] flex items-center justify-center bg-[radial-gradient(34rem_circle_at_50%_15%,rgb(245_158_11/0.2),transparent_52%),radial-gradient(28rem_circle_at_15%_85%,rgb(217_119_6/0.17),transparent_50%),rgb(15_11_5/0.88)] px-4 backdrop-blur-[16px]">
             <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 14 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -770,7 +770,7 @@ const PaymentDetails = ({
               role="dialog"
               aria-modal="true"
               aria-labelledby="topup-success-title"
-              className="relative isolate w-full max-w-[21.5rem] overflow-hidden rounded-[1.65rem] border border-violet-300/25 bg-[radial-gradient(20rem_circle_at_92%_-8%,rgb(244_114_208/0.25),transparent_46%),radial-gradient(18rem_circle_at_2%_104%,rgb(37_99_235/0.3),transparent_48%),linear-gradient(145deg,#10082b_0%,#221b53_52%,#42136a_100%)] p-5 text-center text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.14),0_32px_90px_-35px_rgb(0_0_0/0.95),0_0_55px_-28px_rgb(192_38_211/0.76),0_0_50px_-30px_rgb(124_58_237/0.88)] sm:p-6"
+              className="relative isolate w-full max-w-[21.5rem] overflow-hidden rounded-[1.65rem] border border-amber-300/25 bg-[radial-gradient(20rem_circle_at_92%_-8%,rgb(245_158_11/0.25),transparent_46%),radial-gradient(18rem_circle_at_2%_104%,rgb(217_119_6/0.3),transparent_48%),linear-gradient(145deg,#1f1305_0%,#2d1b08_52%,#3d260c_100%)] p-5 text-center text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.14),0_32px_90px_-35px_rgb(0_0_0/0.95),0_0_55px_-28px_rgb(245_158_11/0.76),0_0_50px_-30px_rgb(217_119_6/0.88)] sm:p-6"
             >
               <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(255_255_255/0.025)_1px,transparent_1px),linear-gradient(180deg,rgb(255_255_255/0.025)_1px,transparent_1px)] bg-[length:30px_30px] [mask-image:linear-gradient(180deg,black,transparent_90%)]" />
               <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl border border-emerald-300/25 bg-[linear-gradient(145deg,rgb(52_211_153/0.22),rgb(20_184_166/0.1))] text-emerald-300 shadow-[inset_0_1px_0_rgb(255_255_255/0.14),0_18px_42px_-22px_rgb(52_211_153/0.9)]">
@@ -779,7 +779,7 @@ const PaymentDetails = ({
               <h3 id="topup-success-title" className="text-xl font-black tracking-tight text-white">
                 {dir === 'rtl' ? 'تم الشحن' : 'Top-up submitted'}
               </h3>
-              <p className="mx-auto mt-2 max-w-[17rem] text-xs font-semibold leading-6 text-violet-100/76">
+              <p className="mx-auto mt-2 max-w-[17rem] text-xs font-semibold leading-6 text-amber-100/80">
                 {dir === 'rtl'
                   ? 'تم إرسال طلب إضافة الرصيد للمراجعة.'
                   : 'Your balance top-up request was sent for review.'}
@@ -789,7 +789,7 @@ const PaymentDetails = ({
                 <button
                   type="button"
                   onClick={handleSuccessConfirm}
-                  className="h-11 rounded-xl bg-[linear-gradient(135deg,#7c3aed,#c026d3)] px-3 text-xs font-black text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.16),0_16px_32px_-20px_rgb(192_38_211/0.9)] transition hover:-translate-y-0.5 hover:brightness-110"
+                  className="h-11 rounded-xl bg-[linear-gradient(135deg,#b45309,#d97706)] px-3 text-xs font-black text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.16),0_16px_32px_-20px_rgb(217_119_6/0.9)] transition hover:-translate-y-0.5 hover:brightness-110"
                 >
                   {dir === 'rtl' ? 'سجل الطلبات' : 'Request history'}
                 </button>

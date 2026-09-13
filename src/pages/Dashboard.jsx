@@ -13,7 +13,6 @@ import slideOneHeroImage from '../assets/slide-1-opt.webp';
 import slideTwoHeroImage from '../assets/slide-2-opt.webp';
 import slideThreeHeroImage from '../assets/slide-3-opt.webp';
 import slideFourHeroImage from '../assets/slide-4-opt.webp';
-import targetBannerImage from '../assets/target.webp';
 import coinsImage from '../assets/logo.webp';
 import { resolveImageUrl } from '../utils/imageUrl';
 import {
@@ -168,12 +167,12 @@ const Dashboard = () => {
   return (
     <div className="space-y-5 pb-5 sm:space-y-6">
       {!isTwoFactorEnabled ? (
-        <section className="group relative mx-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-emerald-400/20 bg-[linear-gradient(120deg,rgb(16_185_129/0.08),rgb(var(--color-card-rgb)/0.72)_48%,rgb(56_189_248/0.07))] p-2 shadow-[0_16px_40px_-34px_rgb(16_185_129/0.72)] backdrop-blur-xl sm:p-2.5">
-          <span className="pointer-events-none absolute -start-8 -top-10 h-24 w-24 rounded-full bg-emerald-400/10 blur-2xl" />
+        <section className="group relative mx-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-amber-400/25 bg-[linear-gradient(120deg,rgb(245_158_11/0.12),rgb(var(--color-card-rgb)/0.92)_48%,rgb(217_119_6/0.08))] p-2 shadow-[0_16px_40px_-34px_rgb(245_158_11/0.6)] backdrop-blur-xl sm:p-2.5">
+          <span className="pointer-events-none absolute -start-8 -top-10 h-24 w-24 rounded-full bg-amber-400/10 blur-2xl" />
           <div className="relative flex items-center justify-between gap-2.5">
             <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
-              <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-emerald-300/25 bg-[linear-gradient(145deg,rgb(16_185_129/0.18),rgb(56_189_248/0.12))] text-emerald-500 shadow-[inset_0_1px_0_rgb(255_255_255/0.16)] sm:h-10 sm:w-10">
-                <span className="absolute end-0 top-0 h-2 w-2 -translate-y-1/4 translate-x-1/4 rounded-full border-2 border-[rgb(var(--color-card-rgb))] bg-emerald-400" />
+              <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-amber-300/30 bg-[linear-gradient(145deg,rgb(245_158_11/0.2),rgb(217_119_6/0.14))] text-amber-400 shadow-[inset_0_1px_0_rgb(255_255_255/0.16)] sm:h-10 sm:w-10">
+                <span className="absolute end-0 top-0 h-2 w-2 -translate-y-1/4 translate-x-1/4 rounded-full border-2 border-[rgb(var(--color-card-rgb))] bg-amber-400" />
                 <ShieldCheck className="h-4.5 w-4.5 sm:h-5 sm:w-5" strokeWidth={2.2} />
               </span>
               <div className="min-w-0 leading-tight">
@@ -188,7 +187,7 @@ const Dashboard = () => {
 
             <Link
               to="/account-security"
-              className="inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-xl border border-emerald-400/25 bg-emerald-500/10 px-2.5 text-[0.66rem] font-extrabold text-emerald-500 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-400/40 hover:bg-emerald-500/16 hover:shadow-[0_10px_24px_-16px_rgb(16_185_129/0.9)] sm:h-9 sm:px-3 sm:text-[0.73rem]"
+              className="inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-xl border border-amber-400/30 bg-amber-500/15 px-2.5 text-[0.66rem] font-extrabold text-amber-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-amber-400/50 hover:bg-amber-500/25 hover:shadow-[0_10px_24px_-16px_rgb(245_158_11/0.8)] sm:h-9 sm:px-3 sm:text-[0.73rem]"
             >
               <span>{language === 'ar' ? 'تفعيل الحماية' : 'Protect now'}</span>
               <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.4} />
@@ -212,29 +211,6 @@ const Dashboard = () => {
 
       </section>
 
-      {isCustomerUser ? (
-        <div className="mx-auto w-full max-w-5xl px-0.5 sm:px-2">
-          <Link
-            to="/buy-target"
-            className="group mx-auto block w-[21rem] max-w-full overflow-hidden rounded-[1rem] border border-[color:rgb(var(--color-primary-rgb)/0.28)] bg-[color:rgb(var(--color-card-rgb)/0.76)] shadow-[0_18px_42px_-30px_rgb(var(--color-primary-rgb)/0.82),inset_0_1px_0_rgb(255_255_255/0.08)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-[color:rgb(var(--color-primary-rgb)/0.46)] hover:shadow-[0_22px_48px_-30px_rgb(var(--color-primary-rgb)/0.9)] sm:w-[26rem]"
-            aria-label={language === 'ar' ? 'بيع تارجت' : 'Sell Target'}
-          >
-            <span className="block overflow-hidden bg-black">
-              <img
-                src={targetBannerImage}
-                alt={language === 'ar' ? 'بيع تارجت' : 'Sell Target'}
-                className="block aspect-[2048/800] w-full object-cover transition-transform duration-500 group-hover:scale-[1.012]"
-                loading="lazy"
-              />
-            </span>
-            <span className="block border-t border-[color:rgb(var(--color-primary-rgb)/0.18)] bg-[linear-gradient(180deg,rgb(var(--color-card-rgb)/0.94),rgb(var(--color-primary-rgb)/0.08))] px-3 py-1.5 text-center">
-              <span className="text-xs font-extrabold text-[var(--color-text)] sm:text-sm">
-                {language === 'ar' ? 'بيع تارجت' : 'Sell Target'}
-              </span>
-            </span>
-          </Link>
-        </div>
-      ) : null}
 
       {bestSellingProducts.length ? (
         <section className="mx-auto w-full max-w-5xl overflow-hidden rounded-[1.35rem] border border-[color:rgb(var(--color-primary-rgb)/0.16)] bg-[linear-gradient(145deg,rgb(var(--color-card-rgb)/0.9),rgb(var(--color-primary-rgb)/0.045))] p-3 shadow-[0_20px_55px_-45px_rgb(var(--color-primary-rgb)/0.65)] sm:p-5" aria-labelledby="best-selling-title">

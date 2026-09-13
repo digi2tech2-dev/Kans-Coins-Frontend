@@ -79,7 +79,7 @@ const BuyTarget = () => {
 
   return (
     <div className="mx-auto max-w-6xl space-y-4 text-[var(--color-text)]">
-      <section className="relative mx-auto aspect-[2048/752] w-[46%] max-w-2xl overflow-hidden rounded-[0.8rem] border border-[color:rgb(var(--color-border-rgb)/0.58)] bg-[var(--color-card)] shadow-[0_18px_46px_-32px_rgb(0_0_0/0.82)] sm:w-[58%] sm:rounded-[1.2rem]">
+      <section className="relative mx-auto aspect-[16/9] w-[46%] max-w-2xl overflow-hidden rounded-[0.8rem] border border-[color:rgb(var(--color-border-rgb)/0.58)] bg-[var(--color-card)] shadow-[0_18px_46px_-32px_rgb(0_0_0/0.82)] sm:w-[58%] sm:rounded-[1.2rem]">
         <img
           src={targetHeroImage}
           alt="بيع تارجت"

@@ -554,7 +554,7 @@ Set valid=true only when the image itself clearly proves a successful completed 
             />
 
             <div className="flex items-center gap-3 text-start">
-              <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#7c3aed,#c026d3)] transition-transform ${
+              <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#b45309,#d97706)] text-white shadow-[0_12px_24px_-16px_rgb(217_119_6/0.9)] transition-transform ${
                   isDragOver ? 'scale-110' : ''
                 }`}>
                 <Upload className="h-4 w-4 text-white" />

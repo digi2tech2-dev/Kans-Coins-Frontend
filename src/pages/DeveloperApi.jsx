@@ -6,6 +6,7 @@ import Button from '../components/ui/Button';
 import { useToast } from '../components/ui/Toast';
 import useAuthStore from '../store/useAuthStore';
 import apiClient from '../services/client';
+import { useLanguage } from '../context/LanguageContext';
 
 const copyText = async (value) => {
   const text = String(value || '');
@@ -29,6 +30,9 @@ const copyText = async (value) => {
 const DeveloperApi = () => {
   const { addToast } = useToast();
   const { user, refreshProfile } = useAuthStore();
+  const { language } = useLanguage();
+  const isAr = language !== 'en';
+
   const [rawToken, setRawToken] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -45,9 +49,17 @@ const DeveloperApi = () => {
     try {
       const result = await apiClient.me.generateApiToken();
       setRawToken(result?.rawToken || result?.data?.rawToken || '');
-      addToast('A new API token was generated. Copy it now; it will not be shown again.', 'success');
+      addToast(
+        isAr
+          ? 'تم إنشاء رمز API جديد بنجاح. انسخه الآن؛ فلن يتم عرضه مرة أخرى.'
+          : 'A new API token was generated. Copy it now; it will not be shown again.',
+        'success'
+      );
     } catch (error) {
-      addToast(error?.message || 'Unable to generate an API token.', 'error');
+      addToast(
+        error?.message || (isAr ? 'تعذر إنشاء رمز الـ API.' : 'Unable to generate an API token.'),
+        'error'
+      );
     } finally {
       setIsGenerating(false);
     }
@@ -59,9 +71,12 @@ const DeveloperApi = () => {
       const whitelistIps = whitelistText.split(/\r?\n|,/).map((value) => value.trim()).filter(Boolean);
       await apiClient.me.updateApiSettings({ whitelistIps, webhookUrl });
       await refreshProfile({ force: true });
-      addToast('API settings saved.', 'success');
+      addToast(isAr ? 'تم حفظ إعدادات الـ API بنجاح.' : 'API settings saved.', 'success');
     } catch (error) {
-      addToast(error?.message || 'Unable to save API settings.', 'error');
+      addToast(
+        error?.message || (isAr ? 'تعذر حفظ إعدادات الـ API.' : 'Unable to save API settings.'),
+        'error'
+      );
     } finally {
       setIsSaving(false);
     }
@@ -72,34 +87,112 @@ const DeveloperApi = () => {
       <Card className="rounded-2xl border border-[color:rgb(var(--color-primary-rgb)/0.3)] bg-[color:rgb(var(--color-card-rgb)/0.92)] p-6 shadow-[var(--shadow-subtle)]">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <div className="flex items-center gap-2 text-[var(--color-primary)]"><KeyRound className="h-5 w-5" /><span className="font-semibold">B2B API management</span></div>
-            <h1 className="mt-3 text-2xl font-bold text-[var(--color-text)]">Manage API access for this account</h1>
-            <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">Use this page to generate a token and control allowed source IP addresses. Public integration documentation is available separately.</p>
+            <div className="flex items-center gap-2 text-[var(--color-primary)]">
+              <KeyRound className="h-5 w-5" />
+              <span className="font-semibold">{isAr ? 'إدارة واجهة برمجة التطبيقات (B2B API)' : 'B2B API management'}</span>
+            </div>
+            <h1 className="mt-3 text-2xl font-bold text-[var(--color-text)]">
+              {isAr ? 'إدارة الوصول إلى الـ API لهذا الحساب' : 'Manage API access for this account'}
+            </h1>
+            <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
+              {isAr
+                ? 'استخدم هذه الصفحة لإنشاء رمز وصول (Token) والتحكم في عناوين IP المصرح لها. وثائق الربط البرمجي متاحة بشكل منفصل.'
+                : 'Use this page to generate a token and control allowed source IP addresses. Public integration documentation is available separately.'}
+            </p>
           </div>
-          <Link to="/api-docs" className="inline-flex items-center justify-center gap-2 rounded-lg border border-[color:rgb(var(--color-primary-rgb)/0.35)] px-4 py-2 text-sm font-semibold text-[var(--color-primary)]">
-            Open API Documentation <ExternalLink className="h-4 w-4" />
+          <Link
+            to="/api-docs"
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-[color:rgb(var(--color-primary-rgb)/0.35)] px-4 py-2 text-sm font-semibold text-[var(--color-primary)] transition hover:bg-[color:rgb(var(--color-primary-rgb)/0.1)]"
+          >
+            {isAr ? 'فتح وثائق الـ API' : 'Open API Documentation'} <ExternalLink className="h-4 w-4" />
           </Link>
         </div>
       </Card>
 
       <Card className="rounded-2xl p-6 shadow-[var(--shadow-subtle)]">
-        <div className="flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-emerald-500" /><h2 className="font-bold text-[var(--color-text)]">API token</h2></div>
-        <p className="mt-2 text-sm text-[var(--color-text-secondary)]">API access is {user?.isApiEnabled ? 'enabled' : 'not enabled'} for this account. Regenerating a token invalidates the previous token.</p>
+        <div className="flex items-center gap-2">
+          <ShieldCheck className="h-5 w-5 text-emerald-500" />
+          <h2 className="font-bold text-[var(--color-text)]">
+            {isAr ? 'رمز الـ API (Token)' : 'API token'}
+          </h2>
+        </div>
+        <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+          {isAr
+            ? user?.isApiEnabled
+              ? 'الوصول إلى واجهة API مفعّل لهذا الحساب. إعادة إنشاء الرمز ستؤدي إلى إلغاء صلاحية الرمز السابق فوراً.'
+              : 'الوصول إلى واجهة API غير مفعّل لهذا الحساب.'
+            : `API access is ${user?.isApiEnabled ? 'enabled' : 'not enabled'} for this account. Regenerating a token invalidates the previous token.`}
+        </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-          <input readOnly value={rawToken || 'Generate a token to reveal a new value.'} className="min-w-0 flex-1 rounded-xl border border-[color:rgb(var(--color-border-rgb)/0.8)] bg-[color:rgb(var(--color-elevated-rgb)/0.55)] px-4 py-3 font-mono text-sm text-[var(--color-text)]" />
-          <Button type="button" variant="outline" disabled={!rawToken} onClick={async () => addToast(await copyText(rawToken) ? 'Token copied.' : 'Unable to copy token.', 'success')}><ClipboardCopy className="h-4 w-4" />Copy</Button>
-          <Button type="button" disabled={isGenerating || !user?.isApiEnabled} onClick={generateToken}><RefreshCw className={`h-4 w-4 ${isGenerating ? 'animate-spin' : ''}`} />Generate token</Button>
+          <input
+            readOnly
+            value={rawToken || (isAr ? 'اضغط على إنشاء رمز لإظهار القيمة الجديدة.' : 'Generate a token to reveal a new value.')}
+            className="min-w-0 flex-1 rounded-xl border border-[color:rgb(var(--color-border-rgb)/0.8)] bg-[color:rgb(var(--color-elevated-rgb)/0.55)] px-4 py-3 font-mono text-sm text-[var(--color-text)]"
+          />
+          <Button
+            type="button"
+            variant="outline"
+            disabled={!rawToken}
+            onClick={async () =>
+              addToast(
+                (await copyText(rawToken))
+                  ? (isAr ? 'تم نسخ الرمز بنجاح.' : 'Token copied.')
+                  : (isAr ? 'تعذر نسخ الرمز.' : 'Unable to copy token.'),
+                'success'
+              )
+            }
+          >
+            <ClipboardCopy className="h-4 w-4" />
+            {isAr ? 'نسخ' : 'Copy'}
+          </Button>
+          <Button
+            type="button"
+            disabled={isGenerating || !user?.isApiEnabled}
+            onClick={generateToken}
+          >
+            <RefreshCw className={`h-4 w-4 ${isGenerating ? 'animate-spin' : ''}`} />
+            {isAr ? 'إنشاء رمز جديد' : 'Generate token'}
+          </Button>
         </div>
       </Card>
 
       <Card className="rounded-2xl p-6 shadow-[var(--shadow-subtle)]">
-        <h2 className="font-bold text-[var(--color-text)]">IP and webhook settings</h2>
-        <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Leave the IP list empty to allow requests from any address. Enter one IP address per line or separate values with commas.</p>
-        <label className="mt-4 block text-sm font-semibold text-[var(--color-text)]">Allowed IP addresses</label>
-        <textarea value={whitelistText} onChange={(event) => setWhitelistText(event.target.value)} rows={5} disabled={!user?.isApiEnabled} className="mt-2 w-full rounded-xl border border-[color:rgb(var(--color-border-rgb)/0.8)] bg-[color:rgb(var(--color-elevated-rgb)/0.55)] p-3 text-sm text-[var(--color-text)]" />
-        <label className="mt-4 block text-sm font-semibold text-[var(--color-text)]">Webhook URL</label>
-        <input value={webhookUrl} onChange={(event) => setWebhookUrl(event.target.value)} disabled={!user?.isApiEnabled} placeholder="https://example.com/webhook" className="mt-2 w-full rounded-xl border border-[color:rgb(var(--color-border-rgb)/0.8)] bg-[color:rgb(var(--color-elevated-rgb)/0.55)] px-3 py-2 text-sm text-[var(--color-text)]" />
-        <div className="mt-4"><Button type="button" disabled={isSaving || !user?.isApiEnabled} onClick={saveSettings}>Save API settings</Button></div>
+        <h2 className="font-bold text-[var(--color-text)]">
+          {isAr ? 'إعدادات عناوين IP والـ Webhook' : 'IP and webhook settings'}
+        </h2>
+        <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+          {isAr
+            ? 'اترك قائمة الـ IP فارغة للسماح بالطلبات من أي عنوان. أدخل عنوان IP واحداً في كل سطر أو افصل بينها بفواصل.'
+            : 'Leave the IP list empty to allow requests from any address. Enter one IP address per line or separate values with commas.'}
+        </p>
+        <label className="mt-4 block text-sm font-semibold text-[var(--color-text)]">
+          {isAr ? 'عناوين IP المسموح بها' : 'Allowed IP addresses'}
+        </label>
+        <textarea
+          value={whitelistText}
+          onChange={(event) => setWhitelistText(event.target.value)}
+          rows={5}
+          disabled={!user?.isApiEnabled}
+          placeholder={isAr ? 'مثال: 192.168.1.100' : 'e.g. 192.168.1.100'}
+          className="mt-2 w-full rounded-xl border border-[color:rgb(var(--color-border-rgb)/0.8)] bg-[color:rgb(var(--color-elevated-rgb)/0.55)] p-3 text-sm text-[var(--color-text)]"
+        />
+        <label className="mt-4 block text-sm font-semibold text-[var(--color-text)]">
+          {isAr ? 'رابط الـ Webhook' : 'Webhook URL'}
+        </label>
+        <input
+          value={webhookUrl}
+          onChange={(event) => setWebhookUrl(event.target.value)}
+          disabled={!user?.isApiEnabled}
+          placeholder="https://example.com/webhook"
+          className="mt-2 w-full rounded-xl border border-[color:rgb(var(--color-border-rgb)/0.8)] bg-[color:rgb(var(--color-elevated-rgb)/0.55)] px-3 py-2 text-sm text-[var(--color-text)]"
+        />
+        <div className="mt-4">
+          <Button type="button" disabled={isSaving || !user?.isApiEnabled} onClick={saveSettings}>
+            {isSaving
+              ? (isAr ? 'جارٍ الحفظ...' : 'Saving...')
+              : (isAr ? 'حفظ إعدادات الـ API' : 'Save API settings')}
+          </Button>
+        </div>
       </Card>
     </div>
   );

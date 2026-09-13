@@ -58,8 +58,8 @@ const STATUS_META = {
 const FILTERS = [
   {
     key: 'all', label: 'الكل', Icon: Layers3,
-    active: 'border-violet-300/45 bg-[linear-gradient(145deg,#7c3aed,#c026d3)] text-white shadow-violet-950/45',
-    icon: 'bg-violet-400/18 text-violet-100',
+    active: 'border-amber-300/50 bg-[linear-gradient(145deg,#b45309,#d97706)] text-white shadow-amber-950/45',
+    icon: 'bg-amber-400/18 text-amber-100',
   },
   {
     key: 'pending', label: 'انتظار', Icon: Clock3,
@@ -191,19 +191,19 @@ const WalletTopupHistory = () => {
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-3 pb-6 text-[var(--color-text)] sm:space-y-4" dir={dir}>
-      <section className="relative isolate overflow-hidden rounded-[1.65rem] border border-violet-300/20 bg-[radial-gradient(24rem_circle_at_95%_-18%,rgb(244_114_208/0.35),transparent_48%),radial-gradient(20rem_circle_at_0%_110%,rgb(37_99_235/0.46),transparent_50%),linear-gradient(135deg,#10082b_0%,#25215d_40%,#6d28d9_76%,#a21caf_115%)] px-4 py-5 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.13),0_32px_75px_-42px_rgb(109_40_217/0.95),0_18px_45px_-36px_rgb(192_38_211/0.9)] sm:px-6 sm:py-6">
-        <div className="pointer-events-none absolute -end-16 -top-20 -z-10 h-52 w-52 rounded-full bg-fuchsia-300/18 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 -start-16 -z-10 h-52 w-52 rounded-full bg-blue-500/22 blur-3xl" />
+      <section className="relative isolate overflow-hidden rounded-[1.65rem] border border-amber-400/30 bg-[radial-gradient(24rem_circle_at_95%_-18%,rgba(251,191,36,0.35),transparent_48%),radial-gradient(20rem_circle_at_0%_110%,rgba(217,119,6,0.4),transparent_50%),linear-gradient(135deg,#1c1305_0%,#451a03_40%,#78350f_76%,#b45309_115%)] px-4 py-5 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_32px_75px_-42px_rgba(217,119,6,0.7)] sm:px-6 sm:py-6">
+        <div className="pointer-events-none absolute -end-16 -top-20 -z-10 h-52 w-52 rounded-full bg-amber-400/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -start-16 -z-10 h-52 w-52 rounded-full bg-amber-600/20 blur-3xl" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(255_255_255/0.025)_1px,transparent_1px),linear-gradient(180deg,rgb(255_255_255/0.025)_1px,transparent_1px)] bg-[length:30px_30px] [mask-image:linear-gradient(120deg,black,transparent_78%)]" />
 
         <div className="flex items-center gap-3">
-          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-white/15 bg-[linear-gradient(145deg,rgb(255_255_255/0.16),rgb(255_255_255/0.07))] text-fuchsia-100 shadow-[inset_0_1px_0_rgb(255_255_255/0.14),0_16px_36px_-24px_rgb(0_0_0/0.9)] backdrop-blur-xl">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-white/15 bg-[linear-gradient(145deg,rgba(255,255,255,0.16),rgba(217,119,6,0.1))] text-amber-200 shadow-[inset_0_1px_0_rgb(255_255_255/0.14),0_16px_36px_-24px_rgb(0_0_0/0.9)] backdrop-blur-xl">
             <WalletCards className="h-6 w-6" />
           </span>
           <div className="min-w-0">
-            <p className="text-[10px] font-black tracking-[0.16em] text-fuchsia-200">حسابك المالي</p>
+            <p className="text-[10px] font-black tracking-[0.16em] text-amber-200">حسابك المالي</p>
             <h1 className="mt-1 text-lg font-black tracking-tight text-white drop-shadow-[0_2px_12px_rgb(0_0_0/0.22)] sm:text-2xl">سجل طلبات إضافة الرصيد</h1>
-            <p className="mt-1 text-[11px] leading-5 text-violet-100/72 sm:text-sm">
+            <p className="mt-1 text-[11px] leading-5 text-amber-100/75 sm:text-sm">
               تابع حالة طلباتك ومبلغ وطريقة الدفع في مكان واحد.
             </p>
           </div>
@@ -307,7 +307,7 @@ const WalletTopupHistory = () => {
                     </span>
                   </div>
 
-                  <div className="mt-3 flex items-end justify-between gap-3 rounded-2xl border border-[color:rgb(var(--color-primary-rgb)/0.14)] bg-[linear-gradient(135deg,rgb(var(--color-primary-rgb)/0.07),rgb(192_38_211/0.05))] px-3 py-2.5">
+                  <div className="mt-3 flex items-end justify-between gap-3 rounded-2xl border border-[color:rgb(var(--color-primary-rgb)/0.14)] bg-[linear-gradient(135deg,rgb(var(--color-primary-rgb)/0.07),rgb(245_158_11/0.05))] px-3 py-2.5">
                     <div>
                       <p className="flex items-center gap-1 text-[9px] font-bold text-[var(--color-text-secondary)]">
                         <CircleDollarSign className="h-3 w-3" />
@@ -388,8 +388,8 @@ const WalletTopupHistory = () => {
               className={cn(
                 'h-9 min-w-9 rounded-xl border px-2 text-xs font-black transition',
                 currentPage === pageNumber
-                  ? 'border-violet-400/45 bg-[linear-gradient(135deg,#7c3aed,#c026d3)] text-white shadow-[0_12px_28px_-18px_rgb(124_58_237/0.9)]'
-                  : 'border-[color:rgb(var(--color-border-rgb)/0.78)] bg-[color:rgb(var(--color-card-rgb)/0.85)] hover:border-violet-400/40 hover:text-[var(--color-primary)]'
+                  ? 'border-amber-400/45 bg-[linear-gradient(135deg,#b45309,#d97706)] text-white shadow-[0_12px_28px_-18px_rgb(217_119_6/0.9)]'
+                  : 'border-[color:rgb(var(--color-border-rgb)/0.78)] bg-[color:rgb(var(--color-card-rgb)/0.85)] hover:border-amber-400/40 hover:text-[var(--color-primary)]'
               )}
             >
               {pageNumber}
@@ -399,7 +399,7 @@ const WalletTopupHistory = () => {
             type="button"
             onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
             disabled={currentPage === totalPages}
-            className="h-9 rounded-xl border border-[color:rgb(var(--color-border-rgb)/0.78)] bg-[color:rgb(var(--color-card-rgb)/0.85)] px-3 text-[10px] font-black transition hover:border-violet-400/40 hover:text-[var(--color-primary)] disabled:cursor-not-allowed disabled:opacity-40"
+            className="h-9 rounded-xl border border-[color:rgb(var(--color-border-rgb)/0.78)] bg-[color:rgb(var(--color-card-rgb)/0.85)] px-3 text-[10px] font-black transition hover:border-amber-400/40 hover:text-[var(--color-primary)] disabled:cursor-not-allowed disabled:opacity-40"
           >
             التالي
           </button>

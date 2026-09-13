@@ -303,7 +303,7 @@ const Orders = () => {
               </p>
 
               <div className="mt-4 flex items-center gap-3">
-                <div className="inline-flex items-center justify-center rounded-full px-3 py-2 bg-[linear-gradient(90deg,var(--color-primary),#c026d3)] text-white font-black text-base shadow-[0_10px_30px_-18px_rgb(var(--color-primary-rgb)/0.9)]">
+                <div className="inline-flex items-center justify-center rounded-full px-3 py-2 bg-[linear-gradient(90deg,#b45309,#d97706_60%,#f59e0b)] text-white font-black text-base shadow-[0_10px_30px_-18px_rgb(217_119_6/0.9)]">
                   {formatCount(accountOrders.length)}
                 </div>
                 <div className="text-sm font-semibold text-[var(--color-text-secondary)]">

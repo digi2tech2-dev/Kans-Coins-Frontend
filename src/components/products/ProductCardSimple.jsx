@@ -32,7 +32,7 @@ const ProductCardSimple = React.memo(({
       aria-label={displayName}
     >
       {isUnavailable ? (
-        <span className="pointer-events-none absolute inset-0 z-10 rounded-[1.25rem] bg-[linear-gradient(180deg,rgb(255_255_255/0.14),rgb(244_114_208/0.08))] dark:bg-[linear-gradient(180deg,rgb(255_255_255/0.06),rgb(124_58_237/0.08))]" aria-hidden="true" />
+        <span className="pointer-events-none absolute inset-0 z-10 rounded-[1.25rem] bg-[linear-gradient(180deg,rgb(255_255_255/0.14),rgb(245_158_11/0.08))] dark:bg-[linear-gradient(180deg,rgb(255_255_255/0.06),rgb(217_119_6/0.08))]" aria-hidden="true" />
       ) : null}
       <div className="storefront-product-media relative overflow-hidden rounded-[1rem]">
         {resolvedImageSrc ? (

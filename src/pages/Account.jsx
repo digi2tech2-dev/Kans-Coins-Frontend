@@ -563,7 +563,7 @@ const Account = () => {
 
           <div className="grid gap-5 p-5 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-center">
             <div className="relative mx-auto md:mx-0">
-              <span className="absolute -inset-2 rounded-[2rem] bg-[conic-gradient(from_140deg,rgb(var(--color-primary-rgb)/0.18),rgb(192_38_211/0.26),rgb(var(--color-primary-rgb)/0.12))] blur-[2px]" />
+              <span className="absolute -inset-2 rounded-[2rem] bg-[conic-gradient(from_140deg,rgb(var(--color-primary-rgb)/0.18),rgb(245_158_11/0.26),rgb(var(--color-primary-rgb)/0.12))] blur-[2px]" />
               <img
                 src={displayedAvatar}
                 alt={form.fullName || text.pageTitle}

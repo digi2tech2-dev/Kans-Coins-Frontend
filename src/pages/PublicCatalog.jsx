@@ -633,7 +633,7 @@ const PublicCatalog = () => {
               <button
                 type="button"
                 onClick={handleLogin}
-                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-violet-200/20 bg-[linear-gradient(180deg,rgb(124_58_237/0.22),rgb(3_8_22/0.78))] text-violet-50 shadow-[inset_0_0_18px_rgb(255_255_255/0.035),0_0_26px_-18px_rgb(124_58_237/0.9)] transition-all hover:-translate-y-0.5 hover:border-amber-200/30 hover:text-amber-100 sm:h-10 sm:w-10"
+                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-amber-400/25 bg-[linear-gradient(180deg,rgb(217_119_6/0.24),rgb(14_11_7/0.85))] text-amber-200 shadow-[inset_0_0_18px_rgb(255_255_255/0.035),0_0_26px_-18px_rgb(245_158_11/0.9)] transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:text-amber-100 sm:h-10 sm:w-10"
                 aria-label={isArabic ? 'تسجيل الدخول' : 'Login'}
               >
                 <UserRound className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
@@ -642,7 +642,7 @@ const PublicCatalog = () => {
               <button
                 type="button"
                 onClick={() => setIsMenuOpen((previous) => !previous)}
-                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:rgb(var(--color-border-rgb)/0.84)] bg-[linear-gradient(180deg,rgb(3_8_22/0.9),rgb(2_6_19/0.78))] text-[var(--color-text)] shadow-[inset_0_0_18px_rgb(255_255_255/0.035),0_0_26px_-18px_rgb(34_211_238/0.9)] transition-all hover:-translate-y-0.5 hover:border-[color:rgb(var(--color-primary-rgb)/0.38)] hover:text-[var(--color-primary)] sm:h-10 sm:w-10"
+                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:rgb(var(--color-border-rgb)/0.84)] bg-[linear-gradient(180deg,rgb(16_13_8/0.9),rgb(10_8_5/0.78))] text-[var(--color-text)] shadow-[inset_0_0_18px_rgb(255_255_255/0.035),0_0_26px_-18px_rgb(245_158_11/0.7)] transition-all hover:-translate-y-0.5 hover:border-[color:rgb(var(--color-primary-rgb)/0.38)] hover:text-[var(--color-primary)] sm:h-10 sm:w-10"
                 aria-label={isArabic ? 'القائمة' : 'Menu'}
               >
                 <Menu className="h-4.5 w-4.5 sm:h-6 sm:w-6" />
@@ -670,17 +670,17 @@ const PublicCatalog = () => {
       {typeof document !== 'undefined' && createPortal(
         <>
       {showServiceNotice && (
-        <div className="public-notice-overlay public-notice-overlay--service fixed inset-0 z-[90] flex items-center justify-center bg-[radial-gradient(circle_at_50%_15%,rgb(168_85_247/0.24),rgb(15_23_42/0.72)_48%,rgb(0_0_0/0.92))] px-4 backdrop-blur-md">
+        <div className="public-notice-overlay public-notice-overlay--service fixed inset-0 z-[90] flex items-center justify-center bg-[radial-gradient(circle_at_50%_15%,rgb(245_158_11/0.2),rgb(15_11_5/0.85)_48%,rgb(10_7_3/0.95))] px-4 backdrop-blur-md">
           <div
             dir="rtl"
-            className="public-notice-card public-notice-card--service kanz-coins-panel relative w-full max-w-[19.5rem] overflow-hidden rounded-[1.5rem] border border-violet-200/20 text-right shadow-[0_30px_86px_-46px_rgb(124_58_237/0.95)] backdrop-blur-2xl"
+            className="public-notice-card public-notice-card--service kanz-coins-panel relative w-full max-w-[19.5rem] overflow-hidden rounded-[1.5rem] border border-amber-300/25 text-right shadow-[0_30px_86px_-46px_rgb(245_158_11/0.6)] backdrop-blur-2xl"
             role="dialog"
             aria-modal="true"
             aria-labelledby="service-notice-title"
             style={{ animation: 'page-fade-in 180ms ease-out both' }}
           >
-            <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,#c084fc,#f472b6,#c084fc,transparent)]" />
-            <div className="pointer-events-none absolute -top-20 left-1/2 h-40 w-64 -translate-x-1/2 rounded-full bg-[color:rgb(124_58_237/0.2)] blur-3xl" />
+            <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,#f59e0b,#fbbf24,#f59e0b,transparent)]" />
+            <div className="pointer-events-none absolute -top-20 left-1/2 h-40 w-64 -translate-x-1/2 rounded-full bg-[color:rgb(245_158_11/0.15)] blur-3xl" />
 
             <button
               type="button"
@@ -719,8 +719,8 @@ const PublicCatalog = () => {
                   </p>
                 </div>
 
-                <div className="flex gap-2.5 rounded-2xl border border-violet-300/15 bg-[linear-gradient(135deg,rgb(124_58_237/0.1),rgb(var(--color-surface-rgb)/0.44))] p-3">
-                  <span className="public-notice-dot public-notice-dot--info grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-violet-400/15 text-violet-400">
+                <div className="flex gap-2.5 rounded-2xl border border-amber-300/15 bg-[linear-gradient(135deg,rgb(217_119_6/0.1),rgb(var(--color-surface-rgb)/0.44))] p-3">
+                  <span className="public-notice-dot public-notice-dot--info grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-amber-400/15 text-amber-400">
                     <Info className="h-3.5 w-3.5" />
                   </span>
                   <p className="public-notice-muted text-[0.75rem] font-bold leading-5 text-[var(--color-text-secondary)]">
@@ -732,7 +732,7 @@ const PublicCatalog = () => {
               <button
                 type="button"
                 onClick={handleCloseServiceNotice}
-                className="mt-3 inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl border border-violet-200/20 bg-[linear-gradient(135deg,#6d28d9,#9333ea_52%,#ec4899)] px-4 text-[0.82rem] font-black text-white shadow-[0_16px_36px_-22px_rgb(124_58_237/0.95)] transition-all hover:-translate-y-0.5 hover:brightness-110"
+                className="mt-3 inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl border border-amber-200/20 bg-[linear-gradient(135deg,#b45309,#d97706_50%,#f59e0b)] px-4 text-[0.82rem] font-black text-white shadow-[0_16px_36px_-22px_rgb(217_119_6/0.95)] transition-all hover:-translate-y-0.5 hover:brightness-110"
               >
                 <Check className="h-4 w-4" strokeWidth={2.5} />
                 متابعة
@@ -743,7 +743,7 @@ const PublicCatalog = () => {
       )}
 
       {showWhatsAppNotice && (
-        <div className="public-notice-overlay public-notice-overlay--whatsapp fixed inset-0 z-[90] flex items-center justify-center bg-[radial-gradient(circle_at_top,rgb(37_211_102/0.18),rgb(124_58_237/0.24)_40%,rgb(0_0_0/0.88))] px-4 backdrop-blur-[4px]">
+        <div className="public-notice-overlay public-notice-overlay--whatsapp fixed inset-0 z-[90] flex items-center justify-center bg-[radial-gradient(circle_at_top,rgb(37_211_102/0.18),rgb(217_119_6/0.2)_40%,rgb(0_0_0/0.88))] px-4 backdrop-blur-[4px]">
           <div
             dir="rtl"
             className="public-notice-card public-notice-card--whatsapp kanz-coins-panel relative w-full max-w-[18.75rem] overflow-hidden rounded-[1.35rem] border border-emerald-300/20 text-right shadow-[0_26px_78px_-44px_rgb(37_211_102/0.88)] backdrop-blur-xl"
@@ -752,7 +752,7 @@ const PublicCatalog = () => {
             aria-labelledby="whatsapp-notice-title"
             style={{ animation: 'page-fade-in 180ms ease-out both' }}
           >
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,#25d366,#7c3aed,#f472d0,transparent)]" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,#25d366,#f59e0b,#fbbf24,transparent)]" />
             <div className="pointer-events-none absolute -top-16 left-1/2 h-24 w-44 -translate-x-1/2 rounded-full bg-[color:rgb(37_211_102/0.16)] blur-3xl" />
 
             <button
@@ -775,10 +775,10 @@ const PublicCatalog = () => {
 
               <div className="mb-3 flex items-center justify-center gap-2">
                 <span className="h-px flex-1 bg-[linear-gradient(90deg,transparent,rgb(37_211_102/0.55))]" />
-                <h2 id="whatsapp-notice-title" className="shrink-0 bg-[linear-gradient(120deg,#25d366,#7c3aed,#f472d0)] bg-clip-text text-base font-black leading-6 text-transparent">
+                <h2 id="whatsapp-notice-title" className="shrink-0 bg-[linear-gradient(120deg,#25d366,#f59e0b,#fbbf24)] bg-clip-text text-base font-black leading-6 text-transparent">
                   تنويه المجتمع
                 </h2>
-                <span className="h-px flex-1 bg-[linear-gradient(90deg,rgb(124_58_237/0.55),transparent)]" />
+                <span className="h-px flex-1 bg-[linear-gradient(90deg,rgb(217_119_6/0.55),transparent)]" />
               </div>
 
               <div className="public-notice-body space-y-2.5 rounded-[1rem] border border-emerald-300/20 bg-emerald-950/20 p-3">
@@ -792,10 +792,10 @@ const PublicCatalog = () => {
                 </div>
 
                 <div className="flex gap-2.5">
-                  <span className="public-notice-dot public-notice-dot--info mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-violet-400/20 text-[0.62rem] font-black text-violet-200">
+                  <span className="public-notice-dot public-notice-dot--info mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-400/20 text-[0.62rem] font-black text-amber-200">
                     i
                   </span>
-                  <p className="public-notice-muted text-[0.76rem] font-bold leading-6 text-violet-50/80">
+                  <p className="public-notice-muted text-[0.76rem] font-bold leading-6 text-amber-50/80">
                     واي اهمال في المتابعة تعرضك للمخاطر دون اي مسؤولية علينا
                   </p>
                 </div>
@@ -805,7 +805,7 @@ const PublicCatalog = () => {
                 href="https://whatsapp.com/channel/0029Vb5xkFpFMqrUmvTSil0Q"
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3 inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-emerald-300/30 bg-[linear-gradient(135deg,#128c7e,#25d366_58%,#7c3aed)] px-4 text-sm font-black text-white shadow-[0_18px_38px_-24px_rgb(37_211_102/0.9)] transition-all hover:-translate-y-0.5 hover:brightness-105"
+                className="mt-3 inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-emerald-300/30 bg-[linear-gradient(135deg,#128c7e,#25d366_58%,#d97706)] px-4 text-sm font-black text-white shadow-[0_18px_38px_-24px_rgb(37_211_102/0.9)] transition-all hover:-translate-y-0.5 hover:brightness-105"
               >
                 <MessageCircle className="h-4 w-4" />
                 مجتمع الواتساب
@@ -815,7 +815,7 @@ const PublicCatalog = () => {
               <button
                 type="button"
                 onClick={handleCloseWhatsAppNotice}
-                className="public-notice-secondary-button mt-2 inline-flex h-10 w-full items-center justify-center rounded-full border border-violet-200/25 bg-[color:rgb(var(--color-card-rgb)/0.72)] px-4 text-sm font-black text-violet-50 shadow-[0_16px_34px_-26px_rgb(124_58_237/0.9)] transition-all hover:-translate-y-0.5 hover:border-emerald-300/30 hover:text-emerald-100"
+                className="public-notice-secondary-button mt-2 inline-flex h-10 w-full items-center justify-center rounded-full border border-amber-300/25 bg-[color:rgb(var(--color-card-rgb)/0.72)] px-4 text-sm font-black text-amber-100 shadow-[0_16px_34px_-26px_rgb(245_158_11/0.6)] transition-all hover:-translate-y-0.5 hover:border-emerald-300/30 hover:text-emerald-100"
               >
                 موافق
               </button>

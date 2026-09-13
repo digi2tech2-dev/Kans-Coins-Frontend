@@ -11,10 +11,10 @@ const HeaderBrand = ({ className, iconClassName, textClassName }) => (
       className={cn('-mx-1.5 scale-[0.72] min-[380px]:scale-[0.78] sm:scale-[0.84]', iconClassName)}
     />
     <span className={cn('min-w-0 text-center leading-none', textClassName)}>
-      <span className="kanz-brand-title block font-['Orbitron'] text-[0.98rem] font-black leading-none tracking-[0.12em] text-transparent bg-clip-text bg-[linear-gradient(120deg,#fffaf0_0%,#f472d0_28%,#c026d3_52%,#7c3aed_76%,#312e81_100%)] animate-shimmer-slow min-[380px]:text-[1.1rem] sm:text-[1.5rem]">
+      <span className="kanz-brand-title block font-['Orbitron'] text-[0.98rem] font-black leading-none tracking-[0.12em] text-transparent bg-clip-text bg-[linear-gradient(120deg,#fffbeb_0%,#fef08a_28%,#f59e0b_52%,#d97706_76%,#b45309_100%)] animate-shimmer-slow min-[380px]:text-[1.1rem] sm:text-[1.5rem]">
         KANZ
       </span>
-      <span className="mt-0.5 block font-['Orbitron'] text-[0.38rem] font-bold uppercase tracking-[0.5em] text-[#c026d3] sm:text-[0.5rem]">
+      <span className="mt-0.5 block font-['Orbitron'] text-[0.38rem] font-bold uppercase tracking-[0.5em] text-[#f59e0b] sm:text-[0.5rem]">
         COINS
       </span>
     </span>

@@ -62,7 +62,7 @@ const BrandMark = ({
               titleClassName
             )}
           >
-            <span className="text-transparent bg-clip-text bg-[linear-gradient(120deg,#fffaf0_0%,#f472d0_28%,#c026d3_52%,#7c3aed_76%,#312e81_100%)] animate-shimmer-slow">
+            <span className="text-transparent bg-clip-text bg-[linear-gradient(120deg,#fffbeb_0%,#fef08a_28%,#f59e0b_52%,#d97706_76%,#b45309_100%)] animate-shimmer-slow">
               KANZ
             </span>
             <span className="mx-1.5 text-[color:rgb(var(--color-text-secondary)/0.64)]">/</span>

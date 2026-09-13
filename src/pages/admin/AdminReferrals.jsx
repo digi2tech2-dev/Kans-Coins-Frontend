@@ -464,7 +464,7 @@ const AdminReferrals = () => {
         </div>
       </section>
 
-      <section className={`${activePanel === 'earnings' ? '' : 'hidden'} relative overflow-hidden rounded-xl border border-emerald-300/20 bg-[linear-gradient(135deg,rgb(16_185_129/0.07),rgb(var(--color-card-rgb)/0.9)_60%,rgb(124_58_237/0.05))] p-2.5 shadow-[0_14px_35px_-30px_rgb(16_185_129/0.7)]`}>
+      <section className={`${activePanel === 'earnings' ? '' : 'hidden'} relative overflow-hidden rounded-xl border border-emerald-300/20 bg-[linear-gradient(135deg,rgb(16_185_129/0.07),rgb(var(--color-card-rgb)/0.9)_60%,rgb(245_158_11/0.05))] p-2.5 shadow-[0_14px_35px_-30px_rgb(16_185_129/0.7)]`}>
         <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-start gap-2">
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-emerald-500/10 text-emerald-500"><Percent className="h-4 w-4" /></span>

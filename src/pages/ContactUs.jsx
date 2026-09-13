@@ -272,7 +272,7 @@ const ContactUs = ({ accountOnly = false }) => {
                   <button
                     type="button"
                     onClick={handleLogin}
-                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-violet-200/20 bg-[linear-gradient(180deg,rgb(124_58_237/0.22),rgb(3_8_22/0.78))] text-violet-50 shadow-[inset_0_0_18px_rgb(255_255_255/0.035),0_0_26px_-18px_rgb(124_58_237/0.9)] transition-all hover:-translate-y-0.5 hover:border-amber-200/30 hover:text-amber-100 sm:h-10 sm:w-10"
+                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-amber-400/25 bg-[linear-gradient(180deg,rgb(217_119_6/0.24),rgb(14_11_7/0.85))] text-amber-200 shadow-[inset_0_0_18px_rgb(255_255_255/0.035),0_0_26px_-18px_rgb(245_158_11/0.9)] transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:text-amber-100 sm:h-10 sm:w-10"
                     aria-label={isArabic ? 'تسجيل الدخول' : 'Login'}
                   >
                     <UserRound className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
@@ -281,7 +281,7 @@ const ContactUs = ({ accountOnly = false }) => {
                   <button
                     type="button"
                     onClick={() => setIsMenuOpen((previous) => !previous)}
-                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:rgb(var(--color-border-rgb)/0.84)] bg-[linear-gradient(180deg,rgb(3_8_22/0.9),rgb(2_6_19/0.78))] text-[var(--color-text)] shadow-[inset_0_0_18px_rgb(255_255_255/0.035),0_0_26px_-18px_rgb(34_211_238/0.9)] transition-all hover:-translate-y-0.5 hover:border-[color:rgb(var(--color-primary-rgb)/0.38)] hover:text-[var(--color-primary)] sm:h-10 sm:w-10"
+                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:rgb(var(--color-border-rgb)/0.84)] bg-[linear-gradient(180deg,rgb(16_13_8/0.9),rgb(10_8_5/0.78))] text-[var(--color-text)] shadow-[inset_0_0_18px_rgb(255_255_255/0.035),0_0_26px_-18px_rgb(245_158_11/0.7)] transition-all hover:-translate-y-0.5 hover:border-[color:rgb(var(--color-primary-rgb)/0.38)] hover:text-[var(--color-primary)] sm:h-10 sm:w-10"
                     aria-label={isArabic ? 'القائمة' : 'Menu'}
                   >
                     <Menu className="h-4.5 w-4.5 sm:h-6 sm:w-6" />

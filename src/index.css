@@ -62,32 +62,32 @@
 
 :root:not(.dark) .public-notice-overlay--service {
   background:
-    radial-gradient(circle at top, rgb(192 38 211 / 0.18), transparent 38%),
-    radial-gradient(circle at 18% 78%, rgb(124 58 237 / 0.14), transparent 44%),
-    linear-gradient(180deg, rgb(248 252 255 / 0.74), rgb(226 239 244 / 0.86)) !important;
+    radial-gradient(circle at top, rgb(217 119 6 / 0.16), transparent 38%),
+    radial-gradient(circle at 18% 78%, rgb(245 158 11 / 0.12), transparent 44%),
+    linear-gradient(180deg, rgb(255 253 245 / 0.85), rgb(254 249 235 / 0.92)) !important;
 }
 
 :root:not(.dark) .public-notice-overlay--whatsapp {
   background:
     radial-gradient(circle at top, rgb(37 211 102 / 0.18), transparent 38%),
-    radial-gradient(circle at 18% 78%, rgb(124 58 237 / 0.16), transparent 44%),
-    linear-gradient(180deg, rgb(248 252 255 / 0.76), rgb(225 242 237 / 0.88)) !important;
+    radial-gradient(circle at 18% 78%, rgb(217 119 6 / 0.14), transparent 44%),
+    linear-gradient(180deg, rgb(255 253 245 / 0.85), rgb(254 249 235 / 0.92)) !important;
 }
 
 :root:not(.dark) .public-notice-card {
-  border-color: rgb(124 58 237 / 0.2) !important;
+  border-color: rgb(217 119 6 / 0.25) !important;
   background:
-    radial-gradient(18rem circle at 50% -18%, rgb(255 255 255 / 0.92), transparent 54%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.96), rgb(241 249 251 / 0.94)) !important;
-  color: #102a36 !important;
+    radial-gradient(18rem circle at 50% -18%, rgb(255 255 255 / 0.95), transparent 54%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.98), rgb(254 250 240 / 0.94)) !important;
+  color: #1c1917 !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.92),
-    0 28px 72px -46px rgb(10 42 55 / 0.5),
-    0 0 36px -26px rgb(124 58 237 / 0.58) !important;
+    0 28px 72px -46px rgb(0 0 0 / 0.25),
+    0 0 36px -26px rgb(217 119 6 / 0.45) !important;
 }
 
 :root:not(.dark) .public-notice-card--service {
-  border-color: rgb(176 126 22 / 0.24) !important;
+  border-color: rgb(217 119 6 / 0.35) !important;
 }
 
 :root:not(.dark) .public-notice-card--whatsapp {
@@ -95,29 +95,29 @@
 }
 
 :root:not(.dark) .public-notice-body {
-  border-color: rgb(124 58 237 / 0.16) !important;
+  border-color: rgb(217 119 6 / 0.16) !important;
   background:
-    radial-gradient(12rem circle at 88% 8%, rgb(192 38 211 / 0.1), transparent 48%),
+    radial-gradient(12rem circle at 88% 8%, rgb(245 158 11 / 0.08), transparent 48%),
     rgb(255 255 255 / 0.72) !important;
 }
 
 :root:not(.dark) .public-notice-text,
 :root:not(.dark) .public-notice-thanks {
-  color: #12313d !important;
+  color: #1c1917 !important;
 }
 
 :root:not(.dark) .public-notice-muted {
-  color: rgb(45 73 86 / 0.76) !important;
+  color: rgb(94 88 74 / 0.8) !important;
 }
 
 :root:not(.dark) .public-notice-dot--warning {
-  background: rgb(192 38 211 / 0.16) !important;
-  color: #9a690d !important;
+  background: rgb(245 158 11 / 0.16) !important;
+  color: #b45309 !important;
 }
 
 :root:not(.dark) .public-notice-dot--info {
-  background: rgb(124 58 237 / 0.12) !important;
-  color: #2563eb !important;
+  background: rgb(217 119 6 / 0.12) !important;
+  color: #b45309 !important;
 }
 
 :root:not(.dark) .public-notice-dot--success {
@@ -126,13 +126,13 @@
 }
 
 :root:not(.dark) .public-notice-secondary-button {
-  border-color: rgb(124 58 237 / 0.22) !important;
-  background: rgb(255 255 255 / 0.72) !important;
-  color: #2563eb !important;
+  border-color: rgb(217 119 6 / 0.25) !important;
+  background: rgb(255 255 255 / 0.8) !important;
+  color: #b45309 !important;
 }
 
 :root:not(.dark) .public-notice-secondary-button:hover {
-  color: #047857 !important;
+  color: #d97706 !important;
 }
 
 @theme {
@@ -171,29 +171,29 @@
     background:
       radial-gradient(
         46rem circle at 16% -12%,
-        rgb(37 99 235 / 0.42),
+        rgb(217 119 6 / 0.18),
         transparent 38%
       ),
       radial-gradient(
         40rem circle at 92% 2%,
-        rgb(192 38 211 / 0.26),
+        rgb(245 158 11 / 0.14),
         transparent 34%
       ),
       radial-gradient(
         42rem circle at 54% 106%,
-        rgb(0 194 255 / 0.18),
+        rgb(180 83 9 / 0.12),
         transparent 43%
       ),
       linear-gradient(
         180deg,
-        #020613 0%,
-        #040817 48%,
-        #02040c 100%
+        rgb(15 11 5 / 0.98) 0%,
+        rgb(24 16 7 / 0.96) 48%,
+        rgb(10 7 3 / 0.98) 100%
       ),
       linear-gradient(
         90deg,
-        rgb(124 58 237 / 0.028) 0,
-        rgb(124 58 237 / 0.028) 1px,
+        rgb(245 158 11 / 0.02) 0,
+        rgb(245 158 11 / 0.02) 1px,
         transparent 1px,
         transparent 100%
       );
@@ -291,8 +291,8 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(180deg, rgb(2 6 19 / 0.22), rgb(2 4 12 / 0.78)),
-      radial-gradient(circle at top, rgb(124 58 237 / 0.1), transparent 38%);
+      linear-gradient(180deg, rgb(15 11 5 / 0.45), rgb(24 16 7 / 0.35) 54%, rgb(10 7 3 / 0.6)),
+      radial-gradient(circle at top, rgb(217 119 6 / 0.12), transparent 42%);
     backdrop-filter: blur(2px);
   }
 
@@ -320,7 +320,7 @@
     left: -8rem;
     width: 26rem;
     height: 26rem;
-    background: radial-gradient(circle, rgb(147 51 234 / 0.32), transparent 68%);
+    background: radial-gradient(circle, rgb(217 119 6 / 0.28), transparent 68%);
   }
 
   .ambient-background__glow--right {
@@ -328,7 +328,7 @@
     right: -10rem;
     width: 24rem;
     height: 24rem;
-    background: radial-gradient(circle, rgb(192 38 211 / 0.26), transparent 70%);
+    background: radial-gradient(circle, rgb(245 158 11 / 0.22), transparent 70%);
     animation-delay: -6s;
   }
 
@@ -337,15 +337,15 @@
     left: 38%;
     width: 22rem;
     height: 22rem;
-    background: radial-gradient(circle, rgb(124 58 237 / 0.2), transparent 72%);
+    background: radial-gradient(circle, rgb(180 83 9 / 0.18), transparent 72%);
     animation-delay: -11s;
   }
 
   .ambient-background__particle {
     position: absolute;
     border-radius: 9999px;
-    background: radial-gradient(circle, rgb(235 252 255 / 0.92), rgb(var(--color-primary-rgb) / 0.34) 52%, rgb(192 38 211 / 0.2) 72%, transparent 100%);
-    box-shadow: 0 0 18px rgb(var(--color-primary-rgb) / 0.16);
+    background: radial-gradient(circle, rgb(255 251 235 / 0.92), rgb(var(--color-primary-rgb) / 0.35) 52%, rgb(245 158 11 / 0.2) 72%, transparent 100%);
+    box-shadow: 0 0 18px rgb(var(--color-primary-rgb) / 0.22);
     animation: ambient-particle-float linear infinite;
     opacity: 0.44;
   }
@@ -432,9 +432,9 @@
     border: 1px solid rgb(var(--color-border-rgb) / 0.78);
     border-radius: var(--radius-xl);
     background:
-      radial-gradient(22rem circle at top right, rgb(192 38 211 / 0.12), transparent 44%),
-      radial-gradient(20rem circle at bottom left, rgb(124 58 237 / 0.08), transparent 46%),
-      linear-gradient(180deg, rgb(var(--color-card-rgb) / 0.78), rgb(var(--color-surface-rgb) / 0.68));
+      radial-gradient(26rem circle at 78% -6%, rgb(245 158 11 / 0.15), transparent 38%) padding-box,
+      radial-gradient(22rem circle at 14% 12%, rgb(217 119 6 / 0.12), transparent 44%) padding-box,
+      linear-gradient(180deg, rgb(15 11 5 / 0.98), rgb(24 16 7 / 0.96)) padding-box;
     box-shadow: var(--shadow-subtle), inset 0 1px 0 rgb(255 255 255 / 0.035);
     backdrop-filter: blur(var(--backdrop-blur));
   }
@@ -443,20 +443,20 @@
     border: 1px solid rgb(var(--color-border-rgb) / 0.84);
     border-radius: var(--radius-xl);
     background:
-      radial-gradient(24rem circle at top right, rgb(124 58 237 / 0.14), transparent 40%),
-      radial-gradient(20rem circle at bottom left, rgb(192 38 211 / 0.11), transparent 45%),
-      linear-gradient(180deg, rgb(var(--color-elevated-rgb) / 0.86), rgb(var(--color-card-rgb) / 0.76));
-    box-shadow: var(--shadow-medium), 0 0 30px -22px rgb(124 58 237 / 0.72);
+      radial-gradient(26rem circle at 78% -6%, rgb(245 158 11 / 0.16), transparent 38%) padding-box,
+      radial-gradient(22rem circle at 14% 12%, rgb(217 119 6 / 0.14), transparent 44%) padding-box,
+      linear-gradient(180deg, rgb(20 14 7 / 0.98), rgb(24 16 7 / 0.96)) padding-box;
+    box-shadow: var(--shadow-medium), 0 0 30px -22px rgb(245 158 11 / 0.5);
     backdrop-filter: blur(calc(var(--backdrop-blur) + 4px));
   }
 
   .premium-card-premium {
-    border: 1px solid rgb(var(--color-primary-rgb) / 0.2);
+    border: 1px solid rgb(var(--color-primary-rgb) / 0.25);
     border-radius: var(--radius-2xl);
     background:
-      radial-gradient(34rem circle at top right, rgb(124 58 237 / 0.18), transparent 46%),
-      radial-gradient(26rem circle at bottom left, rgb(192 38 211 / 0.15), transparent 42%),
-      linear-gradient(180deg, rgb(var(--color-card-rgb) / 0.88), rgb(var(--color-surface-rgb) / 0.8));
+      radial-gradient(26rem circle at 78% -6%, rgb(245 158 11 / 0.2), transparent 38%) padding-box,
+      radial-gradient(22rem circle at 14% 12%, rgb(217 119 6 / 0.16), transparent 44%) padding-box,
+      linear-gradient(180deg, rgb(24 16 7 / 0.98), rgb(15 11 5 / 0.96)) padding-box;
     box-shadow: var(--shadow-medium), var(--shadow-gold);
     backdrop-filter: blur(calc(var(--backdrop-blur) + 6px));
   }
@@ -548,14 +548,14 @@
     gap: 0.4rem;
     overflow: hidden;
     border-radius: 9999px;
-    border: 1px solid rgb(124 58 237 / 0.5);
+    border: 1px solid rgb(217 119 6 / 0.5);
     background:
-      radial-gradient(circle at top right, rgb(192 38 211 / 0.22), transparent 52%),
-      linear-gradient(135deg, rgb(224 251 255 / 0.92), rgb(204 221 255 / 0.62));
+      radial-gradient(circle at top right, rgb(245 158 11 / 0.22), transparent 52%),
+      linear-gradient(135deg, rgb(254 243 199 / 0.15), rgb(217 119 6 / 0.2));
     box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.58),
-      0 12px 28px -18px rgb(37 99 235 / 0.72);
-    color: #075985;
+      inset 0 1px 0 rgb(255 255 255 / 0.3),
+      0 12px 28px -18px rgb(217 119 6 / 0.72);
+    color: #f59e0b;
     backdrop-filter: blur(10px);
   }
 
@@ -569,8 +569,8 @@
       105deg,
       transparent 0%,
       rgb(255 255 255 / 0.02) 18%,
-      rgb(244 114 208 / 0.28) 44%,
-      rgb(192 38 211 / 0.42) 56%,
+      rgb(245 158 11 / 0.28) 44%,
+      rgb(251 191 36 / 0.42) 56%,
       rgb(255 255 255 / 0.04) 76%,
       transparent 100%
     );
@@ -702,7 +702,7 @@
   }
 
   .gold-gradient-text {
-    background: linear-gradient(120deg, #eaffff 0%, #7c3aed 28%, #c026d3 58%, #f472d0 100%);
+    background: linear-gradient(120deg, #fffbeb 0%, #fbbf24 35%, #f59e0b 68%, #d97706 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -710,29 +710,29 @@
 
   .gold-mesh {
     background:
-      radial-gradient(circle at top, rgb(124 58 237 / 0.16), transparent 38%),
-      radial-gradient(circle at bottom left, rgb(192 38 211 / 0.12), transparent 42%),
-      linear-gradient(180deg, rgb(var(--color-card-rgb) / 0.86), rgb(var(--color-surface-rgb) / 0.78));
+      radial-gradient(circle at top, rgb(217 119 6 / 0.14), transparent 38%),
+      radial-gradient(circle at bottom left, rgb(245 158 11 / 0.1), transparent 42%),
+      linear-gradient(180deg, rgb(var(--color-card-rgb) / 0.92), rgb(var(--color-surface-rgb) / 0.82));
   }
 
   .kanz-brand-title {
     font-family: "Orbitron", "Poppins", "Cairo", ui-sans-serif, system-ui, sans-serif;
     letter-spacing: 0.26em;
     text-shadow:
-      0 0 18px rgb(124 58 237 / 0.22),
-      0 0 28px rgb(192 38 211 / 0.18);
+      0 0 18px rgb(245 158 11 / 0.35),
+      0 0 28px rgb(217 119 6 / 0.25);
   }
 
   .kanz-coins-panel {
     border-color: rgb(var(--color-border-rgb) / 0.74);
     background:
-      linear-gradient(135deg, rgb(147 51 234 / 0.08), transparent 28%),
-      radial-gradient(24rem circle at 86% 12%, rgb(124 58 237 / 0.08), transparent 38%),
-      linear-gradient(180deg, rgb(var(--color-card-rgb) / 0.78), rgb(var(--color-surface-rgb) / 0.62));
+      radial-gradient(26rem circle at 78% -6%, rgb(245 158 11 / 0.15), transparent 38%) padding-box,
+      radial-gradient(22rem circle at 14% 12%, rgb(217 119 6 / 0.12), transparent 44%) padding-box,
+      linear-gradient(180deg, rgb(15 11 5 / 0.98), rgb(24 16 7 / 0.96)) padding-box;
     box-shadow:
-      0 0 0 1px rgb(255 255 255 / 0.018) inset,
-      0 0 28px -20px rgb(124 58 237 / 0.75),
-      0 0 36px -24px rgb(192 38 211 / 0.7),
+      0 0 0 1px rgb(255 255 255 / 0.04) inset,
+      0 0 28px -20px rgb(217 119 6 / 0.7),
+      0 0 36px -24px rgb(245 158 11 / 0.65),
       var(--shadow-medium);
   }
 
@@ -892,15 +892,15 @@
 
   :root:not(.dark) .app-shell-header-panel,
   :root:not(.dark) .app-shell-sidebar-panel {
-    border-color: rgb(124 58 237 / 0.34) !important;
+    border-color: rgb(217 119 6 / 0.28) !important;
     background:
-      radial-gradient(circle at top right, rgb(192 38 211 / 0.14), transparent 42%),
-      radial-gradient(circle at top left, rgb(124 58 237 / 0.16), transparent 38%),
-      linear-gradient(180deg, rgb(248 251 255 / 0.94), rgb(224 242 255 / 0.84)) !important;
+      radial-gradient(circle at top right, rgb(245 158 11 / 0.1), transparent 42%),
+      radial-gradient(circle at top left, rgb(217 119 6 / 0.08), transparent 38%),
+      linear-gradient(180deg, rgb(255 255 255 / 0.96), rgb(254 249 235 / 0.9)) !important;
     color: var(--color-text) !important;
     box-shadow:
-      0 24px 72px -48px rgb(37 99 235 / 0.42),
-      inset 0 1px 0 rgb(255 255 255 / 0.82) !important;
+      0 24px 72px -48px rgb(217 119 6 / 0.2),
+      inset 0 1px 0 rgb(255 255 255 / 0.85) !important;
   }
 
   :root:not(.dark) .app-shell-header-panel button,
@@ -910,21 +910,21 @@
   }
 
   :root:not(.dark) .app-shell-sidebar-panel [class*="text-[var(--color-text-secondary)]"] {
-    color: #33566d !important;
+    color: #5e584a !important;
   }
 
   :root:not(.dark) .header-wallet-balance {
     background-image: none !important;
-    filter: drop-shadow(0 1px 0 rgb(235 252 255 / 0.86));
+    filter: none;
   }
 
   :root:not(.dark) .header-mobile-brand-ms {
-    background-image: linear-gradient(120deg, #2563eb 0%, #7c3aed 32%, #a855f7 62%, #f472d0 100%) !important;
-    filter: drop-shadow(0 1px 0 rgb(235 252 255 / 0.86));
+    background-image: linear-gradient(120deg, #fffbeb 0%, #fbbf24 35%, #f59e0b 68%, #d97706 100%) !important;
+    filter: drop-shadow(0 1px 0 rgb(245 158 11 / 0.3));
   }
 
   :root:not(.dark) .header-mobile-brand-store {
-    color: #33566d !important;
+    color: #5e584a !important;
   }
 
   :root:not(.dark) .premium-card,
@@ -935,14 +935,14 @@
   :root:not(.dark) .admin-premium-panel,
   :root:not(.dark) .admin-premium-toolbar,
   :root:not(.dark) .admin-premium-stat {
-    border-color: rgb(124 58 237 / 0.28) !important;
+    border-color: rgb(217 119 6 / 0.24) !important;
     background:
-      radial-gradient(26rem circle at top right, rgb(192 38 211 / 0.12), transparent 42%),
-      radial-gradient(24rem circle at top left, rgb(124 58 237 / 0.14), transparent 42%),
-      linear-gradient(180deg, rgb(248 251 255 / 0.97), rgb(224 242 255 / 0.9)) !important;
+      radial-gradient(26rem circle at top right, rgb(245 158 11 / 0.1), transparent 42%),
+      radial-gradient(24rem circle at top left, rgb(217 119 6 / 0.08), transparent 42%),
+      linear-gradient(180deg, rgb(255 255 255 / 0.96), rgb(254 249 235 / 0.92)) !important;
     box-shadow:
-      0 20px 58px -44px rgb(37 99 235 / 0.34),
-      inset 0 1px 0 rgb(255 255 255 / 0.82) !important;
+      0 20px 58px -44px rgb(217 119 6 / 0.18),
+      inset 0 1px 0 rgb(255 255 255 / 0.85) !important;
   }
 
   :root:not(.dark) input,
@@ -975,7 +975,7 @@
     background:
       radial-gradient(
         46rem circle at 18% -8%,
-        rgb(192 38 211 / 0.2),
+        rgb(245 158 11 / 0.16),
         transparent 36%
       ),
       radial-gradient(
@@ -985,14 +985,14 @@
       ),
       radial-gradient(
         34rem circle at 82% 16%,
-        rgb(124 58 237 / 0.12),
+        rgb(217 119 6 / 0.1),
         transparent 32%
       ),
       linear-gradient(
         180deg,
-        #f8fbff 0%,
-        #eef7ff 48%,
-        #e0f2ff 100%
+        #fffdfa 0%,
+        #fefaf0 48%,
+        #fbf5e6 100%
       );
   }
 
@@ -1005,12 +1005,12 @@
       ),
       radial-gradient(
         28rem circle at 12% 24%,
-        rgb(244 114 208 / 0.12),
+        rgb(251 191 36 / 0.12),
         transparent 30%
       ),
       radial-gradient(
         30rem circle at 86% 100%,
-        rgb(124 58 237 / 0.09),
+        rgb(217 119 6 / 0.08),
         transparent 34%
       );
     opacity: 0.9;
@@ -1020,12 +1020,12 @@
     background:
       linear-gradient(
         90deg,
-        rgb(37 99 235 / 0.06) 1px,
+        rgb(217 119 6 / 0.05) 1px,
         transparent 1px
       ),
       linear-gradient(
         180deg,
-        rgb(147 51 234 / 0.05) 1px,
+        rgb(245 158 11 / 0.04) 1px,
         transparent 1px
       );
     background-size: 62px 62px;
@@ -1052,7 +1052,7 @@
     left: -5rem;
     width: 24rem;
     height: 24rem;
-    background: radial-gradient(circle, rgb(244 114 208 / 0.28), transparent 70%);
+    background: radial-gradient(circle, rgb(245 158 11 / 0.22), transparent 70%);
   }
 
   .auth-atmosphere__halo--right {
@@ -1060,7 +1060,7 @@
     bottom: -10rem;
     width: 28rem;
     height: 28rem;
-    background: radial-gradient(circle, rgb(124 58 237 / 0.18), transparent 72%);
+    background: radial-gradient(circle, rgb(217 119 6 / 0.16), transparent 72%);
     animation-delay: -8s;
   }
 
@@ -1080,14 +1080,14 @@
     border-radius: 9999px;
     background: radial-gradient(
       circle,
-      rgb(124 58 237 / 0.96) 0%,
-      rgb(192 38 211 / 0.72) 42%,
+      rgb(254 240 138 / 0.96) 0%,
+      rgb(245 158 11 / 0.75) 42%,
       var(--auth-dust-color) 68%,
       transparent 100%
     );
     opacity: 0;
     filter: blur(var(--auth-dust-blur));
-    box-shadow: 0 0 12px rgb(124 58 237 / 0.18);
+    box-shadow: 0 0 12px rgb(217 119 6 / 0.25);
     transform: translate3d(0, -10vh, 0) scale(var(--auth-dust-scale-start));
     transform-origin: center;
     will-change: transform, opacity;
@@ -1096,7 +1096,7 @@
   }
 
   .auth-gold-dust__particle.is-soft {
-    box-shadow: 0 0 18px rgb(244 114 208 / 0.12);
+    box-shadow: 0 0 18px rgb(245 158 11 / 0.18);
     opacity: calc(var(--auth-dust-opacity) * 0.85);
   }
 
@@ -1116,12 +1116,12 @@
     background: radial-gradient(
       circle,
       rgb(255 251 236 / 0.94) 0%,
-      rgb(192 38 211 / 0.58) 44%,
+      rgb(245 158 11 / 0.65) 44%,
       transparent 100%
     );
     box-shadow:
-      0 0 10px rgb(244 114 208 / 0.1),
-      0 0 18px rgb(124 58 237 / 0.08);
+      0 0 10px rgb(245 158 11 / 0.25),
+      0 0 18px rgb(217 119 6 / 0.15);
     opacity: 0;
     will-change: transform, opacity;
     animation: auth-ambient-sparkle-twinkle var(--auth-ambient-duration) ease-in-out infinite;
@@ -1140,7 +1140,7 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgb(235 252 255 / 0.7),
+      rgb(254 240 138 / 0.7),
       transparent
     );
     opacity: 0;
@@ -1160,19 +1160,19 @@
     background:
       radial-gradient(
         44rem circle at 18% -6%,
-        rgb(244 114 208 / 0.11),
+        rgb(245 158 11 / 0.14),
         transparent 36%
       ),
       radial-gradient(
         34rem circle at 84% 12%,
-        rgb(124 58 237 / 0.09),
+        rgb(217 119 6 / 0.1),
         transparent 32%
       ),
       linear-gradient(
         180deg,
-        #0d0f14 0%,
-        #07080b 48%,
-        #040507 100%
+        rgb(15 11 5 / 0.98) 0%,
+        rgb(24 16 7 / 0.96) 48%,
+        rgb(10 7 3 / 0.98) 100%
       );
   }
 
@@ -1185,12 +1185,12 @@
       ),
       radial-gradient(
         26rem circle at 12% 24%,
-        rgb(244 114 208 / 0.06),
+        rgb(245 158 11 / 0.08),
         transparent 28%
       ),
       radial-gradient(
         30rem circle at 86% 100%,
-        rgb(124 58 237 / 0.05),
+        rgb(217 119 6 / 0.06),
         transparent 34%
       );
     opacity: 0.96;
@@ -1216,37 +1216,37 @@
   }
 
   .dark .auth-atmosphere__halo--left {
-    background: radial-gradient(circle, rgb(244 114 208 / 0.18), transparent 70%);
+    background: radial-gradient(circle, rgb(245 158 11 / 0.22), transparent 70%);
   }
 
   .dark .auth-atmosphere__halo--right {
-    background: radial-gradient(circle, rgb(124 58 237 / 0.13), transparent 72%);
+    background: radial-gradient(circle, rgb(217 119 6 / 0.16), transparent 72%);
   }
 
   .dark .auth-gold-dust__particle {
     background: radial-gradient(
       circle,
-      rgb(244 114 208 / 0.9) 0%,
+      rgb(254 240 138 / 0.9) 0%,
       var(--auth-dust-color) 55%,
       transparent 100%
     );
-    box-shadow: 0 0 12px rgb(124 58 237 / 0.12);
+    box-shadow: 0 0 12px rgb(217 119 6 / 0.25);
   }
 
   .dark .auth-gold-dust__particle.is-soft {
-    box-shadow: 0 0 18px rgb(244 114 208 / 0.1);
+    box-shadow: 0 0 18px rgb(245 158 11 / 0.18);
   }
 
   .dark .auth-ambient-sparkle {
     background: radial-gradient(
       circle,
-      rgb(235 252 255 / 0.95) 0%,
-      rgb(192 38 211 / 0.48) 44%,
+      rgb(255 251 236 / 0.95) 0%,
+      rgb(245 158 11 / 0.6) 44%,
       transparent 100%
     );
     box-shadow:
-      0 0 10px rgb(244 114 208 / 0.08),
-      0 0 18px rgb(124 58 237 / 0.05);
+      0 0 10px rgb(245 158 11 / 0.2),
+      0 0 18px rgb(217 119 6 / 0.15);
   }
 
   .dark .auth-ambient-sparkle::before,
@@ -1323,7 +1323,7 @@ html[data-page-transition="running"] {
   border: 1px solid rgb(var(--color-border-rgb) / 0.58);
   border-radius: 1.35rem;
   background:
-    radial-gradient(circle at 50% 12%, rgb(192 38 211 / 0.15), transparent 48%),
+    radial-gradient(circle at 50% 12%, rgb(245 158 11 / 0.18), transparent 48%),
     rgb(var(--color-card-rgb) / 0.78);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.08),
@@ -1341,7 +1341,7 @@ html[data-page-transition="running"] {
   width: 3.1rem;
   height: 3.1rem;
   object-fit: contain;
-  filter: drop-shadow(0 8px 18px rgb(192 38 211 / 0.28));
+  filter: drop-shadow(0 8px 18px rgb(245 158 11 / 0.28));
   animation: page-transition-logo 900ms cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
 }
 
@@ -1361,8 +1361,8 @@ html[data-page-transition="running"] {
   background: linear-gradient(
     90deg,
     rgb(var(--color-primary-rgb) / 0.24),
-    rgb(192 38 211 / 0.96),
-    rgb(var(--color-primary-rgb) / 0.92)
+    rgb(245 158 11 / 0.96),
+    rgb(251 191 36 / 0.92)
   );
   box-shadow: 0 0 16px rgb(var(--color-primary-rgb) / 0.64);
   animation: page-transition-progress 720ms cubic-bezier(0.65, 0, 0.35, 1) infinite;
@@ -1380,7 +1380,7 @@ html[data-page-transition="running"] {
   height: 2.25rem;
   border: 2px solid rgb(var(--color-border-rgb) / 0.5);
   border-top-color: rgb(var(--color-primary-rgb) / 0.95);
-  border-right-color: rgb(192 38 211 / 0.78);
+  border-right-color: rgb(245 158 11 / 0.78);
   border-radius: 999px;
   box-shadow: 0 0 24px -8px rgb(var(--color-primary-rgb) / 0.8);
   animation: page-route-spinner 680ms linear infinite;
@@ -1388,19 +1388,19 @@ html[data-page-transition="running"] {
 
 :root:not(.dark) .page-transition-overlay {
   background:
-    radial-gradient(circle at 50% 46%, rgb(124 58 237 / 0.1), transparent 36%),
-    rgb(246 250 248 / 0.34);
+    radial-gradient(circle at 50% 46%, rgb(245 158 11 / 0.1), transparent 36%),
+    rgb(250 248 242 / 0.34);
 }
 
 :root:not(.dark) .page-transition-overlay__card {
-  border-color: rgb(147 51 234 / 0.24);
+  border-color: rgb(217 119 6 / 0.24);
   background:
-    radial-gradient(circle at 50% 8%, rgb(192 38 211 / 0.16), transparent 50%),
+    radial-gradient(circle at 50% 8%, rgb(245 158 11 / 0.16), transparent 50%),
     rgb(255 255 255 / 0.82);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.94),
-    0 24px 64px -38px rgb(37 99 235 / 0.4),
-    0 0 32px -24px rgb(147 51 234 / 0.54);
+    0 24px 64px -38px rgb(217 119 6 / 0.25),
+    0 0 32px -24px rgb(245 158 11 / 0.4);
 }
 
 @keyframes page-transition-progress {
@@ -1779,34 +1779,34 @@ html[data-page-transition="running"] {
   }
 }
 
-  /* Light-mode overrides: keep shell accents aligned with the electric logo palette. */
+  /* Light-mode overrides: keep shell accents aligned with the gold palette. */
 :root:not(.dark) header.app-header {
-  --color-primary: #7c3aed;
-  --color-primary-rgb: 124 58 237;
-  --color-primary-soft: #c026d3;
-  --shadow-gold: 0 0 42px -18px rgba(244, 63, 221, 0.78);
+  --color-primary: #d97706;
+  --color-primary-rgb: 217 119 6;
+  --color-primary-soft: #f59e0b;
+  --shadow-gold: 0 0 42px -18px rgba(245, 158, 11, 0.78);
 }
 
 :root:not(.dark) .sidebar {
-  --color-primary: #7c3aed;
-  --color-primary-rgb: 124 58 237;
-  --color-primary-soft: #c026d3;
-  --shadow-gold: 0 0 42px -18px rgba(244, 63, 221, 0.78);
+  --color-primary: #d97706;
+  --color-primary-rgb: 217 119 6;
+  --color-primary-soft: #f59e0b;
+  --shadow-gold: 0 0 42px -18px rgba(245, 158, 11, 0.78);
 }
 
 :root:not(.dark) .ambient-background__glow--left,
 :root:not(.dark) .ambient-background__glow--right,
 :root:not(.dark) .ambient-background__glow--bottom {
-  background: radial-gradient(circle, rgb(192 38 211 / 0.2), transparent 68%);
+  background: radial-gradient(circle, rgb(245 158 11 / 0.16), transparent 68%);
 }
 
 :root:not(.dark) ::selection {
-  background: rgb(124 58 237 / 0.24);
+  background: rgb(217 119 6 / 0.24);
   color: var(--color-text);
 }
 
 :root:not(.dark) *::-webkit-scrollbar-thumb {
-  background-color: rgb(124 58 237 / 0.22);
+  background-color: rgb(217 119 6 / 0.22);
 }
 
 :root:not(.dark) .app-shell-header-panel,
@@ -1821,31 +1821,31 @@ html[data-page-transition="running"] {
 :root:not(.dark) .admin-premium-stat {
   border-color: rgb(var(--color-border-rgb) / 0.74) !important;
   background:
-    linear-gradient(135deg, rgb(147 51 234 / 0.08), transparent 28%),
-    radial-gradient(24rem circle at 86% 12%, rgb(124 58 237 / 0.08), transparent 38%),
+    linear-gradient(135deg, rgb(245 158 11 / 0.08), transparent 28%),
+    radial-gradient(24rem circle at 86% 12%, rgb(217 119 6 / 0.08), transparent 38%),
     linear-gradient(180deg, rgb(var(--color-card-rgb) / 0.78), rgb(var(--color-surface-rgb) / 0.62)) !important;
   color: var(--color-text) !important;
   box-shadow:
     0 0 0 1px rgb(255 255 255 / 0.018) inset,
-    0 0 28px -20px rgb(124 58 237 / 0.75),
-    0 0 36px -24px rgb(192 38 211 / 0.7),
+    0 0 28px -20px rgb(217 119 6 / 0.75),
+    0 0 36px -24px rgb(245 158 11 / 0.7),
     var(--shadow-medium) !important;
 }
 
 .kanz-sidebar-panel {
   isolation: isolate;
   overflow: hidden;
-  border-color: rgb(93 111 181 / 0.54) !important;
+  border-color: rgb(217 119 6 / 0.35) !important;
   background:
-    radial-gradient(26rem circle at 78% -6%, rgb(124 58 237 / 0.16), transparent 34%),
-    radial-gradient(22rem circle at 16% 8%, rgb(192 38 211 / 0.16), transparent 42%),
-    radial-gradient(18rem circle at 96% 42%, rgb(192 38 211 / 0.1), transparent 44%),
-    linear-gradient(180deg, rgb(4 9 24 / 0.98), rgb(2 7 19 / 0.96) 54%, rgb(2 5 14 / 0.98)) !important;
+    radial-gradient(26rem circle at 78% -6%, rgb(245 158 11 / 0.16), transparent 34%),
+    radial-gradient(22rem circle at 16% 8%, rgb(251 191 36 / 0.14), transparent 42%),
+    radial-gradient(18rem circle at 96% 42%, rgb(217 119 6 / 0.1), transparent 44%),
+    linear-gradient(180deg, rgb(16 12 5 / 0.98), rgb(10 8 3 / 0.97) 54%, rgb(6 4 2 / 0.99)) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.08),
     inset 0 0 0 1px rgb(255 255 255 / 0.02),
-    0 0 48px -28px rgb(124 58 237 / 0.78),
-    0 0 54px -32px rgb(192 38 211 / 0.84),
+    0 0 48px -28px rgb(217 119 6 / 0.78),
+    0 0 54px -32px rgb(245 158 11 / 0.84),
     0 30px 80px -54px rgb(0 0 0 / 0.92) !important;
 }
 
@@ -1856,13 +1856,13 @@ html[data-page-transition="running"] {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(1px 1px at 14% 8%, rgb(235 252 255 / 0.74), transparent 64%),
-    radial-gradient(1px 1px at 72% 6%, rgb(244 114 208 / 0.5), transparent 64%),
-    radial-gradient(1px 1px at 88% 23%, rgb(192 38 211 / 0.48), transparent 64%),
-    radial-gradient(1px 1px at 22% 36%, rgb(255 255 255 / 0.44), transparent 64%),
-    radial-gradient(1px 1px at 60% 58%, rgb(244 114 208 / 0.34), transparent 64%),
-    linear-gradient(90deg, rgb(255 255 255 / 0.028) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(255 255 255 / 0.02) 1px, transparent 1px);
+    radial-gradient(1px 1px at 14% 8%, rgba(254, 240, 138, 0.8), transparent 64%),
+    radial-gradient(1px 1px at 72% 6%, rgba(251, 191, 36, 0.7), transparent 64%),
+    radial-gradient(1px 1px at 88% 23%, rgba(245, 158, 11, 0.6), transparent 64%),
+    radial-gradient(1px 1px at 22% 36%, rgba(255, 255, 255, 0.44), transparent 64%),
+    radial-gradient(1px 1px at 60% 58%, rgba(251, 191, 36, 0.5), transparent 64%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: auto, auto, auto, auto, auto, 82px 82px, 82px 82px;
   opacity: 0.72;
   mask-image: linear-gradient(180deg, rgb(0 0 0 / 0.92), rgb(0 0 0 / 0.72) 62%, transparent 100%);
@@ -1878,10 +1878,10 @@ html[data-page-transition="running"] {
   height: 12rem;
   pointer-events: none;
   background:
-    radial-gradient(18rem 5.5rem at 82% 66%, rgb(124 58 237 / 0.34), transparent 66%),
-    radial-gradient(16rem 6rem at 16% 62%, rgb(192 38 211 / 0.34), transparent 68%),
-    linear-gradient(145deg, transparent 22%, rgb(147 51 234 / 0.24) 42%, transparent 58%),
-    linear-gradient(25deg, transparent 34%, rgb(124 58 237 / 0.18) 46%, transparent 62%);
+    radial-gradient(18rem 5.5rem at 82% 66%, rgba(217, 119, 6, 0.35), transparent 66%),
+    radial-gradient(16rem 6rem at 16% 62%, rgba(245, 158, 11, 0.3), transparent 68%),
+    linear-gradient(145deg, transparent 22%, rgba(180, 83, 9, 0.25) 42%, transparent 58%),
+    linear-gradient(25deg, transparent 34%, rgba(217, 119, 6, 0.18) 46%, transparent 62%);
   filter: blur(0.2px);
   opacity: 0.92;
 }
@@ -1892,54 +1892,54 @@ html[data-page-transition="running"] {
 }
 
 .kanz-sidebar-collapse {
-  border: 1px solid rgb(93 111 181 / 0.42);
+  border: 1px solid rgba(217, 119, 6, 0.3);
   background:
-    radial-gradient(circle at 34% 24%, rgb(255 255 255 / 0.12), transparent 32%),
-    linear-gradient(180deg, rgb(10 18 39 / 0.76), rgb(4 8 22 / 0.68));
-  color: rgb(203 213 225 / 0.78);
+    radial-gradient(circle at 34% 24%, rgba(255, 255, 255, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(28, 20, 8, 0.8), rgba(14, 10, 4, 0.72));
+  color: rgb(245 208 140 / 0.85);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.07),
-    0 0 24px -16px rgb(124 58 237 / 0.72);
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 0 24px -16px rgba(245, 158, 11, 0.6);
 }
 
 .kanz-sidebar-collapse:hover {
-  border-color: rgb(124 58 237 / 0.38);
-  color: #f472d0;
+  border-color: rgba(245, 158, 11, 0.6);
+  color: #fde047;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.1),
-    0 0 30px -14px rgb(124 58 237 / 0.82);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 30px -14px rgba(245, 158, 11, 0.85);
 }
 
 .kanz-sidebar-language {
   min-height: 2.18rem;
   gap: 0.35rem !important;
   padding: 0.38rem 0.72rem !important;
-  border-color: rgb(93 111 181 / 0.42) !important;
+  border-color: rgba(217, 119, 6, 0.35) !important;
   background:
-    radial-gradient(14rem circle at 18% 0%, rgb(192 38 211 / 0.2), transparent 48%),
-    linear-gradient(180deg, rgb(28 22 58 / 0.74), rgb(5 11 29 / 0.7)) !important;
-  color: rgb(226 232 240 / 0.88) !important;
+    radial-gradient(14rem circle at 18% 0%, rgba(245, 158, 11, 0.16), transparent 48%),
+    linear-gradient(180deg, rgba(30, 22, 10, 0.8), rgba(16, 12, 5, 0.75)) !important;
+  color: rgb(254 243 199 / 0.92) !important;
   font-size: 0.66rem !important;
   letter-spacing: 0.06em !important;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    inset 0 -1px 0 rgb(124 58 237 / 0.05),
-    0 18px 34px -28px rgb(147 51 234 / 0.8);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(217, 119, 6, 0.1),
+    0 18px 34px -28px rgba(217, 119, 6, 0.6);
 }
 
 .kanz-sidebar-user-card {
   position: relative;
   min-height: 4.75rem;
-  border: 1px solid rgb(93 111 181 / 0.34);
+  border: 1px solid rgba(217, 119, 6, 0.35);
   border-radius: 0.95rem;
   padding: 0.86rem 0.7rem 0.65rem;
   background:
-    radial-gradient(14rem circle at 92% 28%, rgb(124 58 237 / 0.12), transparent 42%),
-    radial-gradient(12rem circle at 8% 72%, rgb(192 38 211 / 0.12), transparent 48%),
-    linear-gradient(180deg, rgb(5 12 30 / 0.72), rgb(2 8 22 / 0.66));
+    radial-gradient(14rem circle at 92% 28%, rgba(245, 158, 11, 0.14), transparent 42%),
+    radial-gradient(12rem circle at 8% 72%, rgba(217, 119, 6, 0.12), transparent 48%),
+    linear-gradient(180deg, rgba(24, 18, 8, 0.82), rgba(14, 10, 4, 0.8));
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.05),
-    0 20px 42px -34px rgb(124 58 237 / 0.5);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 20px 42px -34px rgba(217, 119, 6, 0.5);
 }
 
 .kanz-sidebar-id-chip {
@@ -1947,19 +1947,19 @@ html[data-page-transition="running"] {
   max-width: 5.75rem;
   align-items: center;
   gap: 0.32rem;
-  border: 1px solid rgb(124 58 237 / 0.16);
+  border: 1px solid rgba(245, 158, 11, 0.35);
   border-radius: 9999px;
   background:
-    radial-gradient(circle at 80% 20%, rgb(124 58 237 / 0.16), transparent 42%),
-    rgb(4 13 31 / 0.82);
+    radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.2), transparent 42%),
+    rgba(30, 22, 9, 0.88);
   padding: 0.22rem 0.48rem;
-  color: #38bdf8;
+  color: #fbbf24;
   font-size: 0.58rem;
   font-weight: 800;
   line-height: 1;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.04),
-    0 0 18px -12px rgb(124 58 237 / 0.86);
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 18px -12px rgba(245, 158, 11, 0.75);
 }
 
 .kanz-sidebar-avatar {
@@ -1969,20 +1969,19 @@ html[data-page-transition="running"] {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 1px solid rgb(124 58 237 / 0.28);
+  border: 1px solid rgba(251, 191, 36, 0.5);
   border-radius: 9999px;
   background:
-    radial-gradient(circle at 30% 22%, rgb(244 114 208 / 0.76), transparent 34%),
-    linear-gradient(135deg, #2563eb 0%, #312e81 44%, #a87408 100%);
+    radial-gradient(circle at 30% 22%, rgba(254, 240, 138, 0.7), transparent 34%),
+    linear-gradient(135deg, #78350f 0%, #b45309 44%, #f59e0b 100%);
   color: white;
   font-size: 1.12rem;
   font-weight: 800;
   letter-spacing: 0;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.24),
-    0 0 0 1px rgb(192 38 211 / 0.2),
-    0 0 28px -10px rgb(124 58 237 / 0.74),
-    0 0 30px -14px rgb(192 38 211 / 0.74);
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 0 1px rgba(245, 158, 11, 0.3),
+    0 0 28px -10px rgba(245, 158, 11, 0.8);
 }
 
 .kanz-sidebar-avatar img {
@@ -1998,36 +1997,36 @@ html[data-page-transition="running"] {
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(192 38 211 / 0.34);
+  border: 1px solid rgba(217, 119, 6, 0.35);
   border-radius: 9999px;
   background:
-    radial-gradient(circle at 34% 28%, rgb(192 38 211 / 0.2), transparent 40%),
-    rgb(28 22 58 / 0.7);
-  color: #c026d3;
+    radial-gradient(circle at 34% 28%, rgba(245, 158, 11, 0.18), transparent 40%),
+    rgba(28, 20, 8, 0.75);
+  color: #fbbf24;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 0 30px -16px rgb(192 38 211 / 0.86);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 30px -16px rgba(245, 158, 11, 0.75);
 }
 
 .kanz-sidebar-user-action:hover {
   transform: translateY(-1px);
-  border-color: rgb(192 38 211 / 0.52);
-  color: #f0abfc;
+  border-color: rgba(251, 191, 36, 0.6);
+  color: #fde047;
 }
 
 .kanz-sidebar-action-card {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgb(93 111 181 / 0.34);
+  border: 1px solid rgba(217, 119, 6, 0.35);
   border-radius: 1.1rem;
   padding: 0.78rem;
   background:
-    radial-gradient(13rem circle at 88% 12%, rgb(124 58 237 / 0.13), transparent 42%),
-    radial-gradient(12rem circle at 6% 90%, rgb(192 38 211 / 0.12), transparent 48%),
-    linear-gradient(180deg, rgb(5 12 30 / 0.74), rgb(2 8 22 / 0.66));
+    radial-gradient(13rem circle at 88% 12%, rgba(245, 158, 11, 0.14), transparent 42%),
+    radial-gradient(12rem circle at 6% 90%, rgba(217, 119, 6, 0.12), transparent 48%),
+    linear-gradient(180deg, rgba(22, 16, 7, 0.82), rgba(12, 9, 3, 0.78));
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.055),
-    0 20px 42px -34px rgb(124 58 237 / 0.54);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 20px 42px -34px rgba(217, 119, 6, 0.5);
 }
 
 .kanz-sidebar-action-card::before {
@@ -2039,9 +2038,9 @@ html[data-page-transition="running"] {
   background: linear-gradient(
     105deg,
     transparent 0%,
-    rgb(255 255 255 / 0.02) 18%,
-    rgb(244 114 208 / 0.3) 44%,
-    rgb(192 38 211 / 0.38) 58%,
+    rgba(255, 255, 255, 0.02) 18%,
+    rgba(254, 240, 138, 0.3) 44%,
+    rgba(245, 158, 11, 0.4) 58%,
     transparent 100%
   );
   opacity: 0;
@@ -2062,18 +2061,17 @@ html[data-page-transition="running"] {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  border: 1px solid rgb(124 58 237 / 0.34);
+  border: 1px solid rgba(251, 191, 36, 0.6);
   border-radius: 0.95rem;
   background:
-    radial-gradient(circle at 22% 18%, rgb(244 114 208 / 0.24), transparent 38%),
-    linear-gradient(135deg, #2563eb 0%, #312e81 52%, #c026d3 100%);
+    radial-gradient(circle at 22% 18%, rgba(254, 240, 138, 0.35), transparent 38%),
+    linear-gradient(135deg, #78350f 0%, #b45309 45%, #f59e0b 100%);
   color: white;
   font-size: 0.82rem;
   font-weight: 800;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.16),
-    0 0 30px -14px rgb(124 58 237 / 0.74),
-    0 0 34px -18px rgb(192 38 211 / 0.72);
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 30px -12px rgba(245, 158, 11, 0.85);
   transition:
     transform 200ms ease,
     border-color 200ms ease,
@@ -2083,12 +2081,11 @@ html[data-page-transition="running"] {
 
 .kanz-sidebar-primary-button:hover {
   transform: translateY(-1px);
-  border-color: rgb(244 114 208 / 0.48);
-  filter: brightness(1.05);
+  border-color: rgba(254, 240, 138, 0.8);
+  filter: brightness(1.08);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.2),
-    0 0 34px -12px rgb(124 58 237 / 0.86),
-    0 0 38px -16px rgb(192 38 211 / 0.82);
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 36px -10px rgba(245, 158, 11, 0.95);
 }
 
 .kanz-sidebar-secondary-button {
@@ -2097,17 +2094,17 @@ html[data-page-transition="running"] {
   align-items: center;
   justify-content: center;
   gap: 0.38rem;
-  border: 1px solid rgb(93 111 181 / 0.32);
+  border: 1px solid rgba(217, 119, 6, 0.35);
   border-radius: 0.85rem;
   background:
-    radial-gradient(circle at 86% 24%, rgb(124 58 237 / 0.09), transparent 38%),
-    linear-gradient(180deg, rgb(12 20 45 / 0.68), rgb(5 12 30 / 0.58));
-  color: rgb(226 232 240 / 0.9);
+    radial-gradient(circle at 86% 24%, rgba(245, 158, 11, 0.1), transparent 38%),
+    linear-gradient(180deg, rgba(28, 20, 9, 0.8), rgba(15, 11, 4, 0.72));
+  color: rgba(254, 243, 199, 0.9);
   font-size: 0.72rem;
   font-weight: 800;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.05),
-    0 18px 34px -30px rgb(0 0 0 / 0.82);
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 18px 34px -30px rgba(0, 0, 0, 0.82);
   transition:
     transform 200ms ease,
     border-color 200ms ease,
@@ -2117,73 +2114,68 @@ html[data-page-transition="running"] {
 
 .kanz-sidebar-secondary-button:hover {
   transform: translateY(-1px);
-  border-color: rgb(124 58 237 / 0.24);
-  color: #f472d0;
+  border-color: rgba(245, 158, 11, 0.6);
+  color: #fbbf24;
   background:
-    radial-gradient(circle at 86% 24%, rgb(124 58 237 / 0.14), transparent 38%),
-    linear-gradient(180deg, rgb(16 28 62 / 0.74), rgb(6 14 34 / 0.66));
+    radial-gradient(circle at 86% 24%, rgba(245, 158, 11, 0.18), transparent 38%),
+    linear-gradient(180deg, rgba(38, 28, 12, 0.85), rgba(20, 15, 6, 0.78));
 }
 
 .kanz-sidebar-google-button {
-  border-color: rgb(66 133 244 / 0.22);
+  border-color: rgba(245, 158, 11, 0.35);
   background:
-    radial-gradient(circle at 16% 20%, rgb(66 133 244 / 0.2), transparent 36%),
-    radial-gradient(circle at 88% 18%, rgb(234 67 53 / 0.16), transparent 34%),
-    radial-gradient(circle at 22% 92%, rgb(52 168 83 / 0.16), transparent 34%),
-    radial-gradient(circle at 84% 88%, rgb(251 188 5 / 0.18), transparent 36%),
-    linear-gradient(180deg, rgb(12 20 45 / 0.72), rgb(5 12 30 / 0.62));
-  color: rgb(248 250 252 / 0.94);
+    radial-gradient(circle at 16% 20%, rgba(66, 133, 244, 0.2), transparent 36%),
+    radial-gradient(circle at 88% 18%, rgba(234, 67, 53, 0.16), transparent 34%),
+    radial-gradient(circle at 22% 92%, rgba(52, 168, 83, 0.16), transparent 34%),
+    radial-gradient(circle at 84% 88%, rgba(251, 188, 5, 0.22), transparent 36%),
+    linear-gradient(180deg, rgba(28, 20, 9, 0.8), rgba(15, 11, 4, 0.72));
+  color: rgb(254 243 199 / 0.94);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 18px 34px -28px rgb(66 133 244 / 0.46);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 34px -28px rgba(245, 158, 11, 0.4);
 }
 
 .kanz-sidebar-google-button:hover {
-  border-color: rgb(52 168 83 / 0.3);
+  border-color: rgba(251, 191, 36, 0.6);
   color: #ffffff;
   background:
-    radial-gradient(circle at 16% 20%, rgb(66 133 244 / 0.28), transparent 36%),
-    radial-gradient(circle at 88% 18%, rgb(234 67 53 / 0.22), transparent 34%),
-    radial-gradient(circle at 22% 92%, rgb(52 168 83 / 0.24), transparent 34%),
-    radial-gradient(circle at 84% 88%, rgb(251 188 5 / 0.26), transparent 36%),
-    linear-gradient(180deg, rgb(16 28 62 / 0.78), rgb(6 14 34 / 0.68));
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.1),
-    0 20px 38px -28px rgb(66 133 244 / 0.56),
-    0 20px 42px -34px rgb(251 188 5 / 0.42);
+    radial-gradient(circle at 16% 20%, rgba(66, 133, 244, 0.28), transparent 36%),
+    radial-gradient(circle at 88% 18%, rgba(234, 67, 53, 0.22), transparent 34%),
+    radial-gradient(circle at 22% 92%, rgba(52, 168, 83, 0.24), transparent 34%),
+    radial-gradient(circle at 84% 88%, rgba(251, 188, 5, 0.3), transparent 36%),
+    linear-gradient(180deg, rgba(38, 28, 12, 0.85), rgba(20, 15, 6, 0.78));
 }
 
 .kanz-sidebar-nav-item {
   min-height: 2.75rem;
-  border: 1px solid rgb(93 111 181 / 0.24);
+  border: 1px solid rgba(217, 119, 6, 0.22);
   border-radius: 0.82rem;
   background:
-    radial-gradient(13rem circle at 90% 50%, rgb(124 58 237 / 0.035), transparent 44%),
-    linear-gradient(180deg, rgb(6 13 31 / 0.58), rgb(2 8 22 / 0.48));
+    radial-gradient(13rem circle at 90% 50%, rgba(245, 158, 11, 0.05), transparent 44%),
+    linear-gradient(180deg, rgba(20, 15, 6, 0.7), rgba(10, 7, 3, 0.6));
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.035),
-    0 18px 36px -34px rgb(0 0 0 / 0.82);
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 18px 36px -34px rgba(0, 0, 0, 0.82);
 }
 
 .kanz-sidebar-nav-item:hover {
-  border-color: rgb(124 58 237 / 0.2);
+  border-color: rgba(245, 158, 11, 0.4);
   background:
-    radial-gradient(13rem circle at 90% 50%, rgb(124 58 237 / 0.09), transparent 44%),
-    linear-gradient(180deg, rgb(9 18 42 / 0.72), rgb(3 10 26 / 0.62));
+    radial-gradient(13rem circle at 90% 50%, rgba(245, 158, 11, 0.12), transparent 44%),
+    linear-gradient(180deg, rgba(30, 22, 9, 0.8), rgba(16, 12, 5, 0.7));
 }
 
 .kanz-sidebar-nav-item.is-active {
-  border-color: rgb(192 38 211 / 0.72);
+  border-color: rgba(251, 191, 36, 0.8);
   background:
-    radial-gradient(11rem circle at 88% 50%, rgb(124 58 237 / 0.22), transparent 46%),
-    radial-gradient(13rem circle at 12% 36%, rgb(192 38 211 / 0.18), transparent 46%),
-    linear-gradient(90deg, rgb(147 51 234 / 0.26), rgb(5 12 30 / 0.78) 68%, rgb(124 58 237 / 0.1));
+    radial-gradient(11rem circle at 88% 50%, rgba(245, 158, 11, 0.25), transparent 46%),
+    radial-gradient(13rem circle at 12% 36%, rgba(251, 191, 36, 0.2), transparent 46%),
+    linear-gradient(90deg, rgba(217, 119, 6, 0.32), rgba(18, 13, 5, 0.85) 68%, rgba(245, 158, 11, 0.14));
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 0 0 1px rgb(124 58 237 / 0.12),
-    0 0 36px -16px rgb(124 58 237 / 0.88),
-    0 0 40px -18px rgb(192 38 211 / 0.9),
-    0 18px 42px -32px rgb(0 0 0 / 0.9);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(245, 158, 11, 0.2),
+    0 0 36px -14px rgba(245, 158, 11, 0.9),
+    0 18px 42px -32px rgba(0, 0, 0, 0.9);
 }
 
 .kanz-sidebar-nav-item.is-active::after {
@@ -2193,10 +2185,10 @@ html[data-page-transition="running"] {
   inset-inline-start: -1px;
   width: 3px;
   border-radius: 9999px;
-  background: linear-gradient(180deg, #f472d0, #c026d3);
+  background: linear-gradient(180deg, #fde047, #f59e0b, #d97706);
   box-shadow:
-    0 0 16px rgb(124 58 237 / 0.86),
-    0 0 20px rgb(192 38 211 / 0.72);
+    0 0 16px rgba(245, 158, 11, 0.95),
+    0 0 20px rgba(217, 119, 6, 0.85);
 }
 
 .kanz-sidebar-icon-bubble {
@@ -2206,15 +2198,15 @@ html[data-page-transition="running"] {
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(93 111 181 / 0.32);
+  border: 1px solid rgba(217, 119, 6, 0.35);
   border-radius: 9999px;
   background:
-    radial-gradient(circle at 36% 26%, rgb(255 255 255 / 0.09), transparent 34%),
-    linear-gradient(180deg, rgb(37 34 84 / 0.74), rgb(17 16 48 / 0.7));
-  color: #c026d3;
+    radial-gradient(circle at 36% 26%, rgba(255, 255, 255, 0.1), transparent 34%),
+    linear-gradient(180deg, rgba(38, 28, 11, 0.8), rgba(18, 13, 5, 0.75));
+  color: #f59e0b;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 0 28px -18px rgb(192 38 211 / 0.82);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 24px -16px rgba(245, 158, 11, 0.8);
   transition:
     color 200ms ease,
     border-color 200ms ease,
@@ -2223,21 +2215,20 @@ html[data-page-transition="running"] {
 }
 
 .kanz-sidebar-nav-item:hover .kanz-sidebar-icon-bubble {
-  border-color: rgb(124 58 237 / 0.28);
-  color: #f472d0;
+  border-color: rgba(251, 191, 36, 0.6);
+  color: #fde047;
   transform: translateY(-1px);
 }
 
 .kanz-sidebar-icon-bubble.is-active {
-  border-color: rgb(124 58 237 / 0.38);
+  border-color: rgba(254, 240, 138, 0.7);
   background:
-    radial-gradient(circle at 36% 26%, rgb(124 58 237 / 0.24), transparent 38%),
-    linear-gradient(145deg, rgb(14 86 151 / 0.86), rgb(51 25 126 / 0.88));
-  color: #f472d0;
+    radial-gradient(circle at 36% 26%, rgba(254, 240, 138, 0.4), transparent 38%),
+    linear-gradient(145deg, #b45309, #d97706 52%, #f59e0b);
+  color: #ffffff;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.14),
-    0 0 30px -10px rgb(124 58 237 / 0.84),
-    0 0 34px -14px rgb(192 38 211 / 0.84);
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 0 28px -8px rgba(245, 158, 11, 0.9);
 }
 
 .kanz-sidebar-logout-pill {
@@ -2246,26 +2237,26 @@ html[data-page-transition="running"] {
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  border: 1px solid rgb(93 111 181 / 0.28);
+  border: 1px solid rgba(217, 119, 6, 0.35);
   border-radius: 9999px;
   background:
-    radial-gradient(10rem circle at 18% 50%, rgb(192 38 211 / 0.16), transparent 48%),
-    rgb(6 13 31 / 0.62);
-  color: #c026d3;
+    radial-gradient(10rem circle at 18% 50%, rgba(245, 158, 11, 0.18), transparent 48%),
+    rgba(22, 16, 7, 0.75);
+  color: #fbbf24;
   font-size: 0.78rem;
   font-weight: 800;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.05),
-    0 0 30px -18px rgb(192 38 211 / 0.78);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 30px -18px rgba(245, 158, 11, 0.75);
 }
 
 .kanz-sidebar-logout-pill:hover {
-  border-color: rgb(192 38 211 / 0.42);
-  color: #f0abfc;
+  border-color: rgba(251, 191, 36, 0.6);
+  color: #fde047;
   transform: translateY(-1px);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 0 34px -14px rgb(192 38 211 / 0.88);
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 0 34px -14px rgba(245, 158, 11, 0.9);
 }
 
 .kanz-sidebar-logout-pill.is-icon-only {
@@ -2274,58 +2265,57 @@ html[data-page-transition="running"] {
 }
 
 .kanz-sidebar-footer-chip {
-  border: 1px solid rgb(93 111 181 / 0.28);
+  border: 1px solid rgba(217, 119, 6, 0.3);
   border-radius: 1rem;
   background:
-    radial-gradient(10rem circle at 86% 50%, rgb(124 58 237 / 0.08), transparent 48%),
-    rgb(6 13 31 / 0.54);
+    radial-gradient(10rem circle at 86% 50%, rgba(245, 158, 11, 0.1), transparent 48%),
+    rgba(22, 16, 7, 0.65);
   padding: 0.72rem;
-  color: rgb(203 213 225 / 0.66);
+  color: rgba(254, 243, 199, 0.75);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.2em;
   text-align: center;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.04),
-    0 0 26px -20px rgb(124 58 237 / 0.68);
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 26px -20px rgba(245, 158, 11, 0.65);
 }
 
 :root:not(.dark) .kanz-sidebar-panel {
-  border-color: rgb(93 111 181 / 0.54) !important;
+  border-color: rgb(217 119 6 / 0.28) !important;
   background:
-    radial-gradient(26rem circle at 78% -6%, rgb(124 58 237 / 0.16), transparent 34%),
-    radial-gradient(22rem circle at 16% 8%, rgb(192 38 211 / 0.16), transparent 42%),
-    radial-gradient(18rem circle at 96% 42%, rgb(192 38 211 / 0.1), transparent 44%),
-    linear-gradient(180deg, rgb(4 9 24 / 0.98), rgb(2 7 19 / 0.96) 54%, rgb(2 5 14 / 0.98)) !important;
+    radial-gradient(24rem circle at 82% -4%, rgb(245 158 11 / 0.12), transparent 38%),
+    radial-gradient(20rem circle at 8% 16%, rgb(217 119 6 / 0.08), transparent 44%),
+    radial-gradient(18rem circle at 96% 42%, rgb(251 191 36 / 0.06), transparent 48%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.96), rgb(254 249 235 / 0.92) 58%, rgb(255 253 245 / 0.96)) !important;
   color: var(--color-text) !important;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    inset 0 0 0 1px rgb(255 255 255 / 0.02),
-    0 0 48px -28px rgb(124 58 237 / 0.78),
-    0 0 54px -32px rgb(192 38 211 / 0.84),
-    0 30px 80px -54px rgb(0 0 0 / 0.92) !important;
+    inset 0 1px 0 rgb(255 255 255 / 0.85),
+    inset 0 0 0 1px rgb(255 255 255 / 0.62),
+    0 26px 74px -50px rgb(217 119 6 / 0.22),
+    0 0 42px -30px rgb(245 158 11 / 0.24) !important;
 }
 
-/* Final light mode pass: keep the electric accent, but restore real light surfaces. */
+/* Final light mode pass: keep the golden accent, but restore real light surfaces. */
 :root:not(.dark) body {
   color: var(--color-text);
   background:
-    radial-gradient(44rem circle at 12% -12%, rgb(124 58 237 / 0.18), transparent 42%),
-    radial-gradient(36rem circle at 94% 4%, rgb(168 85 247 / 0.13), transparent 38%),
-    radial-gradient(34rem circle at 54% 106%, rgb(147 51 234 / 0.1), transparent 46%),
-    linear-gradient(180deg, #f8fbff 0%, #eef6ff 52%, #f6f9ff 100%) !important;
+    radial-gradient(44rem circle at 12% -12%, rgb(245 158 11 / 0.1), transparent 42%),
+    radial-gradient(36rem circle at 94% 4%, rgb(217 119 6 / 0.08), transparent 38%),
+    radial-gradient(34rem circle at 54% 106%, rgb(251 191 36 / 0.06), transparent 46%),
+    linear-gradient(180deg, #fffdf8 0%, #fefcf3 52%, #fffdfa 100%) !important;
 }
 
 :root:not(.dark) .ambient-background__veil {
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.34), rgb(234 244 255 / 0.78)),
-    radial-gradient(circle at top, rgb(124 58 237 / 0.12), transparent 42%) !important;
+    linear-gradient(180deg, rgb(255 255 255 / 0.45), rgb(254 249 235 / 0.78)),
+    radial-gradient(circle at top, rgb(245 158 11 / 0.08), transparent 42%) !important;
 }
 
 :root:not(.dark) .ambient-background__mesh {
   background:
-    linear-gradient(90deg, rgb(37 99 235 / 0.055) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(147 51 234 / 0.045) 1px, transparent 1px) !important;
+    linear-gradient(90deg, rgb(217 119 6 / 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(245 158 11 / 0.035) 1px, transparent 1px) !important;
   opacity: 0.28;
 }
 
@@ -2339,39 +2329,39 @@ html[data-page-transition="running"] {
 :root:not(.dark) .admin-premium-panel,
 :root:not(.dark) .admin-premium-toolbar,
 :root:not(.dark) .admin-premium-stat {
-  border-color: rgb(148 178 210 / 0.62) !important;
+  border-color: rgb(217 119 6 / 0.24) !important;
   background:
-    radial-gradient(28rem circle at 86% 8%, rgb(124 58 237 / 0.13), transparent 42%),
-    radial-gradient(24rem circle at 12% 4%, rgb(168 85 247 / 0.09), transparent 44%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.92), rgb(240 247 255 / 0.84)) !important;
+    radial-gradient(28rem circle at 86% 8%, rgb(245 158 11 / 0.1), transparent 42%),
+    radial-gradient(24rem circle at 12% 4%, rgb(217 119 6 / 0.06), transparent 44%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.95), rgb(254 250 238 / 0.88)) !important;
   color: var(--color-text) !important;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.78),
-    0 24px 70px -48px rgb(37 99 235 / 0.28),
-    0 0 34px -26px rgb(168 85 247 / 0.32) !important;
+    inset 0 1px 0 rgb(255 255 255 / 0.85),
+    0 24px 70px -48px rgb(217 119 6 / 0.18),
+    0 0 34px -26px rgb(245 158 11 / 0.2) !important;
 }
 
 :root:not(.dark) .app-shell-header-panel button[class*="rounded-full"],
 :root:not(.dark) header .kanz-coins-panel button[class*="rounded-full"],
 :root:not(.dark) header .kanz-coins-panel a[class*="rounded-full"] {
-  border-color: rgb(148 178 210 / 0.72) !important;
+  border-color: rgb(217 119 6 / 0.28) !important;
   background:
-    radial-gradient(circle at 35% 25%, rgb(255 255 255 / 0.92), transparent 40%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.96), rgb(229 241 255 / 0.88)) !important;
+    radial-gradient(circle at 35% 25%, rgb(255 255 255 / 0.95), transparent 40%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.96), rgb(254 248 232 / 0.88)) !important;
   color: var(--color-text) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.9),
-    0 18px 36px -28px rgb(37 99 235 / 0.42) !important;
+    0 18px 36px -28px rgb(217 119 6 / 0.25) !important;
 }
 
 :root:not(.dark) .app-shell-header-panel button[class*="rounded-full"]:hover,
 :root:not(.dark) header .kanz-coins-panel button[class*="rounded-full"]:hover {
-  border-color: rgb(37 99 235 / 0.38) !important;
+  border-color: rgb(217 119 6 / 0.45) !important;
   color: var(--color-primary) !important;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.94),
-    0 20px 42px -28px rgb(37 99 235 / 0.48),
-    0 0 24px -18px rgb(168 85 247 / 0.45) !important;
+    inset 0 1px 0 rgb(255 255 255 / 0.95),
+    0 20px 42px -28px rgb(217 119 6 / 0.35),
+    0 0 24px -18px rgb(245 158 11 / 0.35) !important;
 }
 
 :root:not(.dark) .header-wallet-balance {
@@ -2380,122 +2370,107 @@ html[data-page-transition="running"] {
   filter: none !important;
 }
 
-:root:not(.dark) .kanz-sidebar-panel {
-  border-color: rgb(148 178 210 / 0.66) !important;
-  background:
-    radial-gradient(24rem circle at 82% -4%, rgb(124 58 237 / 0.14), transparent 38%),
-    radial-gradient(20rem circle at 8% 16%, rgb(168 85 247 / 0.1), transparent 44%),
-    radial-gradient(18rem circle at 96% 42%, rgb(147 51 234 / 0.08), transparent 48%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.94), rgb(237 246 255 / 0.9) 58%, rgb(248 251 255 / 0.94)) !important;
-  color: var(--color-text) !important;
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.82),
-    inset 0 0 0 1px rgb(255 255 255 / 0.62),
-    0 26px 74px -50px rgb(37 99 235 / 0.36),
-    0 0 42px -30px rgb(168 85 247 / 0.38) !important;
-}
-
 :root:not(.dark) .kanz-sidebar-panel::before {
   opacity: 0.36;
   background:
-    radial-gradient(1px 1px at 14% 8%, rgb(37 99 235 / 0.36), transparent 64%),
-    radial-gradient(1px 1px at 72% 6%, rgb(147 51 234 / 0.28), transparent 64%),
-    radial-gradient(1px 1px at 88% 23%, rgb(168 85 247 / 0.3), transparent 64%),
-    linear-gradient(90deg, rgb(37 99 235 / 0.048) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(147 51 234 / 0.038) 1px, transparent 1px);
+    radial-gradient(1px 1px at 14% 8%, rgb(217 119 6 / 0.36), transparent 64%),
+    radial-gradient(1px 1px at 72% 6%, rgb(245 158 11 / 0.28), transparent 64%),
+    radial-gradient(1px 1px at 88% 23%, rgb(251 191 36 / 0.3), transparent 64%),
+    linear-gradient(90deg, rgb(217 119 6 / 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(245 158 11 / 0.035) 1px, transparent 1px);
   background-size: auto, auto, auto, 82px 82px, 82px 82px;
 }
 
 :root:not(.dark) .kanz-sidebar-panel::after {
   opacity: 0.5;
   background:
-    radial-gradient(18rem 5.5rem at 82% 66%, rgb(124 58 237 / 0.22), transparent 66%),
-    radial-gradient(16rem 6rem at 16% 62%, rgb(147 51 234 / 0.18), transparent 68%),
-    linear-gradient(145deg, transparent 22%, rgb(168 85 247 / 0.12) 42%, transparent 58%);
+    radial-gradient(18rem 5.5rem at 82% 66%, rgb(245 158 11 / 0.18), transparent 66%),
+    radial-gradient(16rem 6rem at 16% 62%, rgb(217 119 6 / 0.14), transparent 68%),
+    linear-gradient(145deg, transparent 22%, rgb(251 191 36 / 0.1) 42%, transparent 58%);
 }
 
 :root:not(.dark) .kanz-sidebar-language,
 :root:not(.dark) .kanz-sidebar-user-card,
 :root:not(.dark) .kanz-sidebar-action-card {
-  border-color: rgb(148 178 210 / 0.52) !important;
+  border-color: rgb(217 119 6 / 0.24) !important;
   background:
-    radial-gradient(14rem circle at 90% 10%, rgb(124 58 237 / 0.1), transparent 44%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.76), rgb(232 243 255 / 0.72)) !important;
+    radial-gradient(14rem circle at 90% 10%, rgb(245 158 11 / 0.08), transparent 44%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.85), rgb(254 249 235 / 0.78)) !important;
   color: var(--color-text) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.86),
-    0 18px 40px -34px rgb(37 99 235 / 0.36);
+    0 18px 40px -34px rgb(217 119 6 / 0.22);
 }
 
 :root:not(.dark) .kanz-sidebar-id-chip {
-  border-color: rgb(37 99 235 / 0.18);
-  background: rgb(232 243 255 / 0.86);
-  color: #0369a1;
+  border-color: rgb(217 119 6 / 0.22);
+  background: rgb(254 243 199 / 0.75);
+  color: #b45309;
 }
 
 :root:not(.dark) .kanz-sidebar-nav-item {
-  border-color: rgb(148 178 210 / 0.34);
+  border-color: rgb(217 119 6 / 0.18);
   background:
-    radial-gradient(13rem circle at 90% 50%, rgb(124 58 237 / 0.055), transparent 44%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.72), rgb(237 246 255 / 0.64));
+    radial-gradient(13rem circle at 90% 50%, rgb(245 158 11 / 0.06), transparent 44%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.82), rgb(254 250 238 / 0.72));
   color: var(--color-text-secondary);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.78),
-    0 18px 36px -34px rgb(15 23 42 / 0.2);
+    inset 0 1px 0 rgb(255 255 255 / 0.82),
+    0 18px 36px -34px rgb(120 53 15 / 0.14);
 }
 
 :root:not(.dark) .kanz-sidebar-nav-item:hover {
-  border-color: rgb(37 99 235 / 0.28);
+  border-color: rgb(217 119 6 / 0.38);
   background:
-    radial-gradient(13rem circle at 90% 50%, rgb(124 58 237 / 0.1), transparent 44%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.9), rgb(229 241 255 / 0.8));
+    radial-gradient(13rem circle at 90% 50%, rgb(245 158 11 / 0.12), transparent 44%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.95), rgb(254 243 199 / 0.85));
   color: var(--color-text);
 }
 
 :root:not(.dark) .kanz-sidebar-nav-item.is-active {
-  border-color: rgb(147 51 234 / 0.42);
+  border-color: rgb(217 119 6 / 0.45);
   background:
-    radial-gradient(11rem circle at 88% 50%, rgb(124 58 237 / 0.18), transparent 46%),
-    radial-gradient(13rem circle at 12% 36%, rgb(168 85 247 / 0.14), transparent 46%),
-    linear-gradient(90deg, rgb(147 51 234 / 0.12), rgb(255 255 255 / 0.9) 68%, rgb(124 58 237 / 0.1));
+    radial-gradient(11rem circle at 88% 50%, rgb(245 158 11 / 0.2), transparent 46%),
+    radial-gradient(13rem circle at 12% 36%, rgb(217 119 6 / 0.15), transparent 46%),
+    linear-gradient(90deg, rgb(245 158 11 / 0.14), rgb(255 255 255 / 0.92) 68%, rgb(217 119 6 / 0.12));
   color: var(--color-text);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.82),
-    0 0 0 1px rgb(124 58 237 / 0.12),
-    0 20px 46px -34px rgb(37 99 235 / 0.42),
-    0 0 34px -24px rgb(168 85 247 / 0.48);
+    inset 0 1px 0 rgb(255 255 255 / 0.88),
+    0 0 0 1px rgb(217 119 6 / 0.15),
+    0 20px 46px -34px rgb(217 119 6 / 0.32),
+    0 0 34px -24px rgb(245 158 11 / 0.35);
 }
 
 :root:not(.dark) .kanz-sidebar-icon-bubble {
-  border-color: rgb(148 178 210 / 0.44);
+  border-color: rgb(217 119 6 / 0.28);
   background:
-    radial-gradient(circle at 36% 26%, rgb(255 255 255 / 0.9), transparent 36%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.82), rgb(231 240 255 / 0.76));
-  color: #a855f7;
+    radial-gradient(circle at 36% 26%, rgb(255 255 255 / 0.95), transparent 36%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.9), rgb(254 243 199 / 0.8));
+  color: #d97706;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.92),
-    0 16px 32px -28px rgb(147 51 234 / 0.48);
+    0 16px 32px -28px rgb(217 119 6 / 0.4);
 }
 
 :root:not(.dark) .kanz-sidebar-icon-bubble.is-active,
 :root:not(.dark) .kanz-sidebar-nav-item:hover .kanz-sidebar-icon-bubble {
-  border-color: rgb(37 99 235 / 0.36);
+  border-color: rgb(217 119 6 / 0.45);
   background:
-    radial-gradient(circle at 36% 26%, rgb(244 114 208 / 0.34), transparent 40%),
-    linear-gradient(145deg, #2563eb, #a855f7 58%, #c026d3);
+    radial-gradient(circle at 36% 26%, rgb(254 240 138 / 0.45), transparent 40%),
+    linear-gradient(145deg, #b45309, #d97706 58%, #f59e0b);
   color: #ffffff;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.22),
-    0 0 28px -14px rgb(124 58 237 / 0.68),
-    0 0 30px -16px rgb(168 85 247 / 0.64);
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    0 0 28px -14px rgb(217 119 6 / 0.65),
+    0 0 30px -16px rgb(245 158 11 / 0.6);
 }
 
 :root:not(.dark) .kanz-sidebar-avatar {
-  border-color: rgb(37 99 235 / 0.32);
+  border-color: rgb(217 119 6 / 0.35);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.32),
-    0 0 24px -12px rgb(37 99 235 / 0.6),
-    0 0 26px -16px rgb(168 85 247 / 0.56);
+    inset 0 1px 0 rgb(255 255 255 / 0.4),
+    0 0 24px -12px rgb(217 119 6 / 0.55),
+    0 0 26px -16px rgb(245 158 11 / 0.5);
 }
 
 :root:not(.dark) .kanz-sidebar-user-action,
@@ -2503,30 +2478,33 @@ html[data-page-transition="running"] {
 :root:not(.dark) .kanz-sidebar-footer-chip,
 :root:not(.dark) .kanz-sidebar-collapse,
 :root:not(.dark) .kanz-sidebar-secondary-button {
-  border-color: rgb(148 178 210 / 0.48);
+  border-color: rgb(217 119 6 / 0.22);
   background:
-    radial-gradient(10rem circle at 18% 50%, rgb(168 85 247 / 0.08), transparent 48%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.78), rgb(232 243 255 / 0.72));
+    radial-gradient(10rem circle at 18% 50%, rgb(245 158 11 / 0.08), transparent 48%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.85), rgb(254 249 235 / 0.76));
   color: var(--color-text-secondary);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.86),
-    0 18px 36px -32px rgb(37 99 235 / 0.32);
+    0 18px 36px -32px rgb(217 119 6 / 0.22);
 }
 
 :root:not(.dark) .kanz-sidebar-user-action:hover,
 :root:not(.dark) .kanz-sidebar-logout-pill:hover,
 :root:not(.dark) .kanz-sidebar-collapse:hover,
 :root:not(.dark) .kanz-sidebar-secondary-button:hover {
-  border-color: rgb(37 99 235 / 0.34);
+  border-color: rgb(217 119 6 / 0.42);
   color: var(--color-primary);
 }
 
 :root:not(.dark) .kanz-sidebar-primary-button {
-  border-color: rgb(37 99 235 / 0.34);
+  border-color: rgb(217 119 6 / 0.45);
   background:
-    radial-gradient(circle at 22% 18%, rgb(244 114 208 / 0.24), transparent 38%),
-    linear-gradient(135deg, #2563eb 0%, #a855f7 56%, #c026d3 100%);
+    radial-gradient(circle at 22% 18%, rgb(254 240 138 / 0.3), transparent 38%),
+    linear-gradient(135deg, #b45309 0%, #d97706 50%, #f59e0b 100%);
   color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    0 18px 38px -24px rgb(217 119 6 / 0.7);
 }
 
 :root:not(.dark) input,
@@ -2551,28 +2529,28 @@ html[data-page-transition="running"] {
 }
 
 :root:not(.dark) .sidebar {
-  border-color: rgb(148 178 210 / 0.66);
+  border-color: rgb(217 119 6 / 0.28);
   background:
-    radial-gradient(24rem circle at 82% -4%, rgb(124 58 237 / 0.14), transparent 38%),
-    radial-gradient(20rem circle at 8% 16%, rgb(168 85 247 / 0.1), transparent 44%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.94), rgb(237 246 255 / 0.9) 58%, rgb(248 251 255 / 0.94));
+    radial-gradient(24rem circle at 82% -4%, rgb(245 158 11 / 0.12), transparent 38%),
+    radial-gradient(20rem circle at 8% 16%, rgb(217 119 6 / 0.08), transparent 44%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.96), rgb(254 249 235 / 0.92) 58%, rgb(255 253 245 / 0.96));
   color: var(--color-text);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.82),
-    0 26px 74px -50px rgb(37 99 235 / 0.36);
+    0 26px 74px -50px rgb(217 119 6 / 0.22);
 }
 
 :root:not(.dark) .sidebar-item {
-  border-color: rgb(148 178 210 / 0.34);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.72), rgb(237 246 255 / 0.64));
+  border-color: rgb(217 119 6 / 0.18);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.82), rgb(254 250 238 / 0.72));
   color: var(--color-text-secondary);
 }
 
 :root:not(.dark) .sidebar-item.active {
-  border-color: rgb(147 51 234 / 0.42);
+  border-color: rgb(217 119 6 / 0.45);
   background:
-    radial-gradient(11rem circle at 88% 50%, rgb(124 58 237 / 0.18), transparent 46%),
-    linear-gradient(90deg, rgb(147 51 234 / 0.12), rgb(255 255 255 / 0.9) 68%, rgb(124 58 237 / 0.1));
+    radial-gradient(11rem circle at 88% 50%, rgb(245 158 11 / 0.2), transparent 46%),
+    linear-gradient(90deg, rgb(245 158 11 / 0.14), rgb(255 255 255 / 0.92) 68%, rgb(217 119 6 / 0.12));
   color: var(--color-text);
 }
 
@@ -2702,43 +2680,43 @@ html[data-page-transition="running"] {
   box-shadow: none !important;
 }
 
-/* KANZ COINS final brand palette: petroleum blue, deep teal, and polished gold. */
+/* KANZ COINS royal gold & obsidian sidebar palette */
 body {
   background:
-    radial-gradient(46rem circle at 16% -12%, rgb(124 58 237 / 0.22), transparent 40%),
-    radial-gradient(38rem circle at 92% 0%, rgb(192 38 211 / 0.2), transparent 36%),
-    radial-gradient(34rem circle at 50% 108%, rgb(8 69 82 / 0.2), transparent 44%),
-    linear-gradient(180deg, #03080a 0%, #071316 50%, #020506 100%) !important;
+    radial-gradient(46rem circle at 16% -12%, rgb(245 158 11 / 0.14), transparent 40%),
+    radial-gradient(38rem circle at 92% 0%, rgb(217 119 6 / 0.12), transparent 36%),
+    radial-gradient(34rem circle at 50% 108%, rgb(180 83 9 / 0.1), transparent 44%),
+    linear-gradient(180deg, rgb(15 11 5 / 0.98) 0%, rgb(24 16 7 / 0.96) 50%, rgb(10 7 3 / 0.98) 100%) !important;
 }
 
 .ambient-background__veil {
   background:
-    linear-gradient(180deg, rgb(3 8 10 / 0.2), rgb(2 5 6 / 0.78)),
-    radial-gradient(circle at top, rgb(192 38 211 / 0.11), transparent 38%) !important;
+    linear-gradient(180deg, rgb(15 11 5 / 0.35), rgb(10 7 3 / 0.75)),
+    radial-gradient(circle at top, rgb(245 158 11 / 0.08), transparent 38%) !important;
 }
 
 .ambient-background__mesh {
   background:
-    linear-gradient(90deg, rgb(192 38 211 / 0.035) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(124 58 237 / 0.035) 1px, transparent 1px) !important;
+    linear-gradient(90deg, rgb(245 158 11 / 0.02) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(217 119 6 / 0.02) 1px, transparent 1px) !important;
 }
 
 .ambient-background__glow--left {
-  background: radial-gradient(circle, rgb(124 58 237 / 0.28), transparent 68%) !important;
+  background: radial-gradient(circle, rgb(217 119 6 / 0.24), transparent 68%) !important;
 }
 
 .ambient-background__glow--right {
-  background: radial-gradient(circle, rgb(192 38 211 / 0.24), transparent 70%) !important;
+  background: radial-gradient(circle, rgb(245 158 11 / 0.2), transparent 70%) !important;
 }
 
 .ambient-background__glow--bottom {
-  background: radial-gradient(circle, rgb(8 69 82 / 0.34), transparent 72%) !important;
+  background: radial-gradient(circle, rgb(180 83 9 / 0.18), transparent 72%) !important;
 }
 
 .gold-gradient-text,
 .header-mobile-brand-ms,
 .kanz-brand-title {
-  background-image: linear-gradient(120deg, #fff4bd 0%, #c026d3 28%, #7c3aed 58%, #312e81 100%) !important;
+  background-image: linear-gradient(120deg, #fffbeb 0%, #fbbf24 35%, #f59e0b 68%, #d97706 100%) !important;
 }
 
 .header-wallet-balance {
@@ -2747,8 +2725,8 @@ body {
 
 .kanz-brand-title {
   text-shadow:
-    0 0 18px rgb(192 38 211 / 0.26),
-    0 0 28px rgb(124 58 237 / 0.2) !important;
+    0 0 18px rgb(245 158 11 / 0.35),
+    0 0 28px rgb(217 119 6 / 0.25) !important;
 }
 
 .kanz-coins-panel,
@@ -2762,58 +2740,58 @@ body {
 .admin-premium-panel,
 .admin-premium-toolbar,
 .admin-premium-stat {
-  border-color: rgb(192 38 211 / 0.3) !important;
+  border-color: rgb(217 119 6 / 0.28) !important;
   background:
-    radial-gradient(28rem circle at 86% 8%, rgb(192 38 211 / 0.12), transparent 42%),
-    radial-gradient(24rem circle at 12% 4%, rgb(124 58 237 / 0.12), transparent 44%),
-    linear-gradient(180deg, rgb(var(--color-card-rgb) / 0.9), rgb(var(--color-surface-rgb) / 0.78)) !important;
+    radial-gradient(28rem circle at 86% 8%, rgb(245 158 11 / 0.1), transparent 42%),
+    radial-gradient(24rem circle at 12% 4%, rgb(217 119 6 / 0.08), transparent 44%),
+    linear-gradient(180deg, rgb(var(--color-card-rgb) / 0.94), rgb(var(--color-surface-rgb) / 0.85)) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.06),
-    0 24px 70px -48px rgb(124 58 237 / 0.46),
-    0 0 34px -24px rgb(192 38 211 / 0.42) !important;
+    0 24px 70px -48px rgb(217 119 6 / 0.35),
+    0 0 34px -24px rgb(245 158 11 / 0.3) !important;
 }
 
 .section-kicker,
 .wallet-accent-chip {
-  border-color: rgb(192 38 211 / 0.34) !important;
+  border-color: rgb(217 119 6 / 0.34) !important;
   background:
-    radial-gradient(circle at top right, rgb(192 38 211 / 0.18), transparent 52%),
-    linear-gradient(135deg, rgb(124 58 237 / 0.18), rgb(192 38 211 / 0.12)) !important;
+    radial-gradient(circle at top right, rgb(245 158 11 / 0.18), transparent 52%),
+    linear-gradient(135deg, rgb(217 119 6 / 0.18), rgb(245 158 11 / 0.12)) !important;
   color: var(--color-primary-soft) !important;
 }
 
 .kanz-sidebar-panel {
-  border-color: rgb(192 38 211 / 0.34) !important;
+  border-color: rgb(217 119 6 / 0.32) !important;
   background:
-    radial-gradient(26rem circle at 78% -6%, rgb(124 58 237 / 0.2), transparent 34%),
-    radial-gradient(22rem circle at 16% 8%, rgb(192 38 211 / 0.18), transparent 42%),
-    radial-gradient(18rem circle at 96% 42%, rgb(9 70 83 / 0.22), transparent 44%),
-    linear-gradient(180deg, rgb(4 13 15 / 0.98), rgb(6 20 24 / 0.96) 54%, rgb(2 7 8 / 0.98)) !important;
+    radial-gradient(26rem circle at 78% -6%, rgb(245 158 11 / 0.15), transparent 34%),
+    radial-gradient(22rem circle at 16% 8%, rgb(217 119 6 / 0.12), transparent 42%),
+    radial-gradient(18rem circle at 96% 42%, rgb(180 83 9 / 0.15), transparent 44%),
+    linear-gradient(180deg, rgb(15 11 5 / 0.98), rgb(24 16 7 / 0.96) 54%, rgb(10 7 3 / 0.98)) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.08),
     inset 0 0 0 1px rgb(255 255 255 / 0.02),
-    0 0 48px -28px rgb(124 58 237 / 0.82),
-    0 0 54px -32px rgb(192 38 211 / 0.76),
+    0 0 48px -28px rgb(217 119 6 / 0.65),
+    0 0 54px -32px rgb(245 158 11 / 0.6),
     0 30px 80px -54px rgb(0 0 0 / 0.92) !important;
 }
 
 .kanz-sidebar-panel::before {
   background:
-    radial-gradient(1px 1px at 14% 8%, rgb(247 242 223 / 0.72), transparent 64%),
-    radial-gradient(1px 1px at 72% 6%, rgb(192 38 211 / 0.5), transparent 64%),
-    radial-gradient(1px 1px at 88% 23%, rgb(124 58 237 / 0.46), transparent 64%),
+    radial-gradient(1px 1px at 14% 8%, rgb(254 240 138 / 0.72), transparent 64%),
+    radial-gradient(1px 1px at 72% 6%, rgb(245 158 11 / 0.5), transparent 64%),
+    radial-gradient(1px 1px at 88% 23%, rgb(217 119 6 / 0.46), transparent 64%),
     radial-gradient(1px 1px at 22% 36%, rgb(255 255 255 / 0.36), transparent 64%),
-    linear-gradient(90deg, rgb(192 38 211 / 0.026) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(124 58 237 / 0.024) 1px, transparent 1px) !important;
+    linear-gradient(90deg, rgb(217 119 6 / 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(245 158 11 / 0.03) 1px, transparent 1px) !important;
   background-size: auto, auto, auto, auto, 82px 82px, 82px 82px !important;
 }
 
 .kanz-sidebar-panel::after {
   background:
-    radial-gradient(18rem 5.5rem at 82% 66%, rgb(124 58 237 / 0.34), transparent 66%),
-    radial-gradient(16rem 6rem at 16% 62%, rgb(192 38 211 / 0.26), transparent 68%),
-    linear-gradient(145deg, transparent 22%, rgb(176 126 18 / 0.22) 42%, transparent 58%),
-    linear-gradient(25deg, transparent 34%, rgb(124 58 237 / 0.18) 46%, transparent 62%) !important;
+    radial-gradient(18rem 5.5rem at 82% 66%, rgb(217 119 6 / 0.25), transparent 66%),
+    radial-gradient(16rem 6rem at 16% 62%, rgb(245 158 11 / 0.2), transparent 68%),
+    linear-gradient(145deg, transparent 22%, rgb(217 119 6 / 0.16) 42%, transparent 58%),
+    linear-gradient(25deg, transparent 34%, rgb(245 158 11 / 0.14) 46%, transparent 62%) !important;
 }
 
 .kanz-sidebar-language,
@@ -2823,183 +2801,78 @@ body {
 .kanz-sidebar-secondary-button,
 .kanz-sidebar-collapse,
 .kanz-sidebar-footer-chip {
-  border-color: rgb(192 38 211 / 0.24) !important;
+  border-color: rgb(217 119 6 / 0.22) !important;
   background:
-    radial-gradient(14rem circle at 90% 10%, rgb(192 38 211 / 0.1), transparent 44%),
-    radial-gradient(13rem circle at 10% 85%, rgb(124 58 237 / 0.1), transparent 46%),
+    radial-gradient(14rem circle at 90% 10%, rgb(245 158 11 / 0.08), transparent 44%),
+    radial-gradient(13rem circle at 10% 85%, rgb(217 119 6 / 0.08), transparent 46%),
     linear-gradient(180deg, rgb(var(--color-card-rgb) / 0.72), rgb(var(--color-surface-rgb) / 0.62)) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.05),
-    0 18px 40px -34px rgb(124 58 237 / 0.48) !important;
+    0 18px 40px -34px rgb(217 119 6 / 0.35) !important;
 }
 
 .kanz-sidebar-nav-item:hover,
 .kanz-sidebar-nav-item.is-active {
-  border-color: rgb(192 38 211 / 0.48) !important;
+  border-color: rgb(217 119 6 / 0.45) !important;
   background:
-    radial-gradient(13rem circle at 88% 50%, rgb(192 38 211 / 0.18), transparent 46%),
-    radial-gradient(13rem circle at 12% 36%, rgb(124 58 237 / 0.18), transparent 46%),
-    linear-gradient(90deg, rgb(37 99 235 / 0.2), rgb(var(--color-card-rgb) / 0.74) 68%, rgb(192 38 211 / 0.12)) !important;
+    radial-gradient(13rem circle at 88% 50%, rgb(245 158 11 / 0.18), transparent 46%),
+    radial-gradient(13rem circle at 12% 36%, rgb(217 119 6 / 0.15), transparent 46%),
+    linear-gradient(90deg, rgb(217 119 6 / 0.18), rgb(var(--color-card-rgb) / 0.74) 68%, rgb(245 158 11 / 0.12)) !important;
 }
 
 .kanz-sidebar-nav-item.is-active::after {
-  background: linear-gradient(180deg, #f472d0, #7c3aed) !important;
+  background: linear-gradient(180deg, #f59e0b, #b45309) !important;
   box-shadow:
-    0 0 16px rgb(192 38 211 / 0.78),
-    0 0 20px rgb(124 58 237 / 0.72) !important;
+    0 0 16px rgb(245 158 11 / 0.78),
+    0 0 20px rgb(217 119 6 / 0.72) !important;
 }
 
 .kanz-sidebar-icon-bubble,
 .kanz-sidebar-avatar {
-  border-color: rgb(192 38 211 / 0.34) !important;
+  border-color: rgb(217 119 6 / 0.38) !important;
   background:
-    radial-gradient(circle at 36% 26%, rgb(255 244 189 / 0.22), transparent 38%),
-    linear-gradient(145deg, #2563eb, #312e81 54%, #a87408) !important;
-  color: #fff4bd !important;
+    radial-gradient(circle at 36% 26%, rgb(254 240 138 / 0.28), transparent 38%),
+    linear-gradient(145deg, #b45309, #d97706 54%, #f59e0b) !important;
+  color: #fffbeb !important;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.14),
-    0 0 30px -12px rgb(124 58 237 / 0.78),
-    0 0 34px -16px rgb(192 38 211 / 0.68) !important;
+    inset 0 1px 0 rgb(255 255 255 / 0.2),
+    0 0 30px -12px rgb(217 119 6 / 0.75),
+    0 0 34px -16px rgb(245 158 11 / 0.65) !important;
 }
 
 .kanz-sidebar-primary-button,
 .glow-button {
-  border-color: rgb(192 38 211 / 0.42) !important;
+  border-color: rgb(217 119 6 / 0.45) !important;
   background:
-    radial-gradient(circle at 22% 18%, rgb(255 244 189 / 0.22), transparent 38%),
-    linear-gradient(135deg, #2563eb 0%, #312e81 48%, #c026d3 100%) !important;
-  color: #fffaf0 !important;
+    radial-gradient(circle at 22% 18%, rgb(254 240 138 / 0.3), transparent 38%),
+    linear-gradient(135deg, #b45309 0%, #d97706 48%, #f59e0b 100%) !important;
+  color: #ffffff !important;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.16),
-    0 0 30px -14px rgb(124 58 237 / 0.76),
-    0 0 34px -18px rgb(192 38 211 / 0.7) !important;
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    0 0 30px -14px rgb(217 119 6 / 0.75),
+    0 0 34px -18px rgb(245 158 11 / 0.65) !important;
 }
 
 .kanz-sidebar-user-action,
 .kanz-sidebar-logout-pill {
-  border-color: rgb(192 38 211 / 0.36) !important;
+  border-color: rgb(217 119 6 / 0.3) !important;
   background:
-    radial-gradient(circle at 34% 28%, rgb(192 38 211 / 0.18), transparent 40%),
+    radial-gradient(circle at 34% 28%, rgb(245 158 11 / 0.15), transparent 40%),
     rgb(var(--color-card-rgb) / 0.7) !important;
-  color: #f472d0 !important;
+  color: #f59e0b !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 0 30px -16px rgb(192 38 211 / 0.76) !important;
+    0 0 30px -16px rgb(217 119 6 / 0.6) !important;
 }
 
 .storefront-product-card,
 .storefront-category-card--plain,
 .storefront-category-card--neon {
-  border-color: rgb(192 38 211 / 0.24) !important;
+  border-color: rgb(217 119 6 / 0.22) !important;
   background:
-    radial-gradient(18rem circle at 86% 10%, rgb(192 38 211 / 0.1), transparent 44%),
-    radial-gradient(14rem circle at 14% 0%, rgb(124 58 237 / 0.1), transparent 48%),
+    radial-gradient(18rem circle at 86% 10%, rgb(245 158 11 / 0.08), transparent 44%),
+    radial-gradient(14rem circle at 14% 0%, rgb(217 119 6 / 0.08), transparent 48%),
     linear-gradient(180deg, rgb(var(--color-card-rgb) / 0.88), rgb(var(--color-surface-rgb) / 0.78)) !important;
-}
-
-:root:not(.dark) body {
-  background:
-    radial-gradient(44rem circle at 12% -12%, rgb(124 58 237 / 0.16), transparent 42%),
-    radial-gradient(36rem circle at 94% 4%, rgb(192 38 211 / 0.18), transparent 38%),
-    radial-gradient(34rem circle at 54% 106%, rgb(9 70 83 / 0.1), transparent 46%),
-    linear-gradient(180deg, #fbf6e8 0%, #eef8f8 52%, #fffaf0 100%) !important;
-}
-
-:root:not(.dark) .ambient-background__veil {
-  background:
-    linear-gradient(180deg, rgb(255 250 240 / 0.42), rgb(237 247 249 / 0.78)),
-    radial-gradient(circle at top, rgb(192 38 211 / 0.14), transparent 42%) !important;
-}
-
-:root:not(.dark) .ambient-background__mesh {
-  background:
-    linear-gradient(90deg, rgb(37 99 235 / 0.05) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(147 51 234 / 0.045) 1px, transparent 1px) !important;
-}
-
-:root:not(.dark) .kanz-coins-panel,
-:root:not(.dark) .app-shell-header-panel,
-:root:not(.dark) .premium-card,
-:root:not(.dark) .premium-card-elevated,
-:root:not(.dark) .premium-card-premium,
-:root:not(.dark) .product-led-card,
-:root:not(.dark) .gold-mesh,
-:root:not(.dark) .admin-premium-hero,
-:root:not(.dark) .admin-premium-panel,
-:root:not(.dark) .admin-premium-toolbar,
-:root:not(.dark) .admin-premium-stat {
-  border-color: rgb(201 183 126 / 0.64) !important;
-  background:
-    radial-gradient(28rem circle at 86% 8%, rgb(192 38 211 / 0.13), transparent 42%),
-    radial-gradient(24rem circle at 12% 4%, rgb(124 58 237 / 0.11), transparent 44%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.92), rgb(237 247 249 / 0.84)) !important;
-  color: var(--color-text) !important;
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.78),
-    0 24px 70px -48px rgb(37 99 235 / 0.3),
-    0 0 34px -26px rgb(168 85 247 / 0.34) !important;
-}
-
-:root:not(.dark) .kanz-sidebar-panel {
-  border-color: rgb(201 183 126 / 0.66) !important;
-  background:
-    radial-gradient(24rem circle at 82% -4%, rgb(124 58 237 / 0.14), transparent 38%),
-    radial-gradient(20rem circle at 8% 16%, rgb(192 38 211 / 0.14), transparent 44%),
-    radial-gradient(18rem circle at 96% 42%, rgb(9 70 83 / 0.08), transparent 48%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.94), rgb(237 247 249 / 0.9) 58%, rgb(255 250 240 / 0.94)) !important;
-  color: var(--color-text) !important;
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.82),
-    inset 0 0 0 1px rgb(255 255 255 / 0.62),
-    0 26px 74px -50px rgb(37 99 235 / 0.34),
-    0 0 42px -30px rgb(168 85 247 / 0.42) !important;
-}
-
-:root:not(.dark) .kanz-sidebar-language,
-:root:not(.dark) .kanz-sidebar-user-card,
-:root:not(.dark) .kanz-sidebar-action-card,
-:root:not(.dark) .kanz-sidebar-nav-item,
-:root:not(.dark) .kanz-sidebar-secondary-button,
-:root:not(.dark) .kanz-sidebar-collapse,
-:root:not(.dark) .kanz-sidebar-footer-chip {
-  border-color: rgb(201 183 126 / 0.5) !important;
-  background:
-    radial-gradient(14rem circle at 90% 10%, rgb(192 38 211 / 0.1), transparent 44%),
-    linear-gradient(180deg, rgb(255 255 255 / 0.78), rgb(237 247 249 / 0.72)) !important;
-  color: var(--color-text-secondary) !important;
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.86),
-    0 18px 36px -32px rgb(37 99 235 / 0.28) !important;
-}
-
-:root:not(.dark) .kanz-sidebar-nav-item:hover,
-:root:not(.dark) .kanz-sidebar-nav-item.is-active {
-  border-color: rgb(147 51 234 / 0.42) !important;
-  background:
-    radial-gradient(11rem circle at 88% 50%, rgb(192 38 211 / 0.18), transparent 46%),
-    radial-gradient(13rem circle at 12% 36%, rgb(124 58 237 / 0.14), transparent 46%),
-    linear-gradient(90deg, rgb(37 99 235 / 0.1), rgb(255 255 255 / 0.9) 68%, rgb(192 38 211 / 0.12)) !important;
-  color: var(--color-text) !important;
-}
-
-:root:not(.dark) .kanz-sidebar-icon-bubble,
-:root:not(.dark) .kanz-sidebar-avatar,
-:root:not(.dark) .kanz-sidebar-icon-bubble.is-active,
-:root:not(.dark) .kanz-sidebar-nav-item:hover .kanz-sidebar-icon-bubble {
-  border-color: rgb(147 51 234 / 0.36) !important;
-  background:
-    radial-gradient(circle at 36% 26%, rgb(255 244 189 / 0.48), transparent 40%),
-    linear-gradient(145deg, #2563eb, #312e81 58%, #a855f7) !important;
-  color: #fffaf0 !important;
-}
-
-:root:not(.dark) .kanz-sidebar-primary-button,
-:root:not(.dark) .glow-button {
-  border-color: rgb(147 51 234 / 0.38) !important;
-  background:
-    radial-gradient(circle at 22% 18%, rgb(255 244 189 / 0.28), transparent 38%),
-    linear-gradient(135deg, #2563eb 0%, #312e81 50%, #a855f7 100%) !important;
-  color: #ffffff !important;
 }
 
 :root:not(.dark) input,
@@ -3144,19 +3017,19 @@ body {
 /* Referral page: deep-ocean and amber identity */
 .referral-fresh-theme > section {
   border-color: rgb(245 158 11 / 0.34) !important;
-  background: linear-gradient(138deg, rgb(255 251 235 / 0.97), rgb(240 253 250 / 0.94) 54%, rgb(255 247 237 / 0.96)) !important;
-  box-shadow: 9px 9px 0 rgb(15 61 62 / 0.10), inset 0 1px 0 rgb(255 255 255 / 0.8) !important;
+  background: linear-gradient(138deg, rgb(255 251 235 / 0.97), rgb(254 243 199 / 0.85) 54%, rgb(255 247 237 / 0.96)) !important;
+  box-shadow: 9px 9px 0 rgb(217 119 6 / 0.12), inset 0 1px 0 rgb(255 255 255 / 0.8) !important;
 }
 
 .dark .referral-fresh-theme > section {
-  background: linear-gradient(138deg, rgb(10 31 43 / 0.98), rgb(15 61 62 / 0.88) 54%, rgb(47 34 13 / 0.94)) !important;
+  background: linear-gradient(138deg, #16120b, #100d08 54%, #1f190e) !important;
   box-shadow: 9px 9px 0 rgb(245 158 11 / 0.09), inset 0 1px 0 rgb(255 255 255 / 0.05) !important;
 }
 
 .referral-fresh-theme > section > div:first-of-type > span:first-child {
   border-radius: 0 !important;
   border-color: rgb(251 191 36 / 0.75) !important;
-  background: #0f3d3e !important;
+  background: #b45309 !important;
   color: #fbbf24 !important;
   box-shadow: 4px 4px 0 #f59e0b !important;
 }
@@ -3189,7 +3062,7 @@ body {
 .referral-fresh-theme section a[class*="linear-gradient"],
 .referral-fresh-theme .referral-earnings-button {
   border-color: #fbbf24 !important;
-  background: #0f3d3e !important;
+  background: linear-gradient(135deg, #b45309, #d97706) !important;
   color: #fef3c7 !important;
   box-shadow: 5px 5px 0 #f59e0b !important;
 }
@@ -3197,23 +3070,23 @@ body {
 .referral-fresh-theme section button[class*="linear-gradient"]:hover,
 .referral-fresh-theme section a[class*="linear-gradient"]:hover,
 .referral-fresh-theme .referral-earnings-button:hover {
-  background: #14532d !important;
+  background: linear-gradient(135deg, #d97706, #f59e0b) !important;
   filter: none !important;
 }
 
 .referral-fresh-theme section article,
 .referral-fresh-theme section [class*="rounded-[1.35rem]"],
 .referral-fresh-theme section [class*="rounded-[1.4rem]"] {
-  border-color: rgb(15 61 62 / 0.22) !important;
+  border-color: rgb(245 158 11 / 0.22) !important;
 }
 
 .referral-fresh-theme section article {
   background: rgb(255 255 255 / 0.56) !important;
-  box-shadow: 4px 4px 0 rgb(15 61 62 / 0.08) !important;
+  box-shadow: 4px 4px 0 rgb(217 119 6 / 0.08) !important;
 }
 
 .dark .referral-fresh-theme section article {
-  background: rgb(4 24 31 / 0.58) !important;
+  background: rgb(26 20 12 / 0.68) !important;
 }
 
 .referral-fresh-theme section article [class*="bg-violet"],
@@ -3228,14 +3101,14 @@ body {
 }
 
 .referral-fresh-theme section a[href*="t.me"] {
-  border-color: rgb(15 61 62 / 0.35) !important;
-  background: #0f3d3e !important;
+  border-color: rgb(245 158 11 / 0.35) !important;
+  background: #1e1910 !important;
   color: white !important;
 }
 
 .referral-fresh-theme section .referral-available-earnings {
   border-color: rgb(245 158 11 / 0.42) !important;
-  background: linear-gradient(110deg, rgb(15 61 62 / 0.13), rgb(245 158 11 / 0.12)) !important;
+  background: linear-gradient(110deg, rgb(217 119 6 / 0.15), rgb(245 158 11 / 0.12)) !important;
 }
 
 .unavailable-status-badge {
@@ -3316,16 +3189,17 @@ body {
 }
 
 /* Storefront product media backgrounds */
+/* Storefront product media backgrounds */
 .storefront-category-card--plain .storefront-category-media {
-  border: 1px solid rgb(244 114 208 / 0.22) !important;
+  border: 1px solid rgb(245 158 11 / 0.25) !important;
   background:
-    radial-gradient(circle at 24% 18%, rgb(244 114 208 / 0.16), transparent 36%),
-    radial-gradient(circle at 78% 72%, rgb(124 58 237 / 0.18), transparent 42%),
-    linear-gradient(145deg, rgb(8 20 26 / 0.92), rgb(18 14 35 / 0.9) 58%, rgb(4 8 16 / 0.96)) !important;
+    radial-gradient(circle at 24% 18%, rgb(245 158 11 / 0.15), transparent 36%),
+    radial-gradient(circle at 78% 72%, rgb(217 119 6 / 0.12), transparent 42%),
+    linear-gradient(145deg, rgb(15 11 5 / 0.98), rgb(24 16 7 / 0.96) 58%, rgb(10 7 3 / 0.98)) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.08),
     inset 0 -22px 34px rgb(0 0 0 / 0.24),
-    0 16px 34px -28px rgb(124 58 237 / 0.72) !important;
+    0 16px 34px -28px rgb(245 158 11 / 0.6) !important;
 }
 
 .storefront-category-card--plain .storefront-category-media img {
@@ -3334,16 +3208,16 @@ body {
 }
 
 :root:not(.dark) .storefront-category-card--plain .storefront-category-media {
-  border-color: rgb(192 38 211 / 0.42) !important;
+  border-color: rgb(217 119 6 / 0.32) !important;
   background:
     radial-gradient(circle at 22% 18%, rgb(255 255 255 / 0.92), transparent 38%),
-    radial-gradient(circle at 78% 72%, rgb(124 58 237 / 0.12), transparent 44%),
-    radial-gradient(circle at 38% 86%, rgb(192 38 211 / 0.14), transparent 42%),
-    linear-gradient(145deg, rgb(244 252 253 / 0.98), rgb(255 249 232 / 0.95) 58%, rgb(238 248 249 / 0.96)) !important;
+    radial-gradient(circle at 78% 72%, rgb(245 158 11 / 0.12), transparent 44%),
+    radial-gradient(circle at 38% 86%, rgb(251 191 36 / 0.14), transparent 42%),
+    linear-gradient(145deg, rgb(255 255 255 / 0.98), rgb(254 249 235 / 0.95) 58%, rgb(255 255 255 / 0.96)) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.94),
-    inset 0 -18px 32px rgb(124 58 237 / 0.055),
-    0 14px 30px -26px rgb(130 96 22 / 0.32) !important;
+    inset 0 -18px 32px rgb(245 158 11 / 0.055),
+    0 14px 30px -26px rgb(217 119 6 / 0.25) !important;
 }
 
 :root:not(.dark) .storefront-category-card--plain .storefront-category-media img {
@@ -3357,8 +3231,8 @@ body {
 
 .public-target-banner {
   background:
-    radial-gradient(circle at 16% 18%, rgb(244 114 208 / 0.22), transparent 34%),
-    linear-gradient(135deg, rgb(3 12 22 / 0.96), rgb(11 34 43 / 0.94) 52%, rgb(47 39 16 / 0.88));
+    radial-gradient(circle at 16% 18%, rgb(245 158 11 / 0.18), transparent 34%),
+    linear-gradient(135deg, rgb(15 11 5 / 0.98), rgb(24 16 7 / 0.96) 52%, rgb(10 7 3 / 0.98));
 }
 
 .public-target-banner img {
@@ -3381,17 +3255,17 @@ body {
 }
 
 :root:not(.dark) .public-target-banner {
-  border-color: rgb(192 38 211 / 0.36) !important;
-  box-shadow: 0 22px 58px -44px rgb(124 58 237 / 0.62);
+  border-color: rgb(217 119 6 / 0.36) !important;
+  box-shadow: 0 22px 58px -44px rgb(245 158 11 / 0.42);
 }
 
 .top-selling-showcase {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 12% 8%, rgb(124 58 237 / 0.18), transparent 30%),
-    radial-gradient(circle at 86% 24%, rgb(244 114 208 / 0.16), transparent 32%),
-    linear-gradient(145deg, rgb(var(--color-card-rgb) / 0.96), rgb(var(--color-surface-rgb) / 0.84)) !important;
+    radial-gradient(circle at 12% 8%, rgb(245 158 11 / 0.15), transparent 30%),
+    radial-gradient(circle at 86% 24%, rgb(217 119 6 / 0.12), transparent 32%),
+    linear-gradient(145deg, rgb(15 11 5 / 0.98), rgb(24 16 7 / 0.96)) !important;
 }
 
 .top-selling-showcase::before {
@@ -3405,37 +3279,37 @@ body {
 
 .top-selling-card {
   border-radius: 1.25rem !important;
-  border: 1px solid rgb(124 58 237 / 0.28) !important;
+  border: 1px solid rgb(245 158 11 / 0.25) !important;
   background:
-    radial-gradient(circle at 18% 8%, rgb(244 114 208 / 0.18), transparent 34%),
-    linear-gradient(160deg, rgb(var(--color-card-rgb) / 0.98), rgb(var(--color-surface-rgb) / 0.9)) !important;
+    radial-gradient(circle at 18% 8%, rgb(245 158 11 / 0.15), transparent 34%),
+    linear-gradient(160deg, rgb(15 11 5 / 0.98), rgb(24 16 7 / 0.96)) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.1),
-    0 18px 44px -34px rgb(124 58 237 / 0.74) !important;
+    0 18px 44px -34px rgb(245 158 11 / 0.6) !important;
 }
 
 .top-selling-card:hover {
-  border-color: rgb(244 114 208 / 0.42) !important;
+  border-color: rgb(251 191 36 / 0.45) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.14),
-    0 24px 54px -34px rgb(244 114 208 / 0.72) !important;
+    0 24px 54px -34px rgb(245 158 11 / 0.72) !important;
 }
 
 :root:not(.dark) .top-selling-showcase {
   background:
-    radial-gradient(circle at 10% 8%, rgb(124 58 237 / 0.12), transparent 32%),
-    radial-gradient(circle at 86% 24%, rgb(192 38 211 / 0.18), transparent 34%),
-    linear-gradient(145deg, rgb(248 253 253 / 0.98), rgb(255 250 235 / 0.92)) !important;
+    radial-gradient(circle at 10% 8%, rgb(245 158 11 / 0.1), transparent 32%),
+    radial-gradient(circle at 86% 24%, rgb(217 119 6 / 0.12), transparent 34%),
+    linear-gradient(145deg, rgb(255 255 255 / 0.98), rgb(254 249 235 / 0.92)) !important;
 }
 
 :root:not(.dark) .top-selling-card {
-  border-color: rgb(192 38 211 / 0.34) !important;
+  border-color: rgb(217 119 6 / 0.3) !important;
   background:
-    radial-gradient(circle at 18% 8%, rgb(124 58 237 / 0.1), transparent 36%),
-    linear-gradient(160deg, rgb(255 255 255 / 0.98), rgb(240 251 252 / 0.94)) !important;
+    radial-gradient(circle at 18% 8%, rgb(245 158 11 / 0.08), transparent 36%),
+    linear-gradient(160deg, rgb(255 255 255 / 0.98), rgb(254 249 235 / 0.94)) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.92),
-    0 18px 42px -34px rgb(124 58 237 / 0.42) !important;
+    0 18px 42px -34px rgb(217 119 6 / 0.25) !important;
 }
 
 /* Unified electric-neon palette — final cascade authority. */
@@ -3453,34 +3327,34 @@ body {
 
 body {
   background:
-    radial-gradient(48rem circle at 8% -10%, rgb(37 99 235 / 0.24), transparent 42%),
-    radial-gradient(42rem circle at 94% 2%, rgb(192 38 211 / 0.22), transparent 40%),
-    radial-gradient(38rem circle at 52% 110%, rgb(124 58 237 / 0.2), transparent 46%),
-    linear-gradient(180deg, #03020d 0%, #08051a 50%, #03020e 100%) !important;
+    radial-gradient(48rem circle at 8% -10%, rgb(245 158 11 / 0.14), transparent 42%),
+    radial-gradient(42rem circle at 94% 2%, rgb(217 119 6 / 0.12), transparent 40%),
+    radial-gradient(38rem circle at 52% 110%, rgb(180 83 9 / 0.1), transparent 46%),
+    linear-gradient(180deg, rgb(15 11 5 / 0.98) 0%, rgb(24 16 7 / 0.96) 50%, rgb(10 7 3 / 0.98) 100%) !important;
 }
 
 .ambient-background__veil {
   background:
-    linear-gradient(180deg, rgb(3 2 13 / 0.16), rgb(3 2 14 / 0.78)),
-    radial-gradient(circle at top, rgb(124 58 237 / 0.15), transparent 42%) !important;
+    linear-gradient(180deg, rgb(15 11 5 / 0.35), rgb(10 7 3 / 0.75)),
+    radial-gradient(circle at top, rgb(245 158 11 / 0.08), transparent 42%) !important;
 }
 
 .ambient-background__mesh {
   background:
-    linear-gradient(90deg, rgb(139 92 246 / 0.04) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(217 70 239 / 0.035) 1px, transparent 1px) !important;
+    linear-gradient(90deg, rgb(245 158 11 / 0.02) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(217 119 6 / 0.02) 1px, transparent 1px) !important;
 }
 
 .ambient-background__glow--left {
-  background: radial-gradient(circle, rgb(37 99 235 / 0.34), transparent 68%) !important;
+  background: radial-gradient(circle, rgb(217 119 6 / 0.24), transparent 68%) !important;
 }
 
 .ambient-background__glow--right {
-  background: radial-gradient(circle, rgb(192 38 211 / 0.3), transparent 70%) !important;
+  background: radial-gradient(circle, rgb(245 158 11 / 0.2), transparent 70%) !important;
 }
 
 .ambient-background__glow--bottom {
-  background: radial-gradient(circle, rgb(124 58 237 / 0.28), transparent 72%) !important;
+  background: radial-gradient(circle, rgb(180 83 9 / 0.18), transparent 72%) !important;
 }
 
 :where(
@@ -3501,24 +3375,24 @@ body {
 ) {
   border: 1px solid transparent !important;
   background:
-    radial-gradient(24rem circle at 88% -8%, rgb(192 38 211 / 0.12), transparent 45%) padding-box,
-    radial-gradient(20rem circle at 4% 104%, rgb(37 99 235 / 0.1), transparent 48%) padding-box,
+    radial-gradient(24rem circle at 88% -8%, rgb(245 158 11 / 0.12), transparent 45%) padding-box,
+    radial-gradient(20rem circle at 4% 104%, rgb(217 119 6 / 0.1), transparent 48%) padding-box,
     linear-gradient(155deg, rgb(var(--color-card-rgb) / 0.94), rgb(var(--color-surface-rgb) / 0.82)) padding-box,
     conic-gradient(
       from var(--neon-edge-angle),
-      rgb(37 99 235 / 0.22) 0deg,
-      #38bdf8 48deg,
-      #7c3aed 112deg,
-      #d946ef 170deg,
-      rgb(217 70 239 / 0.2) 220deg,
-      #7c3aed 286deg,
-      #2563eb 338deg,
-      rgb(37 99 235 / 0.22) 360deg
+      rgb(217 119 6 / 0.22) 0deg,
+      #fbbf24 48deg,
+      #f59e0b 112deg,
+      #d97706 170deg,
+      rgb(245 158 11 / 0.2) 220deg,
+      #d97706 286deg,
+      #f59e0b 338deg,
+      rgb(217 119 6 / 0.22) 360deg
     ) border-box !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 20px 54px -38px rgb(124 58 237 / 0.7),
-    0 0 34px -28px rgb(217 70 239 / 0.72) !important;
+    0 20px 54px -38px rgb(217 119 6 / 0.7),
+    0 0 34px -28px rgb(245 158 11 / 0.72) !important;
 }
 
 :where(button, a, input, select, textarea):focus-visible {
@@ -3529,39 +3403,39 @@ body {
 
 :root:not(.dark) body {
   background:
-    radial-gradient(46rem circle at 8% -10%, rgb(37 99 235 / 0.15), transparent 43%),
-    radial-gradient(40rem circle at 94% 0%, rgb(192 38 211 / 0.14), transparent 40%),
-    radial-gradient(34rem circle at 50% 108%, rgb(124 58 237 / 0.1), transparent 46%),
-    linear-gradient(180deg, #fbfbff 0%, #f3f1ff 52%, #fff8ff 100%) !important;
+    radial-gradient(46rem circle at 8% -10%, rgb(245 158 11 / 0.1), transparent 43%),
+    radial-gradient(40rem circle at 94% 0%, rgb(217 119 6 / 0.08), transparent 40%),
+    radial-gradient(34rem circle at 50% 108%, rgb(251 191 36 / 0.06), transparent 46%),
+    linear-gradient(180deg, #fffdf8 0%, #fefcf3 52%, #fffdfa 100%) !important;
 }
 
 :root:not(.dark) .ambient-background__veil {
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.36), rgb(243 240 255 / 0.8)),
-    radial-gradient(circle at top, rgb(124 58 237 / 0.11), transparent 42%) !important;
+    linear-gradient(180deg, rgb(255 255 255 / 0.45), rgb(254 249 235 / 0.8)),
+    radial-gradient(circle at top, rgb(245 158 11 / 0.08), transparent 42%) !important;
 }
 
 .kanz-sidebar-panel {
   border: 1px solid transparent !important;
   background:
-    radial-gradient(26rem circle at 78% -6%, rgb(124 58 237 / 0.17), transparent 38%) padding-box,
-    radial-gradient(22rem circle at 14% 12%, rgb(217 70 239 / 0.14), transparent 44%) padding-box,
-    linear-gradient(180deg, rgb(7 4 24 / 0.98), rgb(3 2 14 / 0.98)) padding-box,
-    conic-gradient(from var(--neon-edge-angle), #2563eb, #7c3aed 34%, #d946ef 62%, #7c3aed 82%, #2563eb) border-box !important;
+    radial-gradient(26rem circle at 78% -6%, rgb(245 158 11 / 0.15), transparent 38%) padding-box,
+    radial-gradient(22rem circle at 14% 12%, rgb(217 119 6 / 0.12), transparent 44%) padding-box,
+    linear-gradient(180deg, rgb(15 11 5 / 0.98), rgb(24 16 7 / 0.98)) padding-box,
+    conic-gradient(from var(--neon-edge-angle), #b45309, #d97706 34%, #fbbf24 62%, #d97706 82%, #b45309) border-box !important;
 }
 
 :root:not(.dark) .kanz-sidebar-panel {
   border: 1px solid transparent !important;
   background:
-    radial-gradient(28rem circle at 82% -8%, rgb(192 38 211 / 0.12), transparent 42%) padding-box,
-    radial-gradient(22rem circle at 4% 104%, rgb(37 99 235 / 0.1), transparent 46%) padding-box,
-    linear-gradient(180deg, rgb(255 255 255 / 0.96), rgb(242 240 255 / 0.94)) padding-box,
-    conic-gradient(from var(--neon-edge-angle), #2563eb, #7c3aed 35%, #d946ef 62%, #7c3aed 82%, #2563eb) border-box !important;
+    radial-gradient(28rem circle at 82% -8%, rgb(245 158 11 / 0.1), transparent 42%) padding-box,
+    radial-gradient(22rem circle at 4% 104%, rgb(217 119 6 / 0.08), transparent 46%) padding-box,
+    linear-gradient(180deg, rgb(255 255 255 / 0.96), rgb(254 249 235 / 0.94)) padding-box,
+    conic-gradient(from var(--neon-edge-angle), #b45309, #d97706 35%, #fbbf24 62%, #d97706 82%, #b45309) border-box !important;
   color: var(--color-text) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.92),
-    0 24px 64px -42px rgb(124 58 237 / 0.46),
-    0 0 34px -26px rgb(192 38 211 / 0.46) !important;
+    0 24px 64px -42px rgb(217 119 6 / 0.35),
+    0 0 34px -26px rgb(245 158 11 / 0.35) !important;
 }
 
 :root:not(.dark) :where(
@@ -3581,23 +3455,23 @@ body {
   .top-selling-card
 ) {
   background:
-    radial-gradient(24rem circle at 88% -8%, rgb(192 38 211 / 0.09), transparent 45%) padding-box,
-    radial-gradient(20rem circle at 4% 104%, rgb(37 99 235 / 0.08), transparent 48%) padding-box,
-    linear-gradient(155deg, rgb(255 255 255 / 0.96), rgb(246 244 255 / 0.9)) padding-box,
+    radial-gradient(24rem circle at 88% -8%, rgb(245 158 11 / 0.09), transparent 45%) padding-box,
+    radial-gradient(20rem circle at 4% 104%, rgb(217 119 6 / 0.08), transparent 48%) padding-box,
+    linear-gradient(155deg, rgb(255 255 255 / 0.96), rgb(254 249 235 / 0.9)) padding-box,
     conic-gradient(
       from var(--neon-edge-angle),
-      rgb(37 99 235 / 0.16) 0deg,
-      #2563eb 58deg,
-      #7c3aed 132deg,
-      #d946ef 194deg,
-      rgb(217 70 239 / 0.16) 246deg,
-      #7c3aed 306deg,
-      rgb(37 99 235 / 0.16) 360deg
+      rgb(217 119 6 / 0.16) 0deg,
+      #b45309 58deg,
+      #d97706 132deg,
+      #fbbf24 194deg,
+      rgb(245 158 11 / 0.16) 246deg,
+      #d97706 306deg,
+      rgb(217 119 6 / 0.16) 360deg
     ) border-box !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.94),
-    0 20px 54px -40px rgb(124 58 237 / 0.48),
-    0 0 32px -27px rgb(192 38 211 / 0.44) !important;
+    0 20px 54px -40px rgb(217 119 6 / 0.35),
+    0 0 32px -27px rgb(245 158 11 / 0.35) !important;
 }
 
 .home-neon-section {
@@ -3609,19 +3483,19 @@ body {
     linear-gradient(155deg, rgb(var(--color-card-rgb) / 0.3), rgb(var(--color-surface-rgb) / 0.18)) padding-box,
     conic-gradient(
       from var(--neon-edge-angle),
-      rgb(37 99 235 / 0.18) 0deg,
-      #38bdf8 42deg,
-      #2563eb 82deg,
-      #7c3aed 142deg,
-      #d946ef 196deg,
-      rgb(217 70 239 / 0.16) 242deg,
-      #7c3aed 302deg,
-      #2563eb 342deg,
-      rgb(37 99 235 / 0.18) 360deg
+      rgb(217 119 6 / 0.18) 0deg,
+      #fde047 42deg,
+      #f59e0b 82deg,
+      #d97706 142deg,
+      #fbbf24 196deg,
+      rgb(245 158 11 / 0.16) 242deg,
+      #d97706 302deg,
+      #b45309 342deg,
+      rgb(217 119 6 / 0.18) 360deg
     ) border-box !important;
   box-shadow:
-    0 18px 48px -38px rgb(37 99 235 / 0.9),
-    0 0 34px -25px rgb(217 70 239 / 0.82) !important;
+    0 18px 48px -38px rgb(217 119 6 / 0.8),
+    0 0 34px -25px rgb(245 158 11 / 0.7) !important;
   animation: neon-edge-orbit 5.5s linear infinite;
 }
 
@@ -3631,20 +3505,20 @@ body {
 
 :root:not(.dark) .home-neon-section {
   background:
-    linear-gradient(155deg, rgb(255 255 255 / 0.56), rgb(246 244 255 / 0.38)) padding-box,
+    linear-gradient(155deg, rgb(255 255 255 / 0.7), rgb(254 249 235 / 0.5)) padding-box,
     conic-gradient(
       from var(--neon-edge-angle),
-      rgb(37 99 235 / 0.12) 0deg,
-      #2563eb 68deg,
-      #7c3aed 142deg,
-      #d946ef 208deg,
-      rgb(217 70 239 / 0.12) 266deg,
-      #7c3aed 320deg,
-      rgb(37 99 235 / 0.12) 360deg
+      rgb(217 119 6 / 0.12) 0deg,
+      #d97706 68deg,
+      #f59e0b 142deg,
+      #fbbf24 208deg,
+      rgb(245 158 11 / 0.12) 266deg,
+      #d97706 320deg,
+      rgb(217 119 6 / 0.12) 360deg
     ) border-box !important;
   box-shadow:
-    0 18px 46px -38px rgb(124 58 237 / 0.62),
-    0 0 30px -25px rgb(192 38 211 / 0.62) !important;
+    0 18px 46px -38px rgb(217 119 6 / 0.45),
+    0 0 30px -25px rgb(245 158 11 / 0.45) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3686,12 +3560,12 @@ body {
   background: conic-gradient(
     from var(--neon-edge-angle),
     transparent 0deg 282deg,
-    rgb(37 99 235 / 0.08) 292deg,
-    #2563eb 306deg,
-    #38bdf8 318deg,
-    #7c3aed 332deg,
-    #d946ef 344deg,
-    rgb(217 70 239 / 0.12) 354deg,
+    rgb(217 119 6 / 0.08) 292deg,
+    #b45309 306deg,
+    #f59e0b 318deg,
+    #fbbf24 332deg,
+    #fde047 344deg,
+    rgb(245 158 11 / 0.12) 354deg,
     transparent 360deg
   );
   -webkit-mask:
