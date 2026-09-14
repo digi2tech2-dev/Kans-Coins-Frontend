@@ -41,7 +41,7 @@ import Card from '../components/ui/Card';
 import { useToast } from '../components/ui/Toast';
 import { formatDateTime, formatNumber, getNumericLocale } from '../utils/intl';
 import { enrichOrders } from '../utils/orders';
-import { getUserRegistrationDate, isApprovedAccountStatus, isPendingAccountStatus } from '../utils/accountStatus';
+import { getUserRegistrationDate, isApprovedAccountStatus } from '../utils/accountStatus';
 import { PERMISSIONS, hasPermission } from '../utils/permissions';
 
 const PENDING_STATUSES = ['pending', 'requested', 'under_review', 'processing'];
@@ -411,13 +411,6 @@ const AdminDashboard = () => {
     [newCustomersInRange]
   );
 
-  const pendingApprovalUsers = useMemo(
-    () => [...allCustomerUsers]
-      .filter((entry) => isPendingAccountStatus(entry?.status))
-      .sort((left, right) => new Date(getUserRegistrationDate(right) || 0) - new Date(getUserRegistrationDate(left) || 0)),
-    [allCustomerUsers]
-  );
-
   const enrichedOrders = useMemo(
     () => enrichOrders(orders, { users, products, language: isArabic ? 'ar' : 'en' }),
     [isArabic, orders, products, users]
@@ -700,10 +693,12 @@ const AdminDashboard = () => {
         icon: Users,
       },
       {
-        title: isArabic ? 'حسابات بانتظار التفعيل' : 'Pending account approvals',
-        value: formatCount(pendingApprovalUsers.length),
-        note: isArabic ? 'حسابات جديدة ما زالت بانتظار المراجعة' : 'New accounts still waiting for review',
-        icon: UserCog,
+        title: isArabic ? 'المنتجات المفعّلة' : 'Active Products',
+        value: formatCount(statsProducts.active),
+        note: isArabic
+          ? `${formatCount(statsProducts.total)} منتج متاح داخل الكتالوج`
+          : `${formatCount(statsProducts.total)} products in the catalog`,
+        icon: Gamepad2,
       },
       {
         title: isArabic ? 'إجمالي المنتجات' : 'Total Products',
@@ -755,7 +750,6 @@ const AdminDashboard = () => {
       monthlyTargetProfitUsd,
       monthlyTargetProgress,
       monthlyTargetRemaining,
-      pendingApprovalUsers.length,
       pendingManualTopups.length,
       productMetricNote,
       statsFinancials.netProfit,
@@ -768,6 +762,7 @@ const AdminDashboard = () => {
       statsOrders.processing,
       statsOrders.total,
       statsProducts.total,
+      statsProducts.active,
       statsUsers.active,
       statsUsers.total,
       statsUsers.totalWalletBalance,

@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Edit, Image as ImageIcon, Plus, Trash2, Info, Search, Check, Package, RefreshCw, Power } from 'lucide-react';
+import { Edit, Image as ImageIcon, Plus, Trash2, Info, Search, Check, Package, RefreshCw, Power, Coins } from 'lucide-react';
 import { resolveImageUrl } from '../../utils/imageUrl';
 import { uploadImage } from '../../services/realApi';
 import useMediaStore from '../../store/useMediaStore';
+import useGroupStore from '../../store/useGroupStore';
+import useSystemStore from '../../store/useSystemStore';
 import apiClient from '../../services/client';
 import useAuthStore from '../../store/useAuthStore';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../components/ui/Table';
@@ -22,6 +24,7 @@ const PRODUCT_FORM_STEPS = [
     { id: 'basic', number: 1, labelAr: 'الأساسيات', labelEn: 'Basics' },
     { id: 'pricing', number: 2, labelAr: 'الربط والسعر', labelEn: 'Pricing' },
     { id: 'fields', number: 3, labelAr: 'حقول الطلب والمراجعة', labelEn: 'Fields & Review' },
+    { id: 'calculator', number: 4, labelAr: 'حاسبة السعر', labelEn: 'Price Calculator' },
 ];
 
 const getProviderProductSearchToken = (product) =>
@@ -329,6 +332,8 @@ const AdminProducts = () => {
         loadProducts,
     } = useMediaStore();
     const { user } = useAuthStore();
+    const { groups, loadGroups } = useGroupStore();
+    const { currencies, loadCurrencies } = useSystemStore();
     const { addToast } = useToast();
     const { t, language } = useLanguage();
     const isEnglish = language === 'en';
@@ -358,6 +363,9 @@ const AdminProducts = () => {
     const [selectedSubCategoryId, setSelectedSubCategoryId] = useState('');
     const [productSearchQuery, setProductSearchQuery] = useState('');
     const [productFormStep, setProductFormStep] = useState(PRODUCT_FORM_STEPS[0].id);
+    const [calculatorGroupId, setCalculatorGroupId] = useState('');
+    const [calculatorQuantity, setCalculatorQuantity] = useState('');
+    const [calculatorCurrencyCode, setCalculatorCurrencyCode] = useState('USD');
     const [productForm, setProductForm] = useState({
         name: '',
         nameAr: '',
@@ -541,6 +549,13 @@ const AdminProducts = () => {
     }, [loadProducts]);
 
     useEffect(() => {
+        if (isProductModalOpen) {
+            void loadGroups({ force: false });
+            void loadCurrencies({ force: false });
+        }
+    }, [isProductModalOpen, loadCurrencies, loadGroups]);
+
+    useEffect(() => {
         if (isProductModalOpen && !productForm.category && categories.length > 0) {
             setProductForm((prev) => ({ ...prev, category: categories[0].id }));
         }
@@ -660,6 +675,35 @@ const AdminProducts = () => {
         if (!Number.isFinite(sellingPrice) || !Number.isFinite(costPrice)) return null;
         return sellingPrice - costPrice;
     }, [productForm.basePriceCoins, productForm.connectionType, productForm.costPrice]);
+
+    const selectedCalculatorGroup = useMemo(
+        () => (groups || []).find((group) => String(group?.id || group?._id || '') === String(calculatorGroupId)) || null,
+        [calculatorGroupId, groups]
+    );
+    const calculatorGroupPercentage = Number(selectedCalculatorGroup?.percentage ?? selectedCalculatorGroup?.discount ?? 0);
+    const calculatorCurrencies = useMemo(() => {
+        const configuredCurrencies = Array.isArray(currencies) ? currencies : [];
+        const hasUsd = configuredCurrencies.some((currency) => String(currency?.code || '').toUpperCase() === 'USD');
+        return hasUsd
+            ? configuredCurrencies
+            : [{ code: 'USD', name: 'US Dollar', symbol: '$', rate: 1 }, ...configuredCurrencies];
+    }, [currencies]);
+    const selectedCalculatorCurrency = useMemo(
+        () => calculatorCurrencies.find((currency) => String(currency?.code || '').toUpperCase() === calculatorCurrencyCode) || calculatorCurrencies[0],
+        [calculatorCurrencies, calculatorCurrencyCode]
+    );
+    const calculatorCurrencyCodeLabel = String(selectedCalculatorCurrency?.code || 'USD').toUpperCase();
+    const calculatorCurrencySymbol = String(selectedCalculatorCurrency?.symbol || calculatorCurrencyCodeLabel);
+    const calculatorCurrencyRate = Number(selectedCalculatorCurrency?.rate || 1);
+    const calculatorBasePrice = Number(normalizePriceInput(productForm.basePriceCoins) || 0);
+    const calculatorQuantityValue = Number(calculatorQuantity);
+    const hasValidCalculatorQuantity = Number.isFinite(calculatorQuantityValue) && calculatorQuantityValue > 0;
+    const hasCalculatorBasePrice = Number.isFinite(calculatorBasePrice) && calculatorBasePrice > 0;
+    const calculatorUnitPrice = selectedCalculatorGroup && hasCalculatorBasePrice
+        ? calculatorBasePrice * (1 + ((Number.isFinite(calculatorGroupPercentage) ? calculatorGroupPercentage : 0) / 100))
+        : 0;
+    const calculatorUnitPriceInCurrency = calculatorUnitPrice * (Number.isFinite(calculatorCurrencyRate) && calculatorCurrencyRate > 0 ? calculatorCurrencyRate : 1);
+    const calculatorTotalPrice = hasValidCalculatorQuantity ? calculatorUnitPriceInCurrency * calculatorQuantityValue : 0;
 
     const syncProviderPrice = async (manualOverride, supplierIdOverride, providerProductIdOverride) => {
         const supplierId = supplierIdOverride || productForm.supplierId || productForm.providerId;
@@ -825,6 +869,9 @@ const AdminProducts = () => {
 
     const openProductModal = (product = null) => {
         setProductFormStep(PRODUCT_FORM_STEPS[0].id);
+        setCalculatorGroupId('');
+        setCalculatorQuantity('');
+        setCalculatorCurrencyCode('USD');
         setProviderProductsVisibleCount(PROVIDER_PRODUCTS_PAGE_SIZE);
         if (product) {
             const linkedProviderId = String(product.providerId || product.supplierId || '').trim();
@@ -2610,6 +2657,128 @@ const AdminProducts = () => {
                             ) : (
                                 <p className="text-xs text-gray-500 dark:text-gray-400">لا توجد حقول ديناميكية بعد. اضغط "إضافة حقل".</p>
                             )}
+                        </div>
+                    </div>
+                    ) : null}
+
+                    {/* ========== 4. حاسبة السعر حسب المجموعة ========== */}
+                    {productFormStep === 'calculator' ? (
+                    <div>
+                        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-white">
+                            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">4</span>
+                            {isEnglish ? 'Price calculator' : 'حاسبة السعر حسب المجموعة'}
+                        </h3>
+
+                        <div className="space-y-5 rounded-[1.15rem] border border-[color:rgb(var(--color-primary-rgb)/0.22)] bg-[linear-gradient(135deg,rgb(var(--color-primary-rgb)/0.08),rgb(var(--color-card-rgb)/0.76))] p-4 sm:p-5">
+                            <div>
+                                <p className="text-sm font-bold text-[var(--color-text)]">
+                                    {isEnglish ? 'Preview the final customer price' : 'اعرف السعر النهائي للعميل قبل الحفظ'}
+                                </p>
+                                <p className="mt-1 text-xs leading-5 text-[var(--color-text-secondary)]">
+                                    {isEnglish
+                                        ? 'Choose a customer group first, then enter the quantity to preview its exact total.'
+                                        : 'اختر مجموعة العميل أولًا، ثم أدخل الكمية لمعرفة سعر الوحدة والإجمالي حسب نسبة هذه المجموعة.'}
+                                </p>
+                            </div>
+
+                            <div className="grid gap-4 sm:grid-cols-3">
+                                <label className="space-y-1.5">
+                                    <span className="block text-sm font-semibold text-[var(--color-text-secondary)]">
+                                        {isEnglish ? 'Customer group' : 'مجموعة العميل'}
+                                    </span>
+                                    <select
+                                        value={calculatorGroupId}
+                                        onChange={(event) => setCalculatorGroupId(event.target.value)}
+                                        className={`${selectClassName} h-11 dark:[color-scheme:dark]`}
+                                    >
+                                        <option value="">{isEnglish ? 'Choose a group' : 'اختر المجموعة'}</option>
+                                        {(groups || []).map((group) => {
+                                            const groupId = String(group?.id || group?._id || '');
+                                            const percentage = Number(group?.percentage ?? group?.discount ?? 0);
+                                            return (
+                                                <option key={groupId} value={groupId}>
+                                                    {group?.name || group?.nameAr || groupId} ({Number.isFinite(percentage) ? percentage : 0}%)
+                                                </option>
+                                            );
+                                        })}
+                                    </select>
+                                </label>
+
+                                <label className="space-y-1.5">
+                                    <span className="block text-sm font-semibold text-[var(--color-text-secondary)]">
+                                        {isEnglish ? 'Currency' : 'العملة'}
+                                    </span>
+                                    <select
+                                        value={calculatorCurrencyCode}
+                                        onChange={(event) => setCalculatorCurrencyCode(event.target.value)}
+                                        className={`${selectClassName} h-11 dark:[color-scheme:dark]`}
+                                    >
+                                        {calculatorCurrencies.map((currency) => {
+                                            const code = String(currency?.code || '').toUpperCase();
+                                            return (
+                                                <option key={code} value={code}>
+                                                    {currency?.name || code} ({currency?.symbol || code})
+                                                </option>
+                                            );
+                                        })}
+                                    </select>
+                                </label>
+
+                                <Input
+                                    label={isEnglish ? 'Quantity to calculate' : 'الكمية المطلوب حسابها'}
+                                    type="text"
+                                    inputMode="numeric"
+                                    pattern="[0-9]*"
+                                    value={calculatorQuantity}
+                                    onChange={(event) => {
+                                        const nextValue = event.target.value;
+                                        if (/^\d*$/.test(nextValue)) setCalculatorQuantity(nextValue);
+                                    }}
+                                    placeholder={isEnglish ? 'Example: 100' : 'مثال: 100'}
+                                    suffix={(
+                                        <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg border border-[color:rgb(var(--color-primary-rgb)/0.22)] bg-[color:rgb(var(--color-primary-rgb)/0.1)] text-[var(--color-primary)]">
+                                            <Coins className="h-3.5 w-3.5" />
+                                        </span>
+                                    )}
+                                />
+                            </div>
+
+                            {!hasCalculatorBasePrice ? (
+                                <div className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-xs leading-5 text-amber-800 dark:border-amber-900/70 dark:bg-amber-950/30 dark:text-amber-200">
+                                    {isEnglish
+                                        ? 'Enter the product final price in step 2 first to use the calculator.'
+                                        : 'أدخل السعر النهائي للمنتج من خطوة «الربط والسعر» أولًا لتتمكن من استخدام الحاسبة.'}
+                                </div>
+                            ) : null}
+
+                            <div className="grid gap-3 sm:grid-cols-3">
+                                <div className="rounded-xl border border-[color:rgb(var(--color-border-rgb)/0.82)] bg-[color:rgb(var(--color-card-rgb)/0.78)] p-3">
+                                    <p className="text-[11px] font-bold text-[var(--color-muted)]">{isEnglish ? 'Product base price' : 'سعر المنتج الأساسي'}</p>
+                                    <p className="mt-1.5 text-base font-extrabold text-[var(--color-text)]">
+                                        {hasCalculatorBasePrice ? `${formatExactDecimal(productForm.basePriceCoins, language)} USD` : '—'}
+                                    </p>
+                                </div>
+                                <div className="rounded-xl border border-[color:rgb(var(--color-border-rgb)/0.82)] bg-[color:rgb(var(--color-card-rgb)/0.78)] p-3">
+                                    <p className="text-[11px] font-bold text-[var(--color-muted)]">{isEnglish ? 'Unit price for group' : 'سعر الوحدة للمجموعة'}</p>
+                                    <p className="mt-1.5 text-base font-extrabold text-[var(--color-text)]">
+                                        {selectedCalculatorGroup && hasCalculatorBasePrice ? `${formatExactDecimal(calculatorUnitPriceInCurrency, language)} ${calculatorCurrencySymbol}` : '—'}
+                                    </p>
+                                    {selectedCalculatorGroup ? (
+                                        <p className="mt-1 text-[10px] text-[var(--color-text-secondary)]">
+                                            {isEnglish ? 'Group rate' : 'نسبة المجموعة'}: {Number.isFinite(calculatorGroupPercentage) ? calculatorGroupPercentage : 0}%
+                                        </p>
+                                    ) : null}
+                                </div>
+                                <div className="rounded-xl border border-[color:rgb(var(--color-primary-rgb)/0.34)] bg-[linear-gradient(135deg,rgb(var(--color-primary-rgb)/0.18),rgb(var(--color-primary-rgb)/0.07))] p-3">
+                                    <p className="text-[11px] font-bold text-[var(--color-primary-hover)]">{isEnglish ? 'Total price' : 'السعر الإجمالي'}</p>
+                                    <p className="mt-1.5 text-xl font-black text-[var(--color-primary)]">
+                                        {selectedCalculatorGroup && hasCalculatorBasePrice && hasValidCalculatorQuantity ? `${formatExactDecimal(calculatorTotalPrice, language)} ${calculatorCurrencySymbol}` : '—'}
+                                    </p>
+                                    <p className="mt-1 text-[10px] text-[var(--color-text-secondary)]">
+                                        {hasValidCalculatorQuantity ? `${formatNumber(calculatorQuantityValue, isEnglish ? 'en-US' : 'ar-EG')} × ${isEnglish ? 'unit price' : 'سعر الوحدة'}` : (isEnglish ? 'Enter a quantity' : 'أدخل الكمية')}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     ) : null}
