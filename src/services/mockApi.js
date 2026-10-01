@@ -1060,7 +1060,40 @@ const mockApi = {
         maxQty: product.maxQty ?? null,
         maximumOrderQty: product.maxQty ?? null,
       };
-    }
+    },
+
+    getProviderOffers: async (productId) => {
+      await new Promise(resolve => setTimeout(resolve, DELAY));
+      const db = getDB('product-provider-offers-storage', { state: { offers: [] } });
+      return (db.state.offers || []).filter((offer) => String(offer.product) === String(productId));
+    },
+
+    createProviderOffer: async (productId, payload) => {
+      await new Promise(resolve => setTimeout(resolve, DELAY));
+      const db = getDB('product-provider-offers-storage', { state: { offers: [] } });
+      const offer = { ...payload, id: `offer-${Date.now()}`, product: productId };
+      db.state.offers = [...(db.state.offers || []), offer];
+      saveDB('product-provider-offers-storage', db);
+      return offer;
+    },
+
+    updateProviderOffer: async (offerId, payload) => {
+      await new Promise(resolve => setTimeout(resolve, DELAY));
+      const db = getDB('product-provider-offers-storage', { state: { offers: [] } });
+      const index = db.state.offers.findIndex((offer) => offer.id === offerId);
+      if (index < 0) throw new Error('Provider offer not found');
+      db.state.offers[index] = { ...db.state.offers[index], ...payload };
+      saveDB('product-provider-offers-storage', db);
+      return db.state.offers[index];
+    },
+
+    deleteProviderOffer: async (offerId) => {
+      await new Promise(resolve => setTimeout(resolve, DELAY));
+      const db = getDB('product-provider-offers-storage', { state: { offers: [] } });
+      db.state.offers = (db.state.offers || []).filter((offer) => offer.id !== offerId);
+      saveDB('product-provider-offers-storage', db);
+      return { deleted: true };
+    },
   },
 
   // --- Categories ---

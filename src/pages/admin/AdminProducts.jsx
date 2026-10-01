@@ -17,6 +17,7 @@ import { useToast } from '../../components/ui/Toast';
 import { useLanguage } from '../../context/LanguageContext';
 import { formatNumber } from '../../utils/intl';
 import { getProductStatus, validateProductForm } from '../../utils/productStatus';
+import ProductProviderOffersEditor from '../../components/admin/ProductProviderOffersEditor';
 
 const PROVIDER_PRODUCTS_LIMIT = 2000;
 const PROVIDER_PRODUCTS_PAGE_SIZE = 80;
@@ -422,6 +423,7 @@ const AdminProducts = () => {
         hideWhenOutOfStock: false,
         showOutOfStockLabel: true,
         dynamicFields: [],
+        providerRoutingMode: 'LEGACY',
     });
 
     const sortedAdminProducts = useMemo(() => (
@@ -934,6 +936,7 @@ const AdminProducts = () => {
                 hideWhenOutOfStock: false,
                 showOutOfStockLabel: true,
                 dynamicFields: extractDynamicFieldRows(product),
+                providerRoutingMode: product.providerRoutingMode || 'LEGACY',
             });
         } else {
             setEditingProduct(null);
@@ -987,6 +990,7 @@ const AdminProducts = () => {
                 hideWhenOutOfStock: false,
                 showOutOfStockLabel: true,
                 dynamicFields: [],
+                providerRoutingMode: 'LEGACY',
             });
         }
         setIsProductModalOpen(true);
@@ -1107,6 +1111,7 @@ const AdminProducts = () => {
             // معلومات أساسية
             name: fallbackName,
             nameAr: String(productForm.nameAr || productForm.name || '').trim(),
+            providerRoutingMode: productForm.providerRoutingMode || 'LEGACY',
             description: productForm.description,
             descriptionAr: '',
             category: fallbackCategory,
@@ -1174,9 +1179,42 @@ const AdminProducts = () => {
 
         try {
             if (editingProduct) {
+                if (
+                    payload.providerRoutingMode === 'MULTI_PROVIDER'
+                    && payload.autoFulfillmentEnabled
+                ) {
+                    const offers = await apiClient.products.getProviderOffers(editingProduct.id);
+                    const hasRoutableUsdOffer = (Array.isArray(offers) ? offers : []).some((offer) => (
+                        offer.enabled === true
+                        && offer.allowAutomaticRouting === true
+                        && String(offer.supplierCurrency || '').toUpperCase() === 'USD'
+                        && ['FIXED_OFFER', 'PER_UNIT'].includes(offer.priceSemantics)
+                        && Number(offer.maxPriceAgeMs) > 0
+                    ));
+                    if (!hasRoutableUsdOffer) {
+                        addToast(isEnglish
+                            ? 'Add and save at least one enabled USD automatic supplier offer before activating multi-supplier routing.'
+                            : 'أضف واحفظ عرض مورد تلقائي واحدًا على الأقل بالدولار قبل تفعيل تعدد الموردين.', 'error');
+                        return;
+                    }
+                }
                 await updateProduct(editingProduct.id, payload);
             } else {
-                await addProduct(payload);
+                const requestedRoutingMode = payload.providerRoutingMode;
+                // Offers require a persisted Product ID. A new multi-provider
+                // Product is deliberately created as LEGACY first, then offers
+                // are configured and only then can this form activate routing.
+                const created = await addProduct({ ...payload, providerRoutingMode: 'LEGACY' });
+                if (requestedRoutingMode === 'MULTI_PROVIDER') {
+                    setEditingProduct(created);
+                    setProductForm((previous) => ({ ...previous, providerRoutingMode: 'MULTI_PROVIDER' }));
+                    setProductFormStep('pricing');
+                    addToast(isEnglish
+                        ? 'Product created in Legacy mode. Add and save Supplier Offers below, then save again to activate multi-supplier routing.'
+                        : 'تم إنشاء المنتج بوضع المورد الواحد. أضف واحفظ عروض الموردين بالأسفل ثم احفظ مرة أخرى لتفعيل تعدد الموردين.', 'success');
+                    void loadProducts({ force: true, bypassCache: true });
+                    return;
+                }
             }
 
             setIsProductModalOpen(false);
@@ -2084,6 +2122,27 @@ const AdminProducts = () => {
                                 </div>
                             </div>
 
+                            <div className="space-y-2 rounded-xl border border-[color:rgb(var(--color-primary-rgb)/0.24)] bg-[color:rgb(var(--color-primary-rgb)/0.05)] p-3">
+                                <div>
+                                    <p className="text-sm font-semibold text-[var(--color-text)]">{isEnglish ? 'Supplier routing' : 'توجيه الموردين'}</p>
+                                    <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
+                                        {isEnglish
+                                            ? 'This changes supplier routing only. Customer selling price is unchanged.'
+                                            : 'هذا يغير توجيه المورد فقط ولا يغير سعر البيع للعميل.'}
+                                    </p>
+                                </div>
+                                <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+                                    {[
+                                        { value: 'LEGACY', title: isEnglish ? 'Legacy / Single Supplier' : 'تقليدي / مورد واحد', description: isEnglish ? 'Use one configured supplier.' : 'استخدم موردًا واحدًا مضبوطًا.' },
+                                        { value: 'MULTI_PROVIDER', title: isEnglish ? 'Automatic Multi-Supplier' : 'تلقائي / عدة موردين', description: isEnglish ? 'Compare eligible linked supplier offers at order time and use the lowest comparable supplier cost.' : 'يقارن عروض الموردين المؤهلة عند الطلب ويستخدم أقل تكلفة قابلة للمقارنة.' },
+                                    ].map((option) => {
+                                        const selected = productForm.providerRoutingMode === option.value;
+                                        return <button key={option.value} type="button" onClick={() => setProductForm((previous) => ({ ...previous, providerRoutingMode: option.value }))} className={`rounded-lg border p-3 text-left transition ${selected ? 'border-[color:rgb(var(--color-primary-rgb)/0.5)] bg-[color:rgb(var(--color-primary-rgb)/0.13)]' : 'border-[color:rgb(var(--color-border-rgb)/0.82)] bg-[color:rgb(var(--color-card-rgb)/0.7)]'}`}><p className="text-sm font-semibold text-[var(--color-text)]">{option.title}</p><p className="mt-1 text-xs text-[var(--color-text-secondary)]">{option.description}</p></button>;
+                                    })}
+                                </div>
+                                {productForm.providerRoutingMode === 'MULTI_PROVIDER' && !editingProduct ? <p className="text-xs text-[var(--color-warning)]">{isEnglish ? 'New products are saved as Legacy first. Configure offers after creation before multi-supplier routing is activated.' : 'المنتج الجديد يُحفظ أولاً بوضع المورد الواحد. اضبط العروض بعد الإنشاء قبل تفعيل تعدد الموردين.'}</p> : null}
+                            </div>
+
                             {productForm.connectionType === 'auto' ? (
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
@@ -2510,6 +2569,15 @@ const AdminProducts = () => {
                                         </Badge>
                                     ) : null}
                                 </div>
+                            ) : null}
+
+                            {productForm.providerRoutingMode === 'MULTI_PROVIDER' ? (
+                                <ProductProviderOffersEditor
+                                    productId={editingProduct?.id}
+                                    providers={activeProviders}
+                                    customerFields={(productForm.dynamicFields || []).map((field) => String(field?.name || field?.key || '').trim()).filter(Boolean)}
+                                    onChanged={() => void loadProducts({ force: true, bypassCache: true })}
+                                />
                             ) : null}
                         </div>
                     </div>

@@ -875,6 +875,7 @@ const normaliseProduct = (p) => {
     fallbackSupplierId: p.fallbackSupplierId || '',
     supplierFieldMappings,
     supplierNotes: p.supplierNotes || '',
+    providerRoutingMode: p.providerRoutingMode || 'LEGACY',
     // Category stays as-is (string in both BE and FE)
     category: p.category || '',
     // Resolve image URL so user-facing components get fully-qualified paths
@@ -1601,6 +1602,7 @@ const productToBE = (fe) => {
 
   // Direct pass-through fields
   if (fe.name !== undefined) body.name = fe.name;
+  if (fe.providerRoutingMode !== undefined) body.providerRoutingMode = fe.providerRoutingMode;
   if (fe.nameAr !== undefined) body.nameAr = fe.nameAr;
   if (fe.description !== undefined) body.description = fe.description;
   if (fe.descriptionAr !== undefined) body.descriptionAr = fe.descriptionAr;
@@ -2482,6 +2484,45 @@ const realApi = {
         devLogger.warnUnlessBenign('[realApi] getSyncedPrice failed:', err);
         return { basePriceCoins: 0, rawPrice: 0, minQty: null, maxQty: null, found: false };
       }
+    },
+
+    /** Admin-owned supplier routing configuration for one platform product. */
+    getProviderOffers: async (productId) => {
+      const res = await http.get(`/admin/products/${productId}/provider-offers`);
+      const data = unwrap(res);
+      const offers = Array.isArray(data) ? data : (data?.offers || data?.items || []);
+      return offers.map((offer) => {
+        const provider = offer.provider && typeof offer.provider === 'object' ? offer.provider : null;
+        const providerProduct = offer.providerProduct && typeof offer.providerProduct === 'object'
+          ? offer.providerProduct
+          : null;
+        return {
+          ...offer,
+          id: offer._id || offer.id,
+          providerId: provider?._id || provider?.id || offer.provider,
+          providerProductId: providerProduct?._id || providerProduct?.id || offer.providerProduct,
+          provider,
+          providerProduct,
+          providerMapping: offer.providerMapping || {},
+        };
+      });
+    },
+
+    createProviderOffer: async (productId, payload) => {
+      const res = await http.post(`/admin/products/${productId}/provider-offers`, payload);
+      const data = unwrap(res);
+      return data?.offer || data;
+    },
+
+    updateProviderOffer: async (offerId, payload) => {
+      const res = await http.patch(`/admin/product-provider-offers/${offerId}`, payload);
+      const data = unwrap(res);
+      return data?.offer || data;
+    },
+
+    deleteProviderOffer: async (offerId) => {
+      const res = await http.delete(`/admin/product-provider-offers/${offerId}`);
+      return unwrap(res);
     },
   },
 
