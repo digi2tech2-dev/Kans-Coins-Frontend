@@ -11,7 +11,7 @@ import useTopupStore from '../store/useTopupStore';
 import useAuthStore from '../store/useAuthStore';
 import { useToast } from '../components/ui/Toast';
 import { inputBaseClassName, textareaClassName } from '../components/ui/Input';
-import { findPaymentMethodById } from '../utils/paymentSettings';
+import { findPaymentMethodById, isAutomatedPaymentMethod } from '../utils/paymentSettings';
 import { devLogger } from '../utils/devLogger';
 import { resolveImageUrl } from '../utils/imageUrl';
 
@@ -200,17 +200,17 @@ const PaymentDetails = ({
     return token.includes('usdt') || token.includes('tether') || token.includes('يو اس دي تي') || method?.type === 'usdt' || method?.type === 'crypto';
   }, [method]);
 
-  const isAutomated = isVodafone || isUsdt;
+  const isAutomated = useMemo(() => isAutomatedPaymentMethod(method), [method]);
 
   const displayedMethodName = useMemo(() => {
-    if (isVodafone) {
+    if (isAutomated && isVodafone) {
       return dir === 'rtl' ? 'فودافون كاش دفع آلي' : 'Vodafone Cash Automated';
     }
-    if (isUsdt) {
+    if (isAutomated && isUsdt) {
       return dir === 'rtl' ? 'USDT دفع آلي' : 'USDT Automated';
     }
     return method?.name || '';
-  }, [isVodafone, isUsdt, dir, method?.name]);
+  }, [isAutomated, isVodafone, isUsdt, dir, method?.name]);
 
   const methodFields = method?.fields || ['amount'];
   const senderDetailRequirement = useMemo(
@@ -376,6 +376,7 @@ const PaymentDetails = ({
       const freshFeeAmount = Number(((baseAmount * freshFeePercent) / 100).toFixed(2));
       const freshPayableAmount = Number((baseAmount + freshFeeAmount).toFixed(2));
       const freshSenderRequirement = getSenderDetailRequirement(freshMethod);
+      const freshIsAutomated = isAutomatedPaymentMethod(freshMethod);
       const senderValue = freshSenderRequirement
         ? String(formData[freshSenderRequirement.field] || '').trim()
         : '';
@@ -389,6 +390,12 @@ const PaymentDetails = ({
       if (!transactionId) {
         addToast('يرجى إدخال رقم العملية', 'error');
         setFormError('يرجى إدخال رقم العملية');
+        return;
+      }
+      if (!freshIsAutomated && !uploadedFile) {
+        const receiptError = t('payments.validationReceipt');
+        addToast(receiptError, 'error');
+        setFormError(receiptError);
         return;
       }
 
@@ -416,7 +423,7 @@ const PaymentDetails = ({
         transactionNumber: transactionId,
         paymentReference: transactionId,
         proofImage: uploadedFile || null,
-        paymentChannel: (isAutomated ? displayedMethodName : freshMethod?.name) || methodId || '',
+        paymentChannel: (freshIsAutomated ? displayedMethodName : freshMethod?.name) || methodId || '',
         paymentMethodType: normalizeMethodType(freshMethod?.type),
         currencyCode: freshGroup?.currency || freshMethod?.currency || user?.currency || 'USD',
         userId: user?.id || '',
@@ -874,4 +881,3 @@ const PaymentDetails = ({
 };
 
 export default PaymentDetails;
-

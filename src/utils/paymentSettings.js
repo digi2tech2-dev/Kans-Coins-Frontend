@@ -91,6 +91,26 @@ export const createDefaultPaymentGroups = () => [
 export const normalizePaymentMethodToken = (value) =>
   String(value || '').trim().toLowerCase();
 
+/**
+ * Receiptless deposits are limited to the configured automated methods.
+ * Vodafone identity marks the SMS-driven automated flow; accountNumber is the
+ * customer-facing destination wallet/account, not a manual-method marker.
+ * USDT preserves its existing type/identity automation rule.
+ */
+export const isAutomatedPaymentMethod = (method = {}) => {
+  const methodType = normalizePaymentMethodToken(method?.type);
+  const vodafoneToken = `${method?.id || ''} ${method?.name || ''}`.toLowerCase();
+  const usdtToken = `${method?.id || ''} ${method?.name || ''} ${method?.type || ''}`.toLowerCase();
+  const isVodafone = vodafoneToken.includes('vodafone') || vodafoneToken.includes('فودافون');
+  const isUsdt = usdtToken.includes('usdt')
+    || usdtToken.includes('tether')
+    || usdtToken.includes('يو اس دي تي')
+    || methodType === 'usdt'
+    || methodType === 'crypto';
+
+  return isUsdt || isVodafone;
+};
+
 const PAYMENT_METHOD_ALIASES = {
   'vodafone cash': ['vodafone', 'فودافون كاش', 'فودافون كاش دفع آلي', 'فودافون كاش دفع الي'],
   vodafone: ['vodafone cash', 'فودافون كاش', 'فودافون كاش دفع آلي', 'فودافون كاش دفع الي'],
@@ -265,4 +285,3 @@ export const findPaymentMethodById = (settings, methodId, options = {}) => {
 
   return null;
 };
-

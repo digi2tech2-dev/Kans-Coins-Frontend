@@ -14,6 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { useToast } from '../../components/ui/Toast';
 import { formatDateTime, formatNumber } from '../../utils/intl';
 import { PERMISSIONS, hasPermission } from '../../utils/permissions';
+import { findPaymentMethodById, isAutomatedPaymentMethod } from '../../utils/paymentSettings';
 
 const normalizeStatus = (status) => String(status || '').trim().toLowerCase();
 
@@ -83,6 +84,12 @@ const getSenderDetails = (request) => {
   return { label, value: value || '-', transactionNumber };
 };
 
+const isReceiptlessAutomatedDeposit = (request, paymentSettings) => {
+  if (request?.proofImage) return false;
+  const entry = findPaymentMethodById(paymentSettings, request?.paymentMethodId, { fallbackToDefault: false });
+  return isAutomatedPaymentMethod(entry?.method);
+};
+
 const PAGE_SIZE = 20;
 
 const SummaryCard = ({ icon: Icon, label, value }) => (
@@ -103,7 +110,7 @@ const AdminPayments = () => {
   const { topups, topupsPagination, topupsSummary, loadTopups, loadTopupsFiltered, getTopupById, updateTopupStatus, updateTopupRequest } = useTopupStore();
   const { user: actor } = useAuthStore();
   const { users, loadUsers } = useAdminStore();
-  const { currencies, loadCurrencies } = useSystemStore();
+  const { currencies, loadCurrencies, paymentSettings, loadPaymentSettings } = useSystemStore();
   const { addToast } = useToast();
   const canConfirmPayments = hasPermission(actor, PERMISSIONS.ADMIN_PAYMENTS);
 
@@ -156,7 +163,8 @@ const AdminPayments = () => {
     fetchDeposits();
     loadUsers({ force: true });
     loadCurrencies();
-  }, [fetchDeposits, loadUsers, loadCurrencies]);
+    loadPaymentSettings();
+  }, [fetchDeposits, loadUsers, loadCurrencies, loadPaymentSettings]);
 
   // Reset to page 1 when filters change
   useEffect(() => {
@@ -384,6 +392,7 @@ const AdminPayments = () => {
             const requestedAmount = formatRequestAmount(request.requestedAmount ?? request.requestedCoins ?? request.amount ?? 0);
             const actualAmount = request.actualPaidAmount ? formatRequestAmount(request.actualPaidAmount) : '-';
             const senderDetails = getSenderDetails(request);
+            const automatedWithoutReceipt = isReceiptlessAutomatedDeposit(request, paymentSettings);
 
             return (
             <article
@@ -447,7 +456,7 @@ const AdminPayments = () => {
                     <Eye className="h-3.5 w-3.5" /> عرض الإيصال
                   </button>
                 ) : (
-                  <span className="text-xs text-[var(--color-text-secondary)]">لا يوجد إيصال</span>
+                  <span className="text-xs text-[var(--color-text-secondary)]">{automatedWithoutReceipt ? 'لا يوجد إيصال (إيداع آلي)' : 'لا يوجد إيصال'}</span>
                 )}
                 <div className="flex flex-wrap gap-1.5">
                 {isPendingLike(request.status) && canConfirmPayments ? (
@@ -495,6 +504,7 @@ const AdminPayments = () => {
                 const requestId = getRequestId(request);
                 const currencyCode = request.currencyCode || findUserCurrency(request.userId);
                 const senderDetails = getSenderDetails(request);
+                const automatedWithoutReceipt = isReceiptlessAutomatedDeposit(request, paymentSettings);
 
                 return (
                 <TableRow key={request.id}>
@@ -537,7 +547,7 @@ const AdminPayments = () => {
                         <Eye className="w-4 h-4" /> عرض
                       </button>
                     ) : (
-                      <span className="text-xs text-gray-400">لا يوجد</span>
+                      <span className="text-xs text-gray-400">{automatedWithoutReceipt ? 'إيداع آلي' : 'لا يوجد'}</span>
                     )}
                   </TableCell>
                   <TableCell className="text-center">
@@ -756,4 +766,3 @@ const AdminPayments = () => {
 };
 
 export default AdminPayments;
-
