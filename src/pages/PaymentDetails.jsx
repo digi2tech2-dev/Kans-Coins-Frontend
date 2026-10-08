@@ -226,7 +226,7 @@ const PaymentDetails = ({
     .replace(/\s*ورقم العملية\.?/g, '')
     .replace(/\s*ورقم المعاملة\.?/g, '')
     .trim();
-  const requiresReceipt = isAutomated ? false : Boolean(method?.accountNumber);
+  const requiresReceipt = !isAutomated && method?.requiresReceipt !== false;
   const feePercent = useMemo(() => {
     const value = Number(method?.feePercent);
     if (!Number.isFinite(value)) return 0;
@@ -339,7 +339,6 @@ const PaymentDetails = ({
     if (!String(formData.transactionId || '').trim()) {
       return 'يرجى إدخال رقم العملية';
     }
-    if (requiresReceipt && !uploadedFile) return t('payments.validationReceipt');
     return '';
   };
 
@@ -377,6 +376,7 @@ const PaymentDetails = ({
       const freshPayableAmount = Number((baseAmount + freshFeeAmount).toFixed(2));
       const freshSenderRequirement = getSenderDetailRequirement(freshMethod);
       const freshIsAutomated = isAutomatedPaymentMethod(freshMethod);
+      const freshRequiresReceipt = !freshIsAutomated && freshMethod?.requiresReceipt !== false;
       const senderValue = freshSenderRequirement
         ? String(formData[freshSenderRequirement.field] || '').trim()
         : '';
@@ -390,12 +390,6 @@ const PaymentDetails = ({
       if (!transactionId) {
         addToast('يرجى إدخال رقم العملية', 'error');
         setFormError('يرجى إدخال رقم العملية');
-        return;
-      }
-      if (!freshIsAutomated && !uploadedFile) {
-        const receiptError = t('payments.validationReceipt');
-        addToast(receiptError, 'error');
-        setFormError(receiptError);
         return;
       }
 
@@ -425,6 +419,7 @@ const PaymentDetails = ({
         proofImage: uploadedFile || null,
         paymentChannel: (freshIsAutomated ? displayedMethodName : freshMethod?.name) || methodId || '',
         paymentMethodType: normalizeMethodType(freshMethod?.type),
+        requiresReceipt: freshRequiresReceipt,
         currencyCode: freshGroup?.currency || freshMethod?.currency || user?.currency || 'USD',
         userId: user?.id || '',
         userName: user?.name || '',

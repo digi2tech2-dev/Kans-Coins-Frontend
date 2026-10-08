@@ -178,9 +178,6 @@ Vite only exposes variables prefixed with `VITE_` to browser code through `impor
 | `VITE_SITE_URL` | Optional | none | SEO canonical URL | `https://app.example.com` | Used before `VITE_PUBLIC_SITE_URL`. |
 | `VITE_PUBLIC_SITE_URL` | Optional | none | SEO canonical URL fallback | `https://app.example.com` | Public URL only. |
 | `VITE_ADMIN_WHATSAPP_NUMBER` | Optional | hardcoded source fallback exists | WhatsApp support links | `201000000000` | Use a safe public support number. The repository still contains hardcoded phone/link fallbacks. |
-| `VITE_GEMINI_MODEL` | Optional | model fallback chain | Browser receipt validation | `gemini-3.5-flash` | Public. Do not treat as secret. |
-| `VITE_GEMINI_API_KEY` | Optional unless receipt AI is required | none | Browser receipt validation | empty or test key | Public browser-exposed key. Production validation should move to the backend. |
-| `VITE_GEMINI_API_KEY_1` through `VITE_GEMINI_API_KEY_13` | Optional | none | Receipt-validation failover keys | empty | Also public. Do not put private production secrets here. |
 | `VITE_APP_ENV` | Optional/stale | none | Legacy define in Vite config | `development` | No current application feature reads it directly. |
 | `VITE_APP_MODE` | Optional/stale | none | Legacy/example value | `development` | No source-code usage found. |
 | `APP_URL` | Not available to browser code | none | External hosting systems only | `http://localhost:3000` | Not read by current frontend source. Use `VITE_PUBLIC_APP_URL` for browser code. |
@@ -645,21 +642,14 @@ Deposits:
 - Pending deposits can be updated through `/admin/deposits/:id` where supported.
 - Approval creates wallet-credit behavior on the backend; the frontend refreshes affected stores and profile data.
 
-## Receipt Validation And AI Integration
+## Receipt Upload
 
-Receipt validation is implemented in `src/components/wallet/UploadReceiptBox.jsx` and runs in the browser.
+Receipt uploads are handled locally in `src/components/wallet/UploadReceiptBox.jsx`.
 
-- Service: `@google/genai` / Google Gemini.
-- Environment variables: `VITE_GEMINI_MODEL`, `VITE_GEMINI_API_KEY`, and optional failover keys `VITE_GEMINI_API_KEY_1` through `VITE_GEMINI_API_KEY_13`.
 - Supported receipt MIME types: JPEG, PNG, WebP, HEIC, and HEIF.
 - Maximum receipt size: 20 MB.
-- The browser converts the uploaded image to base64 and sends it to Gemini with validation instructions.
-- The prompt includes expected amount/receiver context so the model can compare receipt content.
-- The UI then applies deterministic checks for confidence, amount match, receiver match, and transaction-id match where data exists.
-- Validation fails closed on missing keys, unsupported files, model/key errors, timeouts, malformed responses, or low confidence.
-- Retry/failover attempts multiple configured keys/models with backoff.
-
-Security warning: every `VITE_GEMINI_*` value is public in the browser bundle, and receipt images are sent from the browser to Google. Production deployments should move receipt validation to a backend service where API keys, logging, rate limits, audit policy, and privacy controls are server-side.
+- The browser checks the file type and size, then passes the selected file to the deposit flow.
+- No image is sent to an AI service from the frontend.
 
 ## Localization
 

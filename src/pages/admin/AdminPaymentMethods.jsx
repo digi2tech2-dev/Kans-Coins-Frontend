@@ -36,6 +36,7 @@ const defaultMethodForm = {
   accountName: '',
   bankName: '',
   instructions: '',
+  requiresReceipt: true,
   image: '',
   imageName: '',
   isActive: true,
@@ -304,6 +305,7 @@ const AdminPaymentMethods = () => {
       accountName: method.accountName || '',
       bankName: method.bankName || '',
       instructions: method.instructions || '',
+      requiresReceipt: method.requiresReceipt !== false,
       image: method.image || '',
       imageName: method.imageName || '',
       isActive: method.isActive !== false,
@@ -394,6 +396,7 @@ const AdminPaymentMethods = () => {
       accountName: methodForm.accountName,
       bankName: methodForm.bankName,
       instructions: methodForm.instructions,
+      requiresReceipt: methodForm.requiresReceipt,
       image: methodForm.image,
       imageName: methodForm.imageName,
       isActive: methodForm.isActive,
@@ -917,6 +920,15 @@ const AdminPaymentMethods = () => {
               placeholder={tx('ما الذي يجب أن يفعله العميل قبل رفع الإيصال؟', 'What should the customer do before uploading the receipt?')}
             />
           </div>
+
+          <label className={`flex items-center gap-3 text-sm text-[var(--color-text)] ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <input
+              type="checkbox"
+              checked={methodForm.requiresReceipt}
+              onChange={(event) => setMethodForm((prev) => ({ ...prev, requiresReceipt: event.target.checked }))}
+            />
+            <span>{tx('طلب صورة إيصال من العميل', 'Require a receipt image from the customer')}</span>
+          </label>
 
           <div className="space-y-3 rounded-2xl border border-[color:rgb(var(--color-border-rgb)/0.85)] bg-[color:rgb(var(--color-surface-rgb)/0.75)] p-4">
             <div className={`flex items-start justify-between gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>

@@ -181,6 +181,7 @@ const useTopupStore = create((set, get) => ({
           paymentMethodId: isPayloadObject ? (amountOrPayload.paymentMethodId || '') : '',
           currency: isPayloadObject ? (amountOrPayload.currencyCode || amountOrPayload.currency || 'USD') : 'USD',
           paymentMethodType: isPayloadObject ? (amountOrPayload.paymentMethodType || '') : '',
+          requiresReceipt: isPayloadObject ? amountOrPayload.requiresReceipt !== false : true,
           receipt: isPayloadObject ? (amountOrPayload.receipt || amountOrPayload.proofImage || null) : null,
           notes: isPayloadObject ? (amountOrPayload.notes || '') : '',
         };

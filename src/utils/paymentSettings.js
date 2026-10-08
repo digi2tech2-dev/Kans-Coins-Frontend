@@ -164,6 +164,7 @@ export const normalizePaymentMethod = (method = {}, index = 0) => {
     accountNumber: String(method?.accountNumber || '').trim(),
     accountName: String(method?.accountName || '').trim(),
     bankName: String(method?.bankName || '').trim(),
+    requiresReceipt: method?.requiresReceipt !== false,
     feePercent: normalizeFeePercent(method?.feePercent),
     instructions: String(method?.instructions || '').trim(),
     image: String(method?.image || method?.imageUrl || method?.logo || '').trim(),

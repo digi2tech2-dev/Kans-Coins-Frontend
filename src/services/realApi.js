@@ -3750,7 +3750,8 @@ const realApi = {
      *   - requestedAmount      (required, number)
      *   - currency             (required, string — ISO 4217)
      *   - paymentMethodId      (required, string)
-     *   - receipt              (file, required — multer field name)
+    *   - receipt              (file, required only when requiresReceipt is true — multer field name)
+    *   - requiresReceipt      (optional boolean — whether the selected method requires a file)
      *   - notes                (optional, string)
      *
      * FE sends: { requestedAmount, currency, paymentMethodId, receipt (File), notes }
@@ -3772,6 +3773,8 @@ const realApi = {
         'paymentMethodId',
         String(topupData.paymentMethodId || ''),
       );
+      formData.append('paymentMethodType', String(topupData.paymentMethodType || ''));
+      formData.append('requiresReceipt', String(topupData.requiresReceipt !== false));
 
       const notes = String(topupData.notes || '').trim();
       if (notes) formData.append('notes', notes);
