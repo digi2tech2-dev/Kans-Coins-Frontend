@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useDeferredValue, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   ChevronLeft,
@@ -38,8 +38,11 @@ import {
   normalizeAccountStatus,
 } from '../../utils/accountStatus';
 import { resolveUserAvatar } from '../../utils/avatar';
+import apiClient from '../../services/client';
+import { normalizeBillingMode, normalizeQuota } from '../../utils/billing';
 
 const FILTER_OPTIONS = ['all', 'approved', 'rejected', 'deleted'];
+const USERS_PER_PAGE = 20;
 
 const compactButtonClassName = 'h-7 rounded-[var(--radius-sm)] px-2 text-[10px]';
 const compactFieldClassName =
@@ -122,6 +125,7 @@ const AdminUsers = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const statusFromQuery = searchParams.get('status');
+  const userIdFromQuery = String(searchParams.get('userId') || '').trim();
   const initialFilter = FILTER_OPTIONS.includes(statusFromQuery) ? statusFromQuery : 'all';
 
   const {
@@ -154,6 +158,7 @@ const AdminUsers = () => {
 
   const [filter, setFilter] = useState(initialFilter);
   const [search, setSearch] = useState('');
+  const deferredSearch = useDeferredValue(search);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [approveTarget, setApproveTarget] = useState(null);
@@ -167,25 +172,40 @@ const AdminUsers = () => {
   const [settingsGroup, setSettingsGroup] = useState('');
   const [settingsCurrency, setSettingsCurrency] = useState('USD');
   const [settingsCreditLimit, setSettingsCreditLimit] = useState('0');
+  const [settingsQuantityLimit, setSettingsQuantityLimit] = useState('0');
   const [temporaryPassword, setTemporaryPassword] = useState('');
   const [manualPassword, setManualPassword] = useState('');
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDetailsLoading, setIsDetailsLoading] = useState(false);
   const [copiedUserId, setCopiedUserId] = useState('');
+  const [localPage, setLocalPage] = useState(1);
 
   const isArabic = String(i18n.resolvedLanguage || i18n.language || 'ar').toLowerCase().startsWith('ar');
   const locale = getNumericLocale(isArabic ? 'ar-EG' : 'en-US');
   const canConfirmAccounts = hasPermission(actor, PERMISSIONS.CONFIRM_ACCOUNTS);
   const canManageUsers = hasPermission(actor, PERMISSIONS.MANAGE_USERS);
   const canManageWallet = hasPermission(actor, PERMISSIONS.MANAGE_WALLET);
+  const canViewWallet = hasPermission(actor, PERMISSIONS.ADMIN_WALLET);
 
   useEffect(() => {
-    loadUsers({ force: true });
     loadGroups({ force: true });
     loadCurrencies({ force: true });
     Promise.resolve(loadWallets({ force: true })).catch(() => null);
-  }, [loadCurrencies, loadGroups, loadUsers, loadWallets]);
+  }, [loadCurrencies, loadGroups, loadWallets]);
+
+  // Search and status are applied by the API, so results and counts span every
+  // user page instead of only the users that happened to be loaded first.
+  useEffect(() => {
+    const status = filter === 'all' || filter === 'deleted' ? '' : filter;
+    loadUsers({
+      force: true,
+      page: 1,
+      search: filter === 'deleted' ? '' : deferredSearch,
+      status,
+      role: 'customer',
+    });
+  }, [deferredSearch, filter, loadUsers]);
 
   useEffect(() => {
     if (!FILTER_OPTIONS.includes(statusFromQuery)) return;
@@ -283,12 +303,27 @@ const AdminUsers = () => {
       });
   }, [customerUsers, deletedCustomerUsers, filter, isArabic, search, walletByUserId]);
 
+  const serverPageCount = Number(usersPagination?.pages || 0);
+  const usesServerPagination = filter !== 'deleted' && serverPageCount > 1;
+  const localPageCount = Math.max(1, Math.ceil(filteredUsers.length / USERS_PER_PAGE));
+  const safeLocalPage = Math.min(localPage, localPageCount);
+  const visibleUsers = useMemo(() => {
+    if (usesServerPagination) return filteredUsers;
+    const start = (safeLocalPage - 1) * USERS_PER_PAGE;
+    return filteredUsers.slice(start, start + USERS_PER_PAGE);
+  }, [filteredUsers, safeLocalPage, usesServerPagination]);
+
+  useEffect(() => {
+    setLocalPage(1);
+  }, [filter, search]);
+
   const openDetails = async (entry) => {
     setSelectedUser(entry);
     setSettingsTopupAmount('');
     setSettingsGroup(resolveInitialGroupValue(entry, groups));
     setSettingsCurrency(entry?.currency || currencies[0]?.code || 'USD');
     setSettingsCreditLimit(String(toFiniteNumber(entry?.creditLimit, 0)));
+    setSettingsQuantityLimit(String(toFiniteNumber(entry?.quantityLimit ?? entry?.quota?.limit, 0)));
     setTemporaryPassword('');
     setManualPassword('');
     setIsDetailsOpen(true);
@@ -310,11 +345,35 @@ const AdminUsers = () => {
         setSettingsGroup(resolveInitialGroupValue(userResult.value, groups));
         setSettingsCurrency(userResult.value?.currency || currencies[0]?.code || 'USD');
         setSettingsCreditLimit(String(toFiniteNumber(userResult.value?.creditLimit, 0)));
+        setSettingsQuantityLimit(String(toFiniteNumber(userResult.value?.quantityLimit ?? userResult.value?.quota?.limit, 0)));
       }
     } finally {
       setIsDetailsLoading(false);
     }
   };
+
+  // Enables direct links from order management to the customer's full account details.
+  useEffect(() => {
+    if (!userIdFromQuery) return undefined;
+    let active = true;
+
+    const openRequestedUser = async () => {
+      const existing = (users || []).find((entry) => String(entry?.id || entry?._id || entry?.userId || '').trim() === userIdFromQuery);
+      const entry = existing || await getUserById(userIdFromQuery, { force: true }).catch(() => null);
+      if (active && entry) await openDetails(entry);
+
+      if (active) {
+        const nextParams = new URLSearchParams(searchParams);
+        nextParams.delete('userId');
+        setSearchParams(nextParams, { replace: true });
+      }
+    };
+
+    void openRequestedUser();
+    return () => { active = false; };
+  // The query should be handled once per navigation; user data may refresh while the drawer is open.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userIdFromQuery]);
 
   const formatDate = (value) => {
     if (!value) return isArabic ? 'غير متوفر' : 'Unavailable';
@@ -512,6 +571,49 @@ const AdminUsers = () => {
       await loadUsers({ force: true });
     } catch (error) {
       addToast(error?.message || 'تعذر تحديث حد الدين.', 'error');
+    }
+  };
+
+  const handleQuantityLimitSave = async () => {
+    if (!selectedUser || !canManageUsers) return;
+    const quantityLimit = Number(settingsQuantityLimit);
+    const used = toFiniteNumber(selectedUser?.quantityUsed ?? selectedUser?.quota?.used, 0);
+    if (!Number.isFinite(quantityLimit) || quantityLimit < 0) {
+      addToast(isArabic ? 'حد الكمية يجب أن يكون صفرًا أو أكبر.' : 'Quantity limit must be zero or greater.', 'error');
+      return;
+    }
+    if (quantityLimit < used) {
+      addToast(isArabic ? 'لا يمكن أن يكون حد الكمية أقل من الكمية المستخدمة.' : 'Quantity limit cannot be below used quantity.', 'error');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const quota = normalizeQuota(await apiClient.users.setQuota(selectedUser.id, quantityLimit));
+      setSelectedUser((current) => ({ ...current, quantityLimit: quota.limit, quantityUsed: quota.used, quota }));
+      setSettingsQuantityLimit(String(quota.limit));
+      addToast(isArabic ? 'تم تحديث حد الكمية.' : 'Quantity limit updated.', 'success');
+      await loadUsers({ force: true });
+    } catch (error) {
+      addToast(error?.response?.data?.message || error?.message || (isArabic ? 'تعذر تحديث حد الكمية.' : 'Unable to update quantity limit.'), 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleQuantityReset = async () => {
+    if (!selectedUser || !canManageUsers) return;
+    setIsSubmitting(true);
+    try {
+      const quota = normalizeQuota(await apiClient.users.resetQuota(selectedUser.id));
+      setSelectedUser((current) => ({ ...current, quantityLimit: quota.limit, quantityUsed: quota.used, quota }));
+      setSettingsQuantityLimit(String(quota.limit));
+      addToast(isArabic ? 'تم تصفير الكمية المستخدمة.' : 'Used quantity reset.', 'success');
+      await loadUsers({ force: true });
+    } catch (error) {
+      addToast(error?.response?.data?.message || error?.message || (isArabic ? 'تعذر تصفير الكمية المستخدمة.' : 'Unable to reset used quantity.'), 'error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -715,6 +817,11 @@ const AdminUsers = () => {
     () => buildWalletPreview(selectedUser, walletByUserId.get(String(selectedUser?.id || '').trim()) || null),
     [selectedUser, walletByUserId]
   );
+  const selectedBillingGroup = useMemo(() => (
+    (groups || []).find((group) => String(group?.id || group?._id || '') === String(settingsGroup || selectedUser?.groupId || ''))
+  ), [groups, selectedUser?.groupId, settingsGroup]);
+  const isQuantityOnlyUser = normalizeBillingMode(selectedBillingGroup?.billingMode || selectedUser?.billingMode) === 'quantity_only';
+  const selectedQuota = normalizeQuota(selectedUser);
   const canResendVerification = canManageUsers
     && Boolean(selectedUser?.email)
     && (!selectedUser?.verified || isPendingAccountStatus(selectedUser?.status));
@@ -766,7 +873,7 @@ const AdminUsers = () => {
       </section>
 
       <div className="space-y-2 md:hidden">
-        {filteredUsers.map((entry) => {
+        {visibleUsers.map((entry) => {
           const walletPreview = resolveWalletForEntry(entry);
           const balanceValue = getWalletBalanceValue(entry, walletPreview);
 
@@ -774,7 +881,7 @@ const AdminUsers = () => {
           <Card key={entry.id} variant="elevated" className="overflow-hidden border-[color:rgb(var(--color-primary-rgb)/0.16)] bg-[linear-gradient(145deg,rgb(var(--color-card-rgb)/0.94),rgb(var(--color-surface-rgb)/0.66))] p-2.5 shadow-[0_18px_42px_-36px_rgb(var(--color-primary-rgb)/0.28)]">
             <div className="flex items-start gap-2.5">
               <img
-                src={resolveUserAvatar(entry, entry.name || entry.email || 'Kanz Coins User')}
+                src={resolveUserAvatar(entry, entry.name || entry.email || 'EMBRATOR User')}
                 alt={entry.name}
                 className="h-9 w-9 rounded-xl border border-[color:rgb(var(--color-primary-rgb)/0.22)] object-cover shadow-[0_14px_28px_-24px_rgb(0_0_0/0.82)]"
               />
@@ -853,7 +960,7 @@ const AdminUsers = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredUsers.map((entry) => {
+            {visibleUsers.map((entry) => {
               const walletPreview = resolveWalletForEntry(entry);
               const balanceValue = getWalletBalanceValue(entry, walletPreview);
 
@@ -862,7 +969,7 @@ const AdminUsers = () => {
                 <TableCell className={`${compactTableCellClassName} rounded-s-xl py-2`}>
                   <div className="flex items-center gap-2.5">
                     <img
-                      src={resolveUserAvatar(entry, entry.name || entry.email || 'Kanz Coins User')}
+                src={resolveUserAvatar(entry, entry.name || entry.email || 'EMBRATOR User')}
                       alt={entry.name}
                       className="h-9 w-9 rounded-xl border border-[color:rgb(var(--color-primary-rgb)/0.22)] object-cover shadow-[0_14px_28px_-24px_rgb(0_0_0/0.84)]"
                     />
@@ -920,18 +1027,17 @@ const AdminUsers = () => {
       </div>
 
       {/* ── Pagination Controls (bottom of users list/table) ───────────────── */}
-      {usersPagination && usersPagination.pages > 1 && (
-        <div className="admin-premium-panel mt-2.5 flex flex-col gap-2 rounded-[var(--radius-md)] border border-[color:rgb(var(--color-border-rgb)/0.78)] bg-[color:rgb(var(--color-card-rgb)/0.84)] px-3 py-2 md:flex-row md:items-center md:justify-between">
+      <div className="admin-premium-panel mt-2.5 flex flex-col gap-2 rounded-[var(--radius-md)] border border-[color:rgb(var(--color-border-rgb)/0.78)] bg-[color:rgb(var(--color-card-rgb)/0.84)] px-3 py-2 md:flex-row md:items-center md:justify-between">
           <p className="text-[11px] text-[var(--color-text-secondary)]">
-            صفحة {usersPagination.page} من {usersPagination.pages} — إجمالي {usersPagination.total} مستخدم
+            صفحة {usesServerPagination ? usersPagination.page : safeLocalPage} من {usesServerPagination ? serverPageCount : localPageCount} — إجمالي {usesServerPagination ? usersPagination.total : filteredUsers.length} مستخدم
           </p>
           <div className="flex items-center gap-1.5">
             <Button
               size="sm"
               variant="outline"
               className={compactButtonClassName}
-              disabled={usersPagination.page <= 1}
-              onClick={() => loadUsersPage(usersPagination.page - 1)}
+              disabled={usesServerPagination ? usersPagination.page <= 1 : safeLocalPage <= 1}
+              onClick={() => (usesServerPagination ? loadUsersPage(usersPagination.page - 1) : setLocalPage((page) => Math.max(1, page - 1)))}
             >
               <ChevronRight className="h-3.5 w-3.5" />
               السابق
@@ -940,15 +1046,14 @@ const AdminUsers = () => {
               size="sm"
               variant="outline"
               className={compactButtonClassName}
-              disabled={usersPagination.page >= usersPagination.pages}
-              onClick={() => loadUsersPage(usersPagination.page + 1)}
+              disabled={usesServerPagination ? usersPagination.page >= serverPageCount : safeLocalPage >= localPageCount}
+              onClick={() => (usesServerPagination ? loadUsersPage(usersPagination.page + 1) : setLocalPage((page) => Math.min(localPageCount, page + 1)))}
             >
               التالي
               <ChevronLeft className="h-3.5 w-3.5" />
             </Button>
           </div>
-        </div>
-      )}
+      </div>
 
       <Modal
         isOpen={isDetailsOpen}
@@ -961,7 +1066,7 @@ const AdminUsers = () => {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex items-center gap-2.5">
                 <img
-                  src={resolveUserAvatar(selectedUser, selectedUser?.name || selectedUser?.email || 'Kanz Coins User')}
+                  src={resolveUserAvatar(selectedUser, selectedUser?.name || selectedUser?.email || 'EMBRATOR User')}
                   alt={selectedUser?.name}
                   className="h-12 w-12 rounded-full border border-[color:rgb(var(--color-border-rgb)/0.84)] object-cover"
                 />
@@ -1048,6 +1153,17 @@ const AdminUsers = () => {
             ) : null}
 
             <div className="mt-3 flex flex-wrap justify-end gap-1.5">
+              {canViewWallet && filter !== 'deleted' && selectedUser?.id ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  className={`${compactButtonClassName} border-[color:rgb(var(--color-primary-rgb)/0.28)] text-[var(--color-primary)]`}
+                  onClick={() => navigate(`/admin/wallet?userId=${encodeURIComponent(selectedUser.id)}`)}
+                >
+                  <Eye className="h-3.5 w-3.5" />
+                  المحفظة والسجل
+                </Button>
+              ) : null}
               {canResendVerification ? (
                 <Button variant="ghost" className={compactButtonClassName} onClick={handleResendVerification} disabled={isSubmitting}>
                   <MailCheck className="h-3.5 w-3.5" />
@@ -1143,6 +1259,39 @@ const AdminUsers = () => {
                   />
                 </button>
               </div>
+
+            {isQuantityOnlyUser && (
+              <div className="space-y-3 rounded-[var(--radius-lg)] border border-[color:rgb(var(--color-primary-rgb)/0.28)] bg-[color:rgb(var(--color-primary-rgb)/0.05)] p-3.5">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-xs font-semibold text-[var(--color-text)]">{isArabic ? 'إدارة كمية المستخدم' : 'User quota management'}</p>
+                  <Badge variant="secondary">{isArabic ? 'كمية فقط' : 'Quantity only'}</Badge>
+                </div>
+                <div className="grid grid-cols-3 gap-2 text-center text-[11px]">
+                  <div className={detailsMetricClassName}><span className="text-[var(--color-text-secondary)]">{isArabic ? 'الحد' : 'Limit'}</span><p className="font-semibold">{formatNumber(selectedQuota.limit, locale)}</p></div>
+                  <div className={detailsMetricClassName}><span className="text-[var(--color-text-secondary)]">{isArabic ? 'المستخدم' : 'Used'}</span><p className="font-semibold">{formatNumber(selectedQuota.used, locale)}</p></div>
+                  <div className={detailsMetricClassName}><span className="text-[var(--color-text-secondary)]">{isArabic ? 'المتبقي' : 'Remaining'}</span><p className="font-semibold">{formatNumber(selectedQuota.remaining, locale)}</p></div>
+                </div>
+                <Input
+                  label={isArabic ? 'حد الكمية' : 'Quantity limit'}
+                  type="number"
+                  min="0"
+                  step="1"
+                  value={settingsQuantityLimit}
+                  onChange={(event) => setSettingsQuantityLimit(event.target.value)}
+                  className="h-10 px-3 text-xs"
+                  disabled={!canManageUsers || isSubmitting}
+                />
+                <div className="flex gap-2">
+                  <Button className={`flex-1 ${compactButtonClassName}`} onClick={handleQuantityLimitSave} disabled={!canManageUsers || isSubmitting}>
+                    {isArabic ? 'حفظ حد الكمية' : 'Save quantity limit'}
+                  </Button>
+                  <Button variant="outline" className={`flex-1 ${compactButtonClassName}`} onClick={handleQuantityReset} disabled={!canManageUsers || isSubmitting || selectedQuota.used <= 0}>
+                    <RotateCcw className="h-3.5 w-3.5" />
+                    {isArabic ? 'تصفير المستخدم' : 'Reset used'}
+                  </Button>
+                </div>
+              </div>
+            )}
 
             <div className="space-y-2.5 rounded-[var(--radius-lg)] border border-[color:rgb(var(--color-border-rgb)/0.84)] p-3.5">
               <p className="text-xs font-semibold text-[var(--color-text)]">المجموعة والعملة</p>

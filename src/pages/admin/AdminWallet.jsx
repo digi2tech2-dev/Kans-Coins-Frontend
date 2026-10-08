@@ -2,14 +2,27 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ArrowDownLeft,
   ArrowUpRight,
+  CalendarDays,
+  CheckCircle2,
   Coins,
+  CreditCard,
+  CircleAlert,
+  Copy,
+  Eye,
+  Hash,
   History,
+  MinusCircle,
   PlusCircle,
+  Search,
+  ShoppingCart,
   TrendingUp,
   Users,
   Wallet,
+  X,
+  XCircle,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 import DashboardDateRangeFilter from '../../components/admin-dashboard/DashboardDateRangeFilter';
 import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
@@ -32,10 +45,17 @@ import {
 const COMPLETED_STATUSES = ['completed', 'approved', 'success'];
 const REJECTED_STATUSES = ['rejected', 'denied', 'cancelled', 'canceled', 'failed'];
 const DASHBOARD_DEFAULT_RANGE_DAYS = 30;
+const OPERATIONS_PER_PAGE = 30;
 
 const asNumber = (value) => {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : 0;
+};
+
+const referenceText = (value) => {
+  if (value === null || value === undefined) return '';
+  if (typeof value !== 'object') return String(value);
+  return String(value.orderNumber || value.transactionNumber || value.transactionId || value.reference || value._id || value.id || '');
 };
 
 const normalizeStatus = (status) => String(status || '').trim().toLowerCase();
@@ -317,7 +337,7 @@ const OperationSnapshotCard = ({
   </Card>
 );
 
-const OperationRow = ({ operation, formatMoney, formatWhen, isArabic }) => (
+const OperationRow = ({ operation, formatMoney, formatWhen, isArabic, expanded, onToggle }) => (
   <div className="rounded-[1rem] border border-[color:rgb(var(--color-border-rgb)/0.82)] bg-[color:rgb(var(--color-card-rgb)/0.72)] px-3 py-3">
     <div className="flex items-start gap-2.5">
       <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-[0.85rem] border ${operation.amount >= 0 ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-600' : 'border-rose-500/20 bg-rose-500/10 text-rose-600'}`}>
@@ -349,15 +369,88 @@ const OperationRow = ({ operation, formatMoney, formatWhen, isArabic }) => (
         {operation.title}
       </p>
     </div>
+    <button
+      type="button"
+      onClick={onToggle}
+      className="mt-2.5 flex h-9 w-full items-center justify-center gap-1.5 rounded-[0.8rem] border border-[color:rgb(var(--color-primary-rgb)/0.24)] text-[11px] font-semibold text-[var(--color-text)] transition hover:bg-[color:rgb(var(--color-primary-rgb)/0.08)]"
+    >
+      <Eye className="h-3.5 w-3.5" />
+      {expanded ? (isArabic ? 'إخفاء التفاصيل' : 'Hide details') : (isArabic ? 'عرض التفاصيل' : 'View details')}
+    </button>
+    {expanded ? (
+      <div className="mt-2 grid gap-1 rounded-[0.8rem] bg-[color:rgb(var(--color-surface-rgb)/0.72)] p-2.5 text-[10px] text-[var(--color-text-secondary)]">
+        <p>{isArabic ? 'نوع الحركة' : 'Type'}: {operation.sourceType || operation.source || '-'}</p>
+        <p className="break-all">{isArabic ? 'المرجع' : 'Reference'}: {operation.sourceId || '-'}</p>
+        <p>{isArabic ? 'التاريخ' : 'Date'}: {formatWhen(operation.date)}</p>
+      </div>
+    ) : null}
   </div>
 );
 
+const UserLedgerCard = ({ operation, formatMoney, formatWhen, isArabic }) => {
+  const raw = operation.raw || {};
+  const asDisplayText = (value, fallback = '') => {
+    if (value === null || value === undefined) return fallback;
+    if (typeof value !== 'object') return String(value);
+    return String(value.orderNumber || value.transactionNumber || value.transactionId || value.reference || value._id || value.id || fallback);
+  };
+  const isDebit = operation.amount < 0;
+  const isAdmin = Boolean(raw.isAdminAdjustment || raw.adminId || raw.createdByAdmin || String(operation.sourceType || '').includes('admin'));
+  const status = normalizeStatus(raw.status || 'completed');
+  const isComplete = ['completed', 'complete', 'success', 'approved'].includes(status);
+  const isRejected = REJECTED_STATUSES.includes(status);
+  const StatusIcon = isComplete ? CheckCircle2 : (isRejected ? XCircle : CircleAlert);
+  const statusLabel = isComplete ? (isArabic ? 'مكتملة' : 'Completed') : (isRejected ? (isArabic ? 'غير مكتملة' : 'Not completed') : (isArabic ? 'قيد المعالجة' : 'Processing'));
+  const productOrDescription = asDisplayText(operation.description).replace(/^payment\s+for\s*:\s*/i, '').trim();
+  const title = isAdmin && isDebit
+    ? (isArabic ? 'خصم بواسطة الأدمن' : 'Admin balance deduction')
+    : isDebit
+      ? (productOrDescription || (isArabic ? 'شراء من الرصيد' : 'Wallet purchase'))
+      : (isAdmin ? (isArabic ? 'إضافة بواسطة الأدمن' : 'Admin balance credit') : (isArabic ? 'إضافة رصيد' : 'Balance credit'));
+  const method = asDisplayText(raw.paymentMethodName || raw.paymentChannel || raw.methodName || raw.method, operation.sourceType === 'order' ? (isArabic ? 'محفظة الموقع' : 'Site wallet') : (isArabic ? 'محفظة الموقع' : 'Site wallet'));
+  const reference = asDisplayText(raw.transactionId || raw.transactionNumber || raw.paymentReference || operation.sourceId || raw.reference, '-');
+  const balanceText = (value) => value === null || value === undefined ? (isArabic ? 'غير متاح' : 'Unavailable') : formatMoney(value, operation.currencyCode);
+
+  return (
+    <article className={`relative overflow-hidden rounded-[1rem] border p-2.5 sm:p-3 ${isDebit ? 'border-rose-400/25 bg-rose-500/[.035]' : 'border-emerald-400/25 bg-emerald-500/[.035]'}`}>
+      <span className={`absolute inset-x-0 top-0 h-0.5 ${isDebit ? 'bg-rose-400' : 'bg-emerald-400'}`} />
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex min-w-0 gap-2">
+          <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${isDebit ? 'bg-rose-500/12 text-rose-600 dark:text-rose-300' : 'bg-emerald-500/12 text-emerald-600 dark:text-emerald-300'}`}>
+            {isDebit ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownLeft className="h-4 w-4" />}
+          </span>
+          <div className="min-w-0"><h3 className="truncate text-xs font-black text-[var(--color-text)]">{title}</h3><p className="mt-0.5 truncate text-[9px] text-[var(--color-text-secondary)]">{isDebit && !isAdmin ? (isArabic ? 'تم الشراء من رصيد المحفظة' : 'Purchased from wallet') : asDisplayText(operation.description, '-')}</p></div>
+        </div>
+        <span className={`inline-flex shrink-0 items-center gap-1 rounded-full border px-1.5 py-0.5 text-[8px] font-black ${isComplete ? 'border-emerald-400/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300' : isRejected ? 'border-rose-400/30 bg-rose-500/10 text-rose-600 dark:text-rose-300' : 'border-amber-400/30 bg-amber-500/10 text-amber-600 dark:text-amber-300'}`}><StatusIcon className="h-2.5 w-2.5" />{statusLabel}</span>
+      </div>
+      {isAdmin ? <p className="mt-2 flex items-center gap-1 rounded-lg border border-violet-400/25 bg-violet-500/10 px-2 py-1.5 text-[9px] font-black text-violet-700 dark:text-violet-200">{isDebit ? (isArabic ? 'تم خصم الرصيد بواسطة الأدمن' : 'Balance deducted by admin') : (isArabic ? 'تمت إضافة الرصيد بواسطة الأدمن' : 'Balance credited by admin')}</p> : null}
+      <div className="mt-2 flex items-end justify-between rounded-xl border border-[color:rgb(var(--color-border-rgb)/.55)] bg-[color:rgb(var(--color-surface-rgb)/.48)] px-2.5 py-2"><div><p className="text-[8px] font-bold text-[var(--color-text-secondary)]">{isArabic ? (isDebit ? 'المبلغ المخصوم' : 'المبلغ المضاف') : 'Amount'}</p><p className={`mt-0.5 text-base font-black [direction:ltr] ${isDebit ? 'text-rose-600 dark:text-rose-300' : 'text-emerald-600 dark:text-emerald-300'}`}>{isDebit ? '−' : '+'}{formatMoney(Math.abs(operation.amount), operation.currencyCode)}</p></div><p className="text-end text-[9px] font-bold text-[var(--color-text-secondary)]"><CreditCard className="mb-0.5 ms-auto h-3 w-3 text-[var(--color-primary)]" />{method}</p></div>
+      <div className="mt-2 grid grid-cols-3 gap-1 text-center"><div className="rounded-lg bg-[color:rgb(var(--color-surface-rgb)/.55)] px-1 py-1.5"><p className="text-[7px] font-bold text-[var(--color-text-secondary)]">{isArabic ? 'قبل العملية' : 'Before'}</p><p className="mt-0.5 truncate text-[9px] font-black [direction:ltr]">{balanceText(operation.balanceBefore)}</p></div><div className="rounded-lg bg-[color:rgb(var(--color-surface-rgb)/.55)] px-1 py-1.5"><p className="text-[7px] font-bold text-[var(--color-text-secondary)]">{isArabic ? 'التغيير' : 'Change'}</p><p className={`mt-0.5 text-[9px] font-black [direction:ltr] ${isDebit ? 'text-rose-600' : 'text-emerald-600'}`}>{isDebit ? '−' : '+'}{formatMoney(Math.abs(operation.amount), operation.currencyCode)}</p></div><div className="rounded-lg bg-[color:rgb(var(--color-surface-rgb)/.55)] px-1 py-1.5"><p className="text-[7px] font-bold text-[var(--color-text-secondary)]">{isArabic ? 'بعد العملية' : 'After'}</p><p className="mt-0.5 truncate text-[9px] font-black [direction:ltr]">{balanceText(operation.balanceAfter)}</p></div></div>
+      <div className="mt-2 grid gap-1 border-t border-[color:rgb(var(--color-border-rgb)/.55)] pt-2 text-[9px] text-[var(--color-text-secondary)] sm:grid-cols-2"><button type="button" onClick={() => void navigator.clipboard?.writeText(String(reference || ''))} title={isArabic ? 'نسخ رقم العملية' : 'Copy transaction number'} className="flex min-w-0 items-center gap-1 text-start transition hover:text-[var(--color-primary)]"><Hash className="h-3 w-3 shrink-0 text-[var(--color-primary)]" /><span className="truncate [direction:ltr]">{reference}</span><Copy className="h-2.5 w-2.5 shrink-0" /></button><p className="flex min-w-0 items-center gap-1"><CalendarDays className="h-3 w-3 shrink-0 text-[var(--color-primary)]" /><span className="truncate">{formatWhen(operation.date)}</span></p></div>
+    </article>
+  );
+};
+
 const AdminWallet = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedUserId = String(searchParams.get('userId') || '').trim();
   const { i18n } = useTranslation();
   const actor = useAuthStore((state) => state.user);
   const refreshProfile = useAuthStore((state) => state.refreshProfile);
   const { addToast } = useToast();
-  const { users, wallets, loadUsers, loadWallets, updateUserCoins, updateUserCurrency, updateUserGroup } = useAdminStore();
+  const {
+    users,
+    wallets,
+    userWalletTransactions,
+    loadUsers,
+    loadWallets,
+    getUserWallet,
+    getUserWalletTransactions,
+    updateUserCoins,
+    setUserBalance,
+    updateUserCurrency,
+    updateUserGroup,
+  } = useAdminStore();
   const { groups, loadGroups } = useGroupStore();
   const { orders, loadOrders } = useOrderStore();
   const { topups, loadTopups } = useTopupStore();
@@ -373,13 +466,19 @@ const AdminWallet = () => {
   );
 
   const [isLoading, setIsLoading] = useState(true);
-  const [startDate, setStartDate] = useState(defaultRangeStart);
+  const [startDate, setStartDate] = useState(selectedUserId ? '' : defaultRangeStart);
   const [endDate, setEndDate] = useState(todayInputValue);
   const [selfTopupAmount, setSelfTopupAmount] = useState('');
   const [isSelfTopupUpdating, setIsSelfTopupUpdating] = useState(false);
   const [settingsCurrency, setSettingsCurrency] = useState('');
   const [settingsGroup, setSettingsGroup] = useState('');
   const [isSavingSettings, setIsSavingSettings] = useState(false);
+  const [userAdjustmentAmount, setUserAdjustmentAmount] = useState('');
+  const [userFixedBalance, setUserFixedBalance] = useState('');
+  const [isUserBalanceUpdating, setIsUserBalanceUpdating] = useState(false);
+  const [expandedOperationId, setExpandedOperationId] = useState('');
+  const [operationSearch, setOperationSearch] = useState('');
+  const [operationsPage, setOperationsPage] = useState(1);
 
   useEffect(() => {
     let active = true;
@@ -402,6 +501,14 @@ const AdminWallet = () => {
       active = false;
     };
   }, [loadCurrencies, loadGroups, loadOrders, loadTopups, loadUsers, loadWallets]);
+
+  useEffect(() => {
+    if (!selectedUserId) return;
+    Promise.allSettled([
+      Promise.resolve(getUserWallet(selectedUserId, { force: true })),
+      Promise.resolve(getUserWalletTransactions(selectedUserId, { force: true })),
+    ]);
+  }, [getUserWallet, getUserWalletTransactions, selectedUserId]);
 
   const formatRangeDate = useCallback(
     (value) => formatDateTime(value, locale, { day: 'numeric', month: 'long', year: 'numeric' }),
@@ -474,6 +581,60 @@ const AdminWallet = () => {
   }, [actor, usersById]);
 
   const adminCurrencyCode = String(adminProfile?.currency || actor?.currency || 'USD').toUpperCase();
+  const selectedUser = selectedUserId ? usersById.get(selectedUserId) || null : null;
+  const selectedWallet = useMemo(
+    () => (wallets || []).find((entry) => String(entry?.userId || entry?.id || '').trim() === selectedUserId) || null,
+    [selectedUserId, wallets]
+  );
+  const selectedCurrencyCode = String(selectedWallet?.currency || selectedUser?.currency || 'USD').toUpperCase();
+  const selectedBalance = asNumber(selectedWallet?.walletBalance ?? selectedWallet?.balance ?? selectedUser?.coins ?? 0);
+
+  const refreshSelectedWallet = useCallback(async () => {
+    if (!selectedUserId) return;
+    await Promise.allSettled([
+      Promise.resolve(getUserWallet(selectedUserId, { force: true })),
+      Promise.resolve(getUserWalletTransactions(selectedUserId, { force: true })),
+      Promise.resolve(loadUsers({ force: true })),
+    ]);
+  }, [getUserWallet, getUserWalletTransactions, loadUsers, selectedUserId]);
+
+  const handleUserAdjustment = useCallback(async (direction) => {
+    const amount = Math.abs(asNumber(userAdjustmentAmount));
+    if (!selectedUserId || amount <= 0) {
+      addToast(isArabic ? 'أدخل مبلغًا صحيحًا أولًا.' : 'Enter a valid amount first.', 'error');
+      return;
+    }
+    setIsUserBalanceUpdating(true);
+    try {
+      await updateUserCoins(selectedUserId, direction === 'debit' ? -amount : amount, actor);
+      await refreshSelectedWallet();
+      setUserAdjustmentAmount('');
+      addToast(isArabic ? 'تم تحديث رصيد المستخدم وتسجيل الحركة.' : 'User balance updated and movement recorded.', 'success');
+    } catch (error) {
+      addToast(error?.message || (isArabic ? 'تعذر تحديث الرصيد.' : 'Unable to update balance.'), 'error');
+    } finally {
+      setIsUserBalanceUpdating(false);
+    }
+  }, [actor, addToast, isArabic, refreshSelectedWallet, selectedUserId, updateUserCoins, userAdjustmentAmount]);
+
+  const handleSetUserBalance = useCallback(async () => {
+    const balance = Number(userFixedBalance);
+    if (!selectedUserId || !Number.isFinite(balance)) {
+      addToast(isArabic ? 'أدخل رصيدًا صحيحًا.' : 'Enter a valid balance.', 'error');
+      return;
+    }
+    setIsUserBalanceUpdating(true);
+    try {
+      await setUserBalance(selectedUserId, balance, actor);
+      await refreshSelectedWallet();
+      setUserFixedBalance('');
+      addToast(isArabic ? 'تم تعيين رصيد المستخدم وتسجيل الحركة.' : 'User balance set and movement recorded.', 'success');
+    } catch (error) {
+      addToast(error?.message || (isArabic ? 'تعذر تعيين الرصيد.' : 'Unable to set balance.'), 'error');
+    } finally {
+      setIsUserBalanceUpdating(false);
+    }
+  }, [actor, addToast, isArabic, refreshSelectedWallet, selectedUserId, setUserBalance, userFixedBalance]);
 
   useEffect(() => {
     setSettingsCurrency(String(adminProfile?.currency || actor?.currency || currencies?.[0]?.code || 'USD').toUpperCase());
@@ -623,32 +784,85 @@ const AdminWallet = () => {
 
   const walletFeedOperations = useMemo(
     () => customerWallets
-      .flatMap((wallet) => (Array.isArray(wallet?.recentTransactions) ? wallet.recentTransactions.map((entry) => buildWalletOperation(entry, wallet, isArabic)) : []))
+      .filter((wallet) => !selectedUserId || String(wallet?.userId || wallet?.id || '').trim() === selectedUserId)
+      .flatMap((wallet) => {
+        const walletUserId = String(wallet?.userId || wallet?.id || '').trim();
+        const fullHistory = selectedUserId && walletUserId === selectedUserId
+          ? userWalletTransactions?.[selectedUserId]
+          : null;
+        const transactions = Array.isArray(fullHistory) ? fullHistory : wallet?.recentTransactions;
+        return Array.isArray(transactions) ? transactions.map((entry) => buildWalletOperation(entry, wallet, isArabic)) : [];
+      })
       .sort(sortByNewestDate),
-    [customerWallets, isArabic]
+    [customerWallets, isArabic, selectedUserId, userWalletTransactions]
   );
 
   const fallbackOperations = useMemo(() => {
     const topupOps = (topups || [])
       .filter((topup) => isCompletedStatus(topup?.status))
+      .filter((topup) => !selectedUserId || String(topup?.userId || '').trim() === selectedUserId)
       .map((topup) => buildTopupOperation(topup, usersById, isArabic));
 
     const orderOps = (orders || [])
       .filter((order) => !isRejectedStatus(order?.status))
+      .filter((order) => !selectedUserId || String(order?.userId || '').trim() === selectedUserId)
       .map((order) => buildOrderOperation(order, usersById, isArabic));
 
     return [...topupOps, ...orderOps].sort(sortByNewestDate);
-  }, [isArabic, orders, topups, usersById]);
+  }, [isArabic, orders, selectedUserId, topups, usersById]);
 
   const mergedOperations = useMemo(
     () => mergeOperations(walletFeedOperations, fallbackOperations),
     [fallbackOperations, walletFeedOperations]
   );
 
-  const filteredOperations = useMemo(
-    () => mergedOperations.filter((entry) => isDateWithinRange(entry?.date, { startDate, endDate })),
-    [endDate, mergedOperations, startDate]
+  const filteredOperations = useMemo(() => mergedOperations.filter((entry) => {
+    if (!isDateWithinRange(entry?.date, { startDate, endDate })) return false;
+    const query = operationSearch.trim().toLowerCase();
+    if (!query) return true;
+    const raw = entry?.raw || {};
+    return [entry?.sourceId, raw.transactionId, raw.transactionNumber, raw.paymentReference, raw.reference, raw.id, raw._id]
+      .map(referenceText).join(' ').toLowerCase().includes(query);
+  }), [endDate, mergedOperations, operationSearch, startDate]);
+  const operationsTotalPages = Math.max(1, Math.ceil(filteredOperations.length / OPERATIONS_PER_PAGE));
+  const paginatedOperations = useMemo(
+    () => filteredOperations.slice((operationsPage - 1) * OPERATIONS_PER_PAGE, operationsPage * OPERATIONS_PER_PAGE),
+    [filteredOperations, operationsPage]
   );
+
+  useEffect(() => { setOperationsPage(1); }, [startDate, endDate, selectedUserId]);
+  useEffect(() => { setOperationsPage((page) => Math.min(page, operationsTotalPages)); }, [operationsTotalPages]);
+
+  // Reconstruct before/after only from wallet snapshots and adjacent ledger entries.
+  // A missing snapshot remains unavailable instead of fabricating a balance.
+  const userLedgerOperations = useMemo(() => {
+    if (!selectedUserId) return [];
+    const rows = [...filteredOperations]
+      .sort((left, right) => new Date(left?.date || 0) - new Date(right?.date || 0))
+      .map((entry) => {
+        const afterValue = entry?.raw?.balanceAfter ?? entry?.raw?.walletBalance ?? entry?.raw?.balance;
+        const beforeValue = entry?.raw?.balanceBefore;
+        return {
+          ...entry,
+          balanceBefore: beforeValue !== null && beforeValue !== undefined && Number.isFinite(Number(beforeValue)) ? asNumber(beforeValue) : null,
+          balanceAfter: afterValue !== null && afterValue !== undefined && Number.isFinite(Number(afterValue)) ? asNumber(afterValue) : null,
+          currencyCode: selectedCurrencyCode,
+        };
+      });
+
+    if (rows.length && rows.at(-1).balanceAfter === null && Number.isFinite(Number(selectedBalance))) {
+      rows.at(-1).balanceAfter = asNumber(selectedBalance);
+    }
+    for (let pass = 0; pass <= rows.length; pass += 1) {
+      let changed = false;
+      rows.forEach((row, index) => {
+        if (row.balanceAfter !== null && row.balanceBefore === null) { row.balanceBefore = row.balanceAfter - asNumber(row.amount); changed = true; }
+        if (index && row.balanceBefore !== null && rows[index - 1].balanceAfter === null) { rows[index - 1].balanceAfter = row.balanceBefore; changed = true; }
+      });
+      if (!changed) break;
+    }
+    return rows.sort(sortByNewestDate);
+  }, [filteredOperations, selectedBalance, selectedCurrencyCode, selectedUserId]);
 
   const latestCredit = useMemo(
     () => filteredOperations.find((entry) => asNumber(entry?.amount) > 0) || null,
@@ -661,7 +875,32 @@ const AdminWallet = () => {
   );
 
   const summaryCards = useMemo(
-    () => [
+    () => selectedUserId ? [
+      {
+        icon: Wallet,
+        label: isArabic ? 'الرصيد الحالي' : 'Current balance',
+        value: formatMoney(selectedBalance, selectedCurrencyCode),
+        note: selectedCurrencyCode,
+      },
+      {
+        icon: History,
+        label: isArabic ? 'حركات المحفظة' : 'Wallet movements',
+        value: formatCount(filteredOperations.length),
+        note: isArabic ? 'السجل المباشر من مسار المحفظة' : 'Live wallet transaction history',
+      },
+      {
+        icon: PlusCircle,
+        label: isArabic ? 'إجمالي الإضافات' : 'Total credits',
+        value: formatMoney(filteredOperations.filter((entry) => entry.amount > 0).reduce((sum, entry) => sum + entry.amount, 0), selectedCurrencyCode),
+        note: isArabic ? 'رصيد دخل المحفظة' : 'Balance credited to wallet',
+      },
+      {
+        icon: ShoppingCart,
+        label: isArabic ? 'إجمالي الخصومات' : 'Total debits',
+        value: formatMoney(Math.abs(filteredOperations.filter((entry) => entry.amount < 0).reduce((sum, entry) => sum + entry.amount, 0)), selectedCurrencyCode),
+        note: isArabic ? 'رصيد خرج من المحفظة' : 'Balance debited from wallet',
+      },
+    ] : [
       {
         icon: Wallet,
         label: isArabic ? 'رصيد الأدمن' : 'Admin balance',
@@ -683,7 +922,7 @@ const AdminWallet = () => {
         note: isArabic ? 'من الطلبات المكتملة داخل المدة' : 'From completed orders in range',
       },
     ],
-    [adminProfile?.coins, adminProfile?.currency, adminProfile?.name, customerWallets.length, formatCount, formatMoney, isArabic, totalCustomerBalanceUsd, totalProfitUsd]
+    [adminProfile?.coins, adminProfile?.currency, adminProfile?.name, customerWallets.length, filteredOperations, formatCount, formatMoney, isArabic, selectedBalance, selectedCurrencyCode, selectedUserId, totalCustomerBalanceUsd, totalProfitUsd]
   );
 
   return (
@@ -699,8 +938,30 @@ const AdminWallet = () => {
               {isArabic ? 'المحفظة' : 'Wallet'}
             </span>
             <h1 className="page-heading mt-3">
-              {isArabic ? 'محفظة الأدمن' : 'Admin Wallet'}
+              {selectedUserId
+                ? (isArabic ? 'سجل حركة المستخدم' : 'User transaction history')
+                : (isArabic ? 'محفظة الأدمن' : 'Admin Wallet')}
             </h1>
+            {selectedUserId ? (
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                <span className="wallet-accent-chip px-2.5 py-1 text-[10px] font-semibold">
+                  {selectedUser?.name || selectedUser?.email || selectedUserId}
+                </span>
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-1 text-[10px] font-semibold text-[var(--color-text-secondary)] transition hover:text-[var(--color-primary)]"
+                  onClick={() => {
+                    const nextParams = new URLSearchParams(searchParams);
+                    nextParams.delete('userId');
+                    setSearchParams(nextParams);
+                    setStartDate(defaultRangeStart);
+                  }}
+                >
+                  <X className="h-3.5 w-3.5" />
+                  {isArabic ? 'عرض كل المستخدمين' : 'Show all users'}
+                </button>
+              </div>
+            ) : null}
             <p className="mt-2 text-[11px] leading-5 text-[var(--color-text-secondary)] sm:text-sm">
               {selectedRangeLabel}
             </p>
@@ -720,6 +981,12 @@ const AdminWallet = () => {
               className="w-full xl:w-auto"
               buttonClassName="!min-w-0 !w-full justify-between xl:!w-auto xl:min-w-[240px]"
             />
+            {selectedUserId ? (
+              <label className="relative mt-2 block xl:ms-auto xl:w-[240px]">
+                <Search className="absolute start-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[var(--color-text-secondary)]" />
+                <input value={operationSearch} onChange={(event) => setOperationSearch(event.target.value)} placeholder={isArabic ? 'بحث برقم العملية' : 'Search transaction number'} className="h-9 w-full rounded-xl border border-[color:rgb(var(--color-border-rgb)/.8)] bg-[color:rgb(var(--color-surface-rgb)/.7)] pe-2 ps-8 text-[10px] outline-none focus:border-[var(--color-primary)]" />
+              </label>
+            ) : null}
           </div>
         </div>
 
@@ -735,7 +1002,56 @@ const AdminWallet = () => {
           ))}
         </div>
 
-        <Card className="admin-premium-stat relative mt-3.5 p-3 sm:p-4">
+        {selectedUserId ? (
+          <Card className="admin-premium-stat relative mt-3.5 p-3 sm:p-4">
+            <div className="mb-3 border-b border-[color:rgb(var(--color-border-rgb)/0.6)] pb-3">
+              <p className="text-sm font-semibold text-[var(--color-text)]">{selectedUser?.name || (isArabic ? 'مستخدم' : 'User')}</p>
+              <p className="mt-1 text-[11px] text-[var(--color-text-secondary)]">{selectedUser?.email || '-'}</p>
+              <p className="mt-1 break-all font-mono text-[10px] text-[var(--color-muted)]">ID: {selectedUserId}</p>
+            </div>
+
+            <h2 className="text-sm font-semibold text-[var(--color-text)]">{isArabic ? 'تعديل الرصيد' : 'Adjust balance'}</h2>
+            <div className="mt-3 rounded-[1rem] border border-[color:rgb(var(--color-border-rgb)/0.72)] p-3">
+              <label className="text-[11px] font-medium text-[var(--color-text-secondary)]">{isArabic ? 'زيادة / خصم' : 'Credit / debit'}</label>
+              <Input
+                type="number"
+                min="0"
+                step="0.01"
+                value={userAdjustmentAmount}
+                onChange={(event) => setUserAdjustmentAmount(event.target.value)}
+                placeholder={isArabic ? 'أدخل المبلغ' : 'Enter amount'}
+                suffix={<span className="text-[10px] font-semibold text-[var(--color-muted)]">{selectedCurrencyCode}</span>}
+                className="mt-2 h-11"
+              />
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                <Button type="button" onClick={() => handleUserAdjustment('credit')} disabled={isUserBalanceUpdating} className="h-11 rounded-[0.95rem]">
+                  <PlusCircle className="h-4 w-4" />{isArabic ? 'زيادة' : 'Credit'}
+                </Button>
+                <Button type="button" variant="danger" onClick={() => handleUserAdjustment('debit')} disabled={isUserBalanceUpdating} className="h-11 rounded-[0.95rem]">
+                  <MinusCircle className="h-4 w-4" />{isArabic ? 'خصم' : 'Debit'}
+                </Button>
+              </div>
+            </div>
+
+            <div className="mt-3 rounded-[1rem] border border-[color:rgb(var(--color-border-rgb)/0.72)] p-3">
+              <label className="text-[11px] font-medium text-[var(--color-text-secondary)]">{isArabic ? 'تعيين رصيد محدد' : 'Set exact balance'}</label>
+              <Input
+                type="number"
+                step="0.01"
+                value={userFixedBalance}
+                onChange={(event) => setUserFixedBalance(event.target.value)}
+                placeholder={isArabic ? 'مثال: 500' : 'Example: 500'}
+                suffix={<span className="text-[10px] font-semibold text-[var(--color-muted)]">{selectedCurrencyCode}</span>}
+                className="mt-2 h-11"
+              />
+              <Button type="button" variant="secondary" onClick={handleSetUserBalance} disabled={isUserBalanceUpdating} className="mt-2 h-11 w-full rounded-[0.95rem]">
+                {isArabic ? 'تعيين الرصيد' : 'Set balance'}
+              </Button>
+            </div>
+          </Card>
+        ) : null}
+
+        <Card className={`admin-premium-stat relative mt-3.5 p-3 sm:p-4 ${selectedUserId ? 'hidden' : ''}`}>
           <div className="flex flex-col gap-3.5 lg:flex-row lg:items-end lg:justify-between">
             <div className="min-w-0">
               <p className="text-sm font-semibold text-[var(--color-text)]">
@@ -772,7 +1088,7 @@ const AdminWallet = () => {
           </div>
         </Card>
 
-        <Card className="admin-premium-stat relative mt-3.5 p-3 sm:p-4">
+        <Card className={`admin-premium-stat relative mt-3.5 p-3 sm:p-4 ${selectedUserId ? 'hidden' : ''}`}>
           <div className="flex flex-col gap-3.5 lg:flex-row lg:items-end lg:justify-between">
             <div className="min-w-0">
               <p className="text-sm font-semibold text-[var(--color-text)]">
@@ -853,7 +1169,7 @@ const AdminWallet = () => {
           </span>
         </div>
 
-        <div className="mt-3.5 grid grid-cols-1 gap-2.5 xl:grid-cols-2">
+        {!selectedUserId && <div className="mt-3.5 grid grid-cols-1 gap-2.5 xl:grid-cols-2">
           <OperationSnapshotCard
             icon={ArrowUpRight}
             label={isArabic ? 'آخر إضافة' : 'Latest credit'}
@@ -870,7 +1186,7 @@ const AdminWallet = () => {
             formatWhen={formatWhen}
             isArabic={isArabic}
           />
-        </div>
+        </div>}
 
         <div className="mt-3.5">
           <div className="mb-2.5 flex items-center gap-2">
@@ -879,26 +1195,24 @@ const AdminWallet = () => {
             </div>
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-text)]">
-                {isArabic ? 'آخر الحركات' : 'Recent movements'}
+                {selectedUserId ? (isArabic ? 'سجل العمليات وحركة الرصيد' : 'Transaction & balance history') : (isArabic ? 'آخر الحركات' : 'Recent movements')}
               </h3>
               <p className="text-[10px] leading-4.5 text-[var(--color-muted)]">
                 {isLoading
                   ? (isArabic ? 'جارٍ تحديث البيانات...' : 'Refreshing data...')
-                  : (isArabic ? 'عرض مختصر لأحدث العمليات' : 'Compact view of the latest operations')}
+                  : selectedUserId
+                    ? (isArabic ? 'كل معاملات المستخدم المسجلة' : 'All recorded user transactions')
+                    : (isArabic ? 'عرض مختصر لأحدث العمليات' : 'Compact view of the latest operations')}
               </p>
             </div>
           </div>
 
           {filteredOperations.length ? (
-            <div className="grid grid-cols-1 gap-2.5 xl:grid-cols-2">
-              {filteredOperations.slice(0, 8).map((operation) => (
-                <OperationRow
-                  key={operation.id}
-                  operation={operation}
-                  formatMoney={formatSignedMoney}
-                  formatWhen={formatWhen}
-                  isArabic={isArabic}
-                />
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {selectedUserId ? userLedgerOperations.filter((operation) => paginatedOperations.some((entry) => entry.id === operation.id)).map((operation) => (
+                <UserLedgerCard key={operation.id} operation={operation} formatMoney={formatMoney} formatWhen={formatWhen} isArabic={isArabic} />
+              )) : paginatedOperations.slice(0, 8).map((operation) => (
+                <OperationRow key={operation.id} operation={operation} formatMoney={formatSignedMoney} formatWhen={formatWhen} isArabic={isArabic} expanded={expandedOperationId === operation.id} onToggle={() => setExpandedOperationId((current) => current === operation.id ? '' : operation.id)} />
               ))}
             </div>
           ) : (
@@ -913,6 +1227,7 @@ const AdminWallet = () => {
               </p>
             </Card>
           )}
+          {filteredOperations.length > OPERATIONS_PER_PAGE ? <nav className="mt-3 flex items-center justify-center gap-1.5" aria-label={isArabic ? 'صفحات العمليات' : 'Transaction pages'}><button type="button" disabled={operationsPage === 1} onClick={() => setOperationsPage((page) => page - 1)} className="h-8 rounded-lg border border-[color:rgb(var(--color-border-rgb)/.8)] px-2 text-[10px] font-bold disabled:opacity-40">{isArabic ? 'السابق' : 'Previous'}</button><span className="px-2 text-[10px] font-bold text-[var(--color-text-secondary)]">{operationsPage} / {operationsTotalPages}</span><button type="button" disabled={operationsPage === operationsTotalPages} onClick={() => setOperationsPage((page) => page + 1)} className="h-8 rounded-lg border border-[color:rgb(var(--color-border-rgb)/.8)] px-2 text-[10px] font-bold disabled:opacity-40">{isArabic ? 'التالي' : 'Next'}</button></nav> : null}
         </div>
       </section>
     </div>

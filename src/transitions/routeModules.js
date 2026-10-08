@@ -37,6 +37,7 @@ export const routeLoaders = {
   TargetOrders: () => import('../pages/TargetOrders'),
   AddBalance: () => import('../pages/AddBalance'),
   WalletTopupHistory: () => import('../pages/WalletTopupHistory'),
+  WalletTransactions: () => import('../pages/WalletTransactions'),
   PaymentDetails: () => import('../pages/PaymentDetails'),
 };
 
@@ -85,6 +86,7 @@ const routeMatchers = [
   [/^\/target-orders\/?$/, routeLoaders.TargetOrders],
   [/^\/wallet\/add-balance\/?$/, routeLoaders.AddBalance],
   [/^\/wallet\/(?:topups|topup-history)\/?$/, routeLoaders.WalletTopupHistory],
+  [/^\/wallet\/transactions\/?$/, routeLoaders.WalletTransactions],
   [/^\/wallet\/payment-details\/[^/]+\/?$/, routeLoaders.PaymentDetails],
   [/^\/(?:admin|manager\/dashboard|supervisor\/dashboard)\/?$/, routeLoaders.AdminDashboard],
   [/^\/admin\/dashboard\/?$/, routeLoaders.AdminDashboard],

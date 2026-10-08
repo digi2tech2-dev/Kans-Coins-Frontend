@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   CheckCircle2,
   Clock3,
@@ -207,6 +207,7 @@ const AdminOrders = () => {
   const { currencies, loadCurrencies } = useSystemStore();
   const { addToast } = useToast();
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -298,6 +299,12 @@ const AdminOrders = () => {
   const locale = isArabic ? 'ar-EG' : 'en-US';
   const language = isArabic ? 'ar' : 'en';
   const canConfirmOrders = hasPermission(actor, PERMISSIONS.CONFIRM_ORDERS);
+
+  const handleViewCustomer = useCallback((order) => {
+    const userId = String(order?.userId || order?.userRecord?.id || order?.userRecord?._id || '').trim();
+    if (!userId) return;
+    navigate(`/admin/users?userId=${encodeURIComponent(userId)}`);
+  }, [navigate]);
 
   // ── Re-fetch when page / limit / dates change ────────────────────────
   // (Search changes are handled directly inside the debounce above.)
@@ -646,6 +653,7 @@ const AdminOrders = () => {
           isArabic={isArabic}
           currencies={currencies}
           onViewOrder={handleViewOrder}
+          onViewCustomer={handleViewCustomer}
         />
       ) : (
         <EmptyOrdersState

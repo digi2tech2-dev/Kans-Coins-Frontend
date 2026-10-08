@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, Camera, Phone, UserRound } from 'lucide-react';
 import useAuthStore from '../store/useAuthStore';
 import useMediaStore from '../store/useMediaStore';
 import useGroupStore from '../store/useGroupStore';
@@ -28,9 +28,17 @@ const Dashboard = () => {
   const { i18n } = useTranslation();
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isProfileCompletionDismissed, setIsProfileCompletionDismissed] = useState(false);
   const language = getStorefrontLanguage(i18n);
-  const isTwoFactorEnabled = Boolean(user?.twoFactorEnabled ?? user?.isTwoFactorEnabled);
   const isCustomerUser = String(user?.role || '').trim().toLowerCase() === 'customer';
+  const profileCompletionItems = [
+    { key: 'avatar', label: language === 'ar' ? 'الصورة الشخصية' : 'Profile image', value: user?.avatar, icon: Camera },
+    { key: 'name', label: language === 'ar' ? 'الاسم' : 'Name', value: user?.name, icon: UserRound },
+    { key: 'phone', label: language === 'ar' ? 'رقم الهاتف' : 'Phone number', value: user?.phone, icon: Phone },
+  ];
+  const completedProfileItems = profileCompletionItems.filter((item) => String(item.value || '').trim());
+  const profileCompletionPercentage = Math.round((completedProfileItems.length / profileCompletionItems.length) * 100);
+  const showProfileCompletion = !isProfileCompletionDismissed && profileCompletionPercentage < 100;
 
   useEffect(() => {
     if (refreshProfile) refreshProfile();
@@ -164,37 +172,35 @@ const Dashboard = () => {
     navigate(`/orders/${encodeURIComponent(orderId)}`);
   }, [navigate]);
 
+  const handleProfileCompletion = useCallback(() => {
+    setIsProfileCompletionDismissed(true);
+    navigate('/account');
+  }, [navigate]);
+
   return (
     <div className="space-y-5 pb-5 sm:space-y-6">
-      {!isTwoFactorEnabled ? (
-        <section className="group relative mx-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-amber-400/25 bg-[linear-gradient(120deg,rgb(245_158_11/0.12),rgb(var(--color-card-rgb)/0.92)_48%,rgb(217_119_6/0.08))] p-2 shadow-[0_16px_40px_-34px_rgb(245_158_11/0.6)] backdrop-blur-xl sm:p-2.5">
-          <span className="pointer-events-none absolute -start-8 -top-10 h-24 w-24 rounded-full bg-amber-400/10 blur-2xl" />
-          <div className="relative flex items-center justify-between gap-2.5">
-            <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
-              <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-amber-300/30 bg-[linear-gradient(145deg,rgb(245_158_11/0.2),rgb(217_119_6/0.14))] text-amber-400 shadow-[inset_0_1px_0_rgb(255_255_255/0.16)] sm:h-10 sm:w-10">
-                <span className="absolute end-0 top-0 h-2 w-2 -translate-y-1/4 translate-x-1/4 rounded-full border-2 border-[rgb(var(--color-card-rgb))] bg-amber-400" />
-                <ShieldCheck className="h-4.5 w-4.5 sm:h-5 sm:w-5" strokeWidth={2.2} />
-              </span>
-              <div className="min-w-0 leading-tight">
-                <p className="truncate text-[0.75rem] font-bold text-[var(--color-text)] sm:text-[0.84rem]">
-                  {language === 'ar' ? 'حماية إضافية لحسابك' : 'Extra protection for your account'}
-                </p>
-                <p className="mt-0.5 truncate text-[0.64rem] font-medium text-[var(--color-text-secondary)] sm:text-[0.71rem]">
-                  {language === 'ar' ? 'فعّل المصادقة الثنائية في أقل من دقيقة.' : 'Enable two-factor authentication in under a minute.'}
-                </p>
+      <div className="grid gap-3 lg:grid-cols-2">
+        {showProfileCompletion ? (
+          <section className="relative overflow-hidden rounded-xl border border-[color:rgb(var(--color-primary-rgb)/0.2)] bg-[linear-gradient(135deg,rgb(var(--color-card-rgb)/0.96),rgb(var(--color-primary-rgb)/0.1))] p-2.5 shadow-[0_14px_35px_-30px_rgb(var(--color-primary-rgb)/0.8)] sm:p-3 lg:col-span-2">
+            <div className="relative flex w-full min-w-0 items-center justify-center gap-2">
+              <div
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full border-3 border-[color:rgb(var(--color-primary-rgb)/0.18)] text-[0.6rem] font-black text-[var(--color-text)] sm:h-10 sm:w-10 sm:text-[0.65rem]"
+                style={{ background: `conic-gradient(var(--color-primary) ${profileCompletionPercentage}%, rgb(var(--color-primary-rgb) / 0.12) 0)` }}
+              >
+                <span className="grid h-6 w-6 place-items-center rounded-full bg-[var(--color-card)] sm:h-7 sm:w-7">{profileCompletionPercentage}%</span>
               </div>
+              <h2 className="min-w-0 truncate text-center text-xs font-black text-[var(--color-text)] sm:text-sm">
+                {language === 'ar' ? 'اكمل بيانات حسابك من فضلك لسهوله التواصل' : 'Complete your details for easier communication'}
+              </h2>
+              <button type="button" onClick={handleProfileCompletion} className="order-last inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-lg bg-[var(--color-primary)] px-2.5 text-[0.68rem] font-black text-[var(--color-button-text)] shadow-[0_8px_18px_-12px_rgb(var(--color-primary-rgb)/0.95)] transition hover:brightness-105 sm:gap-1.5 sm:px-3 sm:text-xs">
+              {language === 'ar' ? 'إكمال' : 'Complete'}
+              <ArrowUpRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+              </button>
             </div>
+          </section>
+        ) : null}
 
-            <Link
-              to="/account-security"
-              className="inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-xl border border-amber-400/30 bg-amber-500/15 px-2.5 text-[0.66rem] font-extrabold text-amber-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-amber-400/50 hover:bg-amber-500/25 hover:shadow-[0_10px_24px_-16px_rgb(245_158_11/0.8)] sm:h-9 sm:px-3 sm:text-[0.73rem]"
-            >
-              <span>{language === 'ar' ? 'تفعيل الحماية' : 'Protect now'}</span>
-              <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.4} />
-            </Link>
-          </div>
-        </section>
-      ) : null}
+      </div>
 
       <HeroSlider slides={heroSlides} />
 

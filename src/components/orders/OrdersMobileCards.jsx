@@ -10,6 +10,7 @@ const OrdersMobileCards = ({
   isArabic,
   currencies,
   onViewOrder,
+  onViewCustomer,
 }) => {
   const locale = isArabic ? 'ar-EG' : 'en-US';
 
@@ -62,9 +63,15 @@ const OrdersMobileCards = ({
                 <p className="text-[10px] text-[var(--color-muted)]">
                   {isArabic ? 'اسم المستخدم' : 'Customer name'}
                 </p>
-                <p className="mt-0.5 truncate text-[13px] font-medium text-[var(--color-text)]">
+                <button
+                  type="button"
+                  onClick={() => onViewCustomer?.(order)}
+                  disabled={!order.userId}
+                  className="mt-0.5 block max-w-full truncate text-start text-[13px] font-medium text-[var(--color-text)] transition hover:text-[var(--color-primary)] disabled:cursor-default disabled:hover:text-[var(--color-text)]"
+                  title={isArabic ? 'فتح تفاصيل حساب العميل' : 'Open customer account details'}
+                >
                   {order.customerName}
-                </p>
+                </button>
               </div>
             </div>
             <p className="mt-0.5 truncate text-[10px] text-[var(--color-text-secondary)]">

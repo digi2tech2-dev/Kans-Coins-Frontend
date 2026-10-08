@@ -57,6 +57,7 @@ const BuyTarget = lazy(routeLoaders.BuyTarget);
 const TargetOrders = lazy(routeLoaders.TargetOrders);
 const AddBalance = lazy(routeLoaders.AddBalance);
 const WalletTopupHistory = lazy(routeLoaders.WalletTopupHistory);
+const WalletTransactions = lazy(routeLoaders.WalletTransactions);
 const PaymentDetails = lazy(routeLoaders.PaymentDetails);
 
 const ADMIN_PANEL_ROLES = [...ADMIN_ROLES, ...SUPERVISOR_ROLES];
@@ -254,6 +255,14 @@ const AnimatedAppRoutes = ({ location }) => {
           element={(
             <ProtectedRoute roles={['customer', 'admin', ...SUPERVISOR_ROLES]}>
               {renderSuspended(<WalletTopupHistory />)}
+            </ProtectedRoute>
+          )}
+        />
+        <Route
+          path="/wallet/transactions"
+          element={(
+            <ProtectedRoute roles={['customer', 'admin', ...SUPERVISOR_ROLES]}>
+              {renderSuspended(<WalletTransactions />)}
             </ProtectedRoute>
           )}
         />

@@ -26,7 +26,8 @@ import {
   Target,
   Truck,
   UserCog,
-  UsersRound
+  UsersRound,
+  WalletCards
 } from 'lucide-react';
 import ConfirmDialog from '../account/ConfirmDialog';
 import { motion } from 'framer-motion';
@@ -164,6 +165,7 @@ const Sidebar = ({ isOpen, setIsOpen, isMobile }) => {
       path: '/orders',
       roles: ['customer', 'admin', ...SUPERVISOR_ROLES]
     },
+    { icon: WalletCards, label: dir === 'rtl' ? 'سجل العمليات المالية' : 'Wallet Transactions', path: '/wallet/transactions', roles: ['customer', 'admin', ...SUPERVISOR_ROLES] },
     { icon: Target, label: 'بيع التارجت', path: '/buy-target', roles: ['customer'] },
     {
       icon: Code2,
