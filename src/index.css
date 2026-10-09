@@ -3,6 +3,42 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Ka-style mobile navigation in KanZ Coins' gold identity. */
+.mobile-bottom-nav__panel {
+  border-color: rgb(var(--color-primary-rgb) / 0.34);
+  background:
+    radial-gradient(ellipse at 16% -8%, rgb(var(--color-primary-rgb) / 0.25), transparent 38%),
+    radial-gradient(ellipse at 84% 112%, rgb(251 191 36 / 0.18), transparent 42%),
+    linear-gradient(118deg, rgb(15 11 5), rgb(42 27 8) 52%, rgb(76 42 8));
+  box-shadow: 0 -18px 54px -34px rgb(var(--color-primary-rgb) / 0.9), 0 16px 38px -28px rgb(2 6 23 / 0.92), inset 0 1px rgb(255 255 255 / 0.18), inset 0 -12px 30px rgb(2 6 23 / 0.28);
+}
+
+.mobile-bottom-nav__surface { z-index: 0; }
+.mobile-bottom-nav__item { overflow: visible; -webkit-tap-highlight-color: transparent; }
+.mobile-bottom-nav__item-icon { position: absolute; top: 0.82rem; transform: translate3d(0, 0, 0); transition: transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 110ms ease-out; will-change: transform; }
+.mobile-bottom-nav__item.is-active .mobile-bottom-nav__item-icon { transform: translate3d(0, -1.94rem, 0); background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 44%, #d97706 72%, #92400e 100%) !important; box-shadow: 0 10px 24px -12px rgb(245 158 11 / 0.95), 0 14px 28px -16px rgb(251 191 36 / 0.88), inset 0 1px rgb(255 255 255 / 0.4); }
+.mobile-bottom-nav__item-label { position: absolute; right: 0.15rem; bottom: 0.52rem; left: 0.15rem; opacity: 0; pointer-events: none; transform: scale(0.96); transition: opacity 100ms ease, transform 140ms ease; }
+.mobile-bottom-nav__item.is-active .mobile-bottom-nav__item-label { opacity: 1; transform: scale(1); }
+.mobile-bottom-nav__item.is-active .mobile-bottom-nav__item-icon > span:last-child { box-shadow: 0 0 8px rgb(251 191 36 / 0.95), 0 0 12px rgb(245 158 11 / 0.85); }
+.mobile-bottom-nav__search-color { color: #fbbf24; animation: mobile-bottom-nav-search-hue 20s linear infinite; will-change: filter; }
+
+@keyframes mobile-bottom-nav-search-hue { from { filter: drop-shadow(0 0 4px rgb(251 191 36 / 0.42)) hue-rotate(0deg); } to { filter: drop-shadow(0 0 4px rgb(245 158 11 / 0.48)) hue-rotate(26deg); } }
+
+@media (max-width: 767px) {
+  body[data-mobile-bottom-nav="true"] { padding-bottom: calc(4.65rem + env(safe-area-inset-bottom)); }
+  body[data-mobile-bottom-nav="true"] .floating-whatsapp { bottom: calc(5.1rem + env(safe-area-inset-bottom)); }
+  body[data-sidebar-open="true"] .mobile-bottom-nav { display: none !important; }
+  .mobile-bottom-nav.mobile-auto-hide-bar { transform: translate3d(0, 0, 0); transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), filter 220ms ease; will-change: transform; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .mobile-bottom-nav.mobile-auto-hide-bar.is-visible { pointer-events: auto; }
+  .mobile-bottom-nav.mobile-auto-hide-bar.is-hidden { pointer-events: none; transform: translate3d(0, calc(100% + max(1rem, env(safe-area-inset-bottom))), 0); filter: none; }
+  .mobile-bottom-nav.mobile-auto-hide-bar.is-scrolled.is-visible { filter: drop-shadow(0 -10px 15px rgb(28 25 23 / 0.25)); }
+  :root:not(.dark) .mobile-bottom-nav__panel { border-color: rgb(217 119 6 / 0.35) !important; background: radial-gradient(ellipse at 16% -8%, rgb(255 255 255 / 0.96), transparent 40%), radial-gradient(ellipse at 84% 112%, rgb(251 191 36 / 0.2), transparent 44%), linear-gradient(118deg, #fffdf7, #f8f1df 52%, #fff3cf) !important; box-shadow: 0 -16px 48px -34px rgb(217 119 6 / 0.52), 0 15px 34px -27px rgb(180 83 9 / 0.36), inset 0 1px rgb(255 255 255 / 0.98), inset 0 -10px 26px rgb(245 158 11 / 0.06) !important; }
+  :root:not(.dark) .mobile-bottom-nav__item { color: #5e584a !important; }
+  :root:not(.dark) .mobile-bottom-nav__item[aria-current="page"] { color: #b45309 !important; }
+}
+
+@media (prefers-reduced-motion: reduce) { .mobile-bottom-nav.mobile-auto-hide-bar, .mobile-bottom-nav__search-color { animation: none !important; transition-duration: 1ms !important; } }
+
 .payment-amount-input::-webkit-outer-spin-button,
 .payment-amount-input::-webkit-inner-spin-button {
   margin: 0;
